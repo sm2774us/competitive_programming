@@ -7,7 +7,7 @@ python:
 install:
   - "pip install -r requirements.txt"
 script:
-  - pytest --black --cov=./app --cov-report=term-missing
+  - pytest --black --cov=./ --cov-report=term-missing
   - find . -name "Solution.py" -type f -exec coverage run -p '{}' \;
   - coverage combine
   - coverage html
