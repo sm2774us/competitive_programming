@@ -1,3 +1,7 @@
+# Competitive Programming
+
+[![Build Status](https://travis-ci.com/sm2774us/competitive_programming.svg?branch=master)](https://travis-ci.com/sm2774us/competitive_programming)
+
 ## Arrays
 
 | Problem | Description | Links | Solution |
