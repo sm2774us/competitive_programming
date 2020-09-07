@@ -36,6 +36,7 @@ from typing import List
 
 import unittest
 
+
 class Solution:
     # Time: O(n)
     # Space: O(1)
@@ -47,7 +48,7 @@ class Solution:
         leftCursor, rightCursor = 0, len(height) - 1
         leftMax, rightMax, storedWater = 0, 0, 0
 
-        while (leftCursor <= rightCursor):
+        while leftCursor <= rightCursor:
             leftMax = max(leftMax, height[leftCursor])
             rightMax = max(rightMax, height[rightCursor])
             if leftMax < rightMax:
@@ -59,6 +60,7 @@ class Solution:
 
         return storedWater
 
+
 class Test(unittest.TestCase):
     def setUp(self) -> None:
         pass
@@ -68,9 +70,14 @@ class Test(unittest.TestCase):
 
     def test_trap(self) -> None:
         s = Solution()
-        height = [0,1,0,2,1,0,1,3,2,1,2,1]
+        height = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]
         trappedWater = s.trap(height)
-        self.assertEqual(6, trappedWater, "Should compute how much water it is able to trap after raining")
+        self.assertEqual(
+            6,
+            trappedWater,
+            "Should compute how much water it is able to trap after raining",
+        )
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

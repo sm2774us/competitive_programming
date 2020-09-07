@@ -42,6 +42,7 @@ import sys
 
 import unittest
 
+
 class Solution:
 
     # arr[0..n-1] represents sizes of packets
@@ -52,7 +53,7 @@ class Solution:
         n = len(arr)
         # if there are no chocolates or number
         # of students is 0
-        if (m == 0 or n == 0):
+        if m == 0 or n == 0:
             return 0
 
         # Sort the given packets
@@ -60,7 +61,7 @@ class Solution:
 
         # Number of students cannot be more than
         # number of packets
-        if (n < m):
+        if n < m:
             return -1
 
         # Largest number of chocolates
@@ -73,17 +74,18 @@ class Solution:
         first = 0
         last = 0
         i = 0
-        while (i + m - 1 < n):
+        while i + m - 1 < n:
 
             diff = arr[i + m - 1] - arr[i]
-            if (diff < min_diff):
+            if diff < min_diff:
                 min_diff = diff
                 first = i
                 last = i + m - 1
 
             i += 1
 
-        return (arr[last] - arr[first])
+        return arr[last] - arr[first]
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
@@ -95,10 +97,15 @@ class Test(unittest.TestCase):
     def test_findMinDiff(self) -> None:
         s = Solution()
         for arr, m, solution in (
-                [[3, 4, 1, 9, 56, 7, 9, 12], 5, 6],
-                [[7, 3, 2, 4, 9, 12, 56], 3, 2]
+            [[3, 4, 1, 9, 56, 7, 9, 12], 5, 6],
+            [[7, 3, 2, 4, 9, 12, 56], 3, 2],
         ):
-            self.assertEqual(solution, s.findMinDiff(arr, m), "Should return the minimum difference between maximum chocolates and minimum chocolates")
+            self.assertEqual(
+                solution,
+                s.findMinDiff(arr, m),
+                "Should return the minimum difference between maximum chocolates and minimum chocolates",
+            )
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

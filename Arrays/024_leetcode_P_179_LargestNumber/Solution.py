@@ -38,11 +38,11 @@ from functools import cmp_to_key
 
 import unittest
 
+
 class Solution:
 
     # built-in function
     def largestNumberDetailedExplanation(self, nums: List[int]) -> str:
-
         def cmp_func(x, y):
             """Sorted by value of concatenated string increasingly."""
             if x + y > y + x:
@@ -59,7 +59,7 @@ class Solution:
         nums.sort(key=cmp_to_key(cmp_func), reverse=True)
 
         # Remove leading 0s, if empty return '0'.
-        return ''.join(nums).lstrip('0') or '0'
+        return "".join(nums).lstrip("0") or "0"
 
     # built-in function
     #
@@ -101,8 +101,8 @@ class Solution:
     #
     # Detailed Proof: https://leetcode.com/problems/maximum-of-absolute-value-expression/discuss/471630/Idea-through-mathematical-optimization
     def largestNumberConcise(self, nums: List[int]) -> str:
-        nums.sort(reverse=True, key = lambda x: x/(10**(len(str(x)))-1))
-        return ''.join(map(str,nums)).lstrip('0') or '0'
+        nums.sort(reverse=True, key=lambda x: x / (10 ** (len(str(x))) - 1))
+        return "".join(map(str, nums)).lstrip("0") or "0"
 
     # bubble sort
     def largestNumber2(self, nums: List[int]) -> str:
@@ -184,6 +184,7 @@ class Solution:
         nums[low], nums[r] = nums[r], nums[low]
         return low
 
+
 class Test(unittest.TestCase):
     def setUp(self) -> None:
         pass
@@ -193,27 +194,48 @@ class Test(unittest.TestCase):
 
     def test_findKthSmallest(self) -> None:
         s = Solution()
-        for nums, solution in (
-                [[10,2], "210"],
-                [[3,30,34,5,9], "9534330"]
-        ):
-            self.assertEqual(solution, s.largestNumber(nums),
-                             "Should return the rarranged list such that they form the largest number")
-            self.assertEqual(solution, s.largestNumberDetailedExplanation(nums),
-                             "Should return the rarranged list such that they form the largest number")
-            self.assertEqual(solution, s.largestNumberConcise(nums),
-                             "Should return the rarranged list such that they form the largest number")
-            self.assertEqual(solution, s.largestNumber1(nums),
-                             "Should return the rarranged list such that they form the largest number")
-            self.assertEqual(solution, s.largestNumber2(nums),
-                             "Should return the rarranged list such that they form the largest number")
-            self.assertEqual(solution, s.largestNumber3(nums),
-                             "Should return the rarranged list such that they form the largest number")
-            self.assertEqual(solution, s.largestNumber4(nums),
-                             "Should return the rarranged list such that they form the largest number")
-            self.assertEqual(solution, s.largestNumber5(nums),
-                             "Should return the rarranged list such that they form the largest number")
+        for nums, solution in ([[10, 2], "210"], [[3, 30, 34, 5, 9], "9534330"]):
+            self.assertEqual(
+                solution,
+                s.largestNumber(nums),
+                "Should return the rarranged list such that they form the largest number",
+            )
+            self.assertEqual(
+                solution,
+                s.largestNumberDetailedExplanation(nums),
+                "Should return the rarranged list such that they form the largest number",
+            )
+            self.assertEqual(
+                solution,
+                s.largestNumberConcise(nums),
+                "Should return the rarranged list such that they form the largest number",
+            )
+            self.assertEqual(
+                solution,
+                s.largestNumber1(nums),
+                "Should return the rarranged list such that they form the largest number",
+            )
+            self.assertEqual(
+                solution,
+                s.largestNumber2(nums),
+                "Should return the rarranged list such that they form the largest number",
+            )
+            self.assertEqual(
+                solution,
+                s.largestNumber3(nums),
+                "Should return the rarranged list such that they form the largest number",
+            )
+            self.assertEqual(
+                solution,
+                s.largestNumber4(nums),
+                "Should return the rarranged list such that they form the largest number",
+            )
+            self.assertEqual(
+                solution,
+                s.largestNumber5(nums),
+                "Should return the rarranged list such that they form the largest number",
+            )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

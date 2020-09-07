@@ -37,6 +37,7 @@ import bisect
 
 import unittest
 
+
 class Solution:
     def count(self, x: int, Y: List[int], n: int, counts: int) -> int:
         if x == 0:
@@ -45,9 +46,9 @@ class Solution:
             return counts[0]
         idx = bisect.bisect_right(Y, x)
         ans = n - idx
-        ans += (counts[0] + counts[1])
+        ans += counts[0] + counts[1]
         if x == 2:
-            ans -= (counts[3] + counts[4])
+            ans -= counts[3] + counts[4]
         if x == 3:
             ans += counts[2]
         return ans
@@ -63,6 +64,7 @@ class Solution:
             totalPairs += self.count(x, Y, n, counts)
         return totalPairs
 
+
 class Test(unittest.TestCase):
     def setUp(self) -> None:
         pass
@@ -73,10 +75,15 @@ class Test(unittest.TestCase):
     def test_countPairs(self) -> None:
         s = Solution()
         for X, Y, m, n, solution in (
-                [[2,1,6], [1,5], 3, 2, 3],
-                [[1,4,3], [1,2], 3, 2, 3]
+            [[2, 1, 6], [1, 5], 3, 2, 3],
+            [[1, 4, 3], [1, 2], 3, 2, 3],
         ):
-            self.assertEqual(solution, s.countPairs(X, Y, m, n), "Should return the number of pairs such the x^y > y^x")
+            self.assertEqual(
+                solution,
+                s.countPairs(X, Y, m, n),
+                "Should return the number of pairs such the x^y > y^x",
+            )
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

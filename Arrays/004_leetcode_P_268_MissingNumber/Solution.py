@@ -34,6 +34,7 @@ from functools import reduce
 
 import unittest
 
+
 class Solution:
     # # Time: O(n) ; Space: O(1)
     # # Sum of 0..n minus sum of the given numbers is the missing one.
@@ -57,7 +58,8 @@ class Solution:
     # Time: O(n) ; Space: O(1)
     # Set/array difference
     def missingNumber(self, nums: List[int]) -> int:
-        return (set(range(len(nums)+1)) - set(nums)).pop()
+        return (set(range(len(nums) + 1)) - set(nums)).pop()
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
@@ -69,11 +71,15 @@ class Test(unittest.TestCase):
     def test_missingNumber(self) -> None:
         s = Solution()
         for nums, solution in (
-            [ [3,0,1], 2 ],                 # [1,2] => 3  [3,2] => 5 ;  so 2 Triplets
-            [ [9,6,4,2,3,5,7,0,1], 8 ]      # No triplet(s) possible, so -1
+            [[3, 0, 1], 2],  # [1,2] => 3  [3,2] => 5 ;  so 2 Triplets
+            [[9, 6, 4, 2, 3, 5, 7, 0, 1], 8],  # No triplet(s) possible, so -1
         ):
-            self.assertEqual(solution, s.missingNumber(nums), "Should return the missing number from the array")
+            self.assertEqual(
+                solution,
+                s.missingNumber(nums),
+                "Should return the missing number from the array",
+            )
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()
-

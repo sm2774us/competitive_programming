@@ -59,6 +59,7 @@ from typing import List
 
 import unittest
 
+
 class Solution:
     def pivotIndex(self, nums: List[int]) -> int:
         # Time: O(n)
@@ -71,6 +72,7 @@ class Solution:
             left += num
         return -1
 
+
 class Test(unittest.TestCase):
     def setUp(self) -> None:
         pass
@@ -81,14 +83,26 @@ class Test(unittest.TestCase):
     def test_pivotIndex(self) -> None:
         s = Solution()
         for nums, solution in (
-                [[1,7,3,6,5,6], 3],         # The sum of the numbers to the left of index 3 (nums[3] = 6) is equal to the sum of numbers to the right of index 3.
-                [[1,3,5,2,2], 2],           # equilibrium point is at position 3 as elements below it (1+3) = elements after it (2+2)
-                [[1,2,3], -1]               # no index that satisfies the conditions in the problem statement, so return -1
+            [
+                [1, 7, 3, 6, 5, 6],
+                3,
+            ],  # The sum of the numbers to the left of index 3 (nums[3] = 6) is equal to the sum of numbers to the right of index 3.
+            [
+                [1, 3, 5, 2, 2],
+                2,
+            ],  # equilibrium point is at position 3 as elements below it (1+3) = elements after it (2+2)
+            [
+                [1, 2, 3],
+                -1,
+            ],  # no index that satisfies the conditions in the problem statement, so return -1
         ):
-            self.assertEqual(solution, s.pivotIndex(nums),
-                             """Should find the pivot index as the index where the sum of all the numbers to the left of the 
-                             index is equal to the sum of all the numbers to the right of the index""")
+            self.assertEqual(
+                solution,
+                s.pivotIndex(nums),
+                """Should find the pivot index as the index where the sum of all the numbers to the left of the 
+                             index is equal to the sum of all the numbers to the right of the index""",
+            )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

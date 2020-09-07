@@ -57,12 +57,13 @@ from typing import List
 
 import unittest
 
+
 class Solution:
     def arrayreverse(self, arr: List[int], k: int) -> None:
         n = len(arr)
         i = 0
 
-        while (i < n):
+        while i < n:
 
             left = i
 
@@ -71,11 +72,12 @@ class Solution:
             right = min(i + k - 1, n - 1)
 
             # Reverse the sub-array [left, right]
-            while (left < right):
+            while left < right:
                 arr[left], arr[right] = arr[right], arr[left]
-                left += 1;
+                left += 1
                 right -= 1
             i += k
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
@@ -86,15 +88,31 @@ class Test(unittest.TestCase):
 
     def test_arrayreverse(self) -> None:
         s = Solution()
-        arr = [11, 22, 33, 44, 55, 66]; k = 2
+        arr = [11, 22, 33, 44, 55, 66]
+        k = 2
         s.arrayreverse(arr, k)
-        self.assertEqual([22,11,44,33,66,55], arr, "Should reverse every sub-array of k group elements in the array N")
-        arr = [1, 2, 3, 4, 5]; k = 3
+        self.assertEqual(
+            [22, 11, 44, 33, 66, 55],
+            arr,
+            "Should reverse every sub-array of k group elements in the array N",
+        )
+        arr = [1, 2, 3, 4, 5]
+        k = 3
         s.arrayreverse(arr, k)
-        self.assertEqual([3, 2, 1, 5, 4], arr, "Should reverse every sub-array of k group elements in the array N")
-        arr = [10, 20, 30, 40, 50, 60]; k = 2
+        self.assertEqual(
+            [3, 2, 1, 5, 4],
+            arr,
+            "Should reverse every sub-array of k group elements in the array N",
+        )
+        arr = [10, 20, 30, 40, 50, 60]
+        k = 2
         s.arrayreverse(arr, k)
-        self.assertEqual([20, 10, 40, 30, 60, 50], arr, "Should reverse every sub-array of k group elements in the array N")
+        self.assertEqual(
+            [20, 10, 40, 30, 60, 50],
+            arr,
+            "Should reverse every sub-array of k group elements in the array N",
+        )
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

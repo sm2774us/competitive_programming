@@ -39,13 +39,15 @@ from typing import List
 
 import unittest
 
+
 class Solution(object):
     def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
         """
         :type matrix: List[List[int]]
         :rtype: List[int]
         """
-        if not matrix: return []
+        if not matrix:
+            return []
 
         row_start = 0
         row_end = len(matrix) - 1
@@ -81,6 +83,7 @@ class Solution(object):
 
         return res
 
+
 class Test(unittest.TestCase):
     def setUp(self):
         pass
@@ -91,10 +94,14 @@ class Test(unittest.TestCase):
     def test_spiralOrder(self):
         s = Solution()
         for matrix, solution in (
-            [ [ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 7, 8, 9 ] ], [1,2,3,6,9,8,7,4,5] ],
-            [ [ [ 1, 2, 3, 4 ], [ 5, 6, 7, 8 ], [ 9, 10, 11, 12 ] ], [1,2,3,4,8,12,11,10,9,5,6,7] ]
+            [[[1, 2, 3], [4, 5, 6], [7, 8, 9]], [1, 2, 3, 6, 9, 8, 7, 4, 5]],
+            [
+                [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]],
+                [1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7],
+            ],
         ):
             self.assertEqual(s.spiralOrder(matrix), solution)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

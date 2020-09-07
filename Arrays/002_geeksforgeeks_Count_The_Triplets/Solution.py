@@ -21,6 +21,7 @@ from typing import List
 
 import unittest
 
+
 class Solution:
     # def triplets(self, arr: List[int]) -> int:
     #     ans = 0
@@ -49,11 +50,12 @@ class Solution:
         for i in range(n - 2):
             for j in range(i + 1, n - 1):
                 s = arr[i] + arr[j]
-                if (s > max_a):
+                if s > max_a:
                     break
-                elif (s in set_a):
+                elif s in set_a:
                     ans += 1
-        return(ans if ans > 0 else -1)
+        return ans if ans > 0 else -1
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
@@ -65,12 +67,16 @@ class Test(unittest.TestCase):
     def test_triplets(self) -> None:
         s = Solution()
         for arr, solution in (
-            [ [1, 5, 3, 2], 2 ],            # [1,2] => 3  [3,2] => 5 ;  so 2 Triplets
-            [ [3, 2, 7], -1 ]               # No triplet(s) possible, so -1
+            [[1, 5, 3, 2], 2],  # [1,2] => 3  [3,2] => 5 ;  so 2 Triplets
+            [[3, 2, 7], -1],  # No triplet(s) possible, so -1
         ):
-            self.assertEqual(solution, s.triplets(arr),
-            """Should return the total number of triplets 
-            such that sum of two elements equals the third element""")
+            self.assertEqual(
+                solution,
+                s.triplets(arr),
+                """Should return the total number of triplets 
+            such that sum of two elements equals the third element""",
+            )
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

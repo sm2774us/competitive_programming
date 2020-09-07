@@ -64,9 +64,11 @@ from typing import List
 
 import unittest
 
+
 class Solution:
     def rearrange(self, nums: List[int]) -> List[int]:
-        return list(sum(zip(reversed(nums), nums), ())[:len(nums)])
+        return list(sum(zip(reversed(nums), nums), ())[: len(nums)])
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
@@ -78,12 +80,16 @@ class Test(unittest.TestCase):
     def test_rearrange(self) -> None:
         s = Solution()
         for nums, solution in (
-                [[1,2,3,4,5,6], [6,1,5,2,4,3]],
-                [[1,2,3,4], [4,1,3,2]],
-                [[1,2,3,4,5], [5,1,4,2,3]]
+            [[1, 2, 3, 4, 5, 6], [6, 1, 5, 2, 4, 3]],
+            [[1, 2, 3, 4], [4, 1, 3, 2]],
+            [[1, 2, 3, 4, 5], [5, 1, 4, 2, 3]],
         ):
-            self.assertEqual(solution, s.rearrange(nums), "Should return the array with the elements rearranged alternately")
+            self.assertEqual(
+                solution,
+                s.rearrange(nums),
+                "Should return the array with the elements rearranged alternately",
+            )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

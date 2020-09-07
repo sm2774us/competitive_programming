@@ -100,17 +100,18 @@ from typing import List
 
 import unittest
 
+
 class Solution:
     def findElement(self, arr: List[int]) -> int:
         n = len(arr)
 
-        for i in range(1,n):
+        for i in range(1, n):
             big = arr[0]
             f = 0
             for i in range(1, n - 1):
                 if arr[i] >= big:
                     big = arr[i]
-                    if arr[i] <= min(arr[i + 1:]):
+                    if arr[i] <= min(arr[i + 1 :]):
                         return arr[i]
                         f = 1
                         break
@@ -141,6 +142,7 @@ class Solution:
         # # If there was no element matching criteria
         # return -1
 
+
 class Test(unittest.TestCase):
     def setUp(self) -> None:
         pass
@@ -151,12 +153,16 @@ class Test(unittest.TestCase):
     def test_findElement(self) -> None:
         s = Solution()
         for arr, solution in (
-                [[4, 2, 5, 7], 5],
-                [[11, 9, 12], -1],
-                [[4, 3, 2, 7, 8, 9], 7]
+            [[4, 2, 5, 7], 5],
+            [[11, 9, 12], -1],
+            [[4, 3, 2, 7, 8, 9], 7],
         ):
-            self.assertEqual(solution, s.findElement(arr),
-                             "Should return first element in array such that all of its left elements are smaller and all right elements to it are greater than it")
+            self.assertEqual(
+                solution,
+                s.findElement(arr),
+                "Should return first element in array such that all of its left elements are smaller and all right elements to it are greater than it",
+            )
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

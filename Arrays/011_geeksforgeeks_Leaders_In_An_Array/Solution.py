@@ -28,6 +28,7 @@ from typing import List
 
 import unittest
 
+
 class Solution:
     def find_leaders(self, nums: List[int]) -> List[int]:
         size = len(nums)
@@ -43,8 +44,9 @@ class Solution:
                 result.append(n)
 
         result.reverse()
-        #print(result)
+        # print(result)
         return result
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
@@ -56,13 +58,17 @@ class Test(unittest.TestCase):
     def test_rearrange(self) -> None:
         s = Solution()
         for nums, solution in (
-                [[16,17,4,3,5,2], [17,5,2]],
-                [[1,2,3,4,0], [4,0]],
-                [[7,4,5,7,3], [7,7,3]],
-                [[13,4,12,1,5], [13,12,5]]
+            [[16, 17, 4, 3, 5, 2], [17, 5, 2]],
+            [[1, 2, 3, 4, 0], [4, 0]],
+            [[7, 4, 5, 7, 3], [7, 7, 3]],
+            [[13, 4, 12, 1, 5], [13, 12, 5]],
         ):
-            self.assertEqual(solution, s.find_leaders(nums), "Should return the array with the leaders")
+            self.assertEqual(
+                solution,
+                s.find_leaders(nums),
+                "Should return the array with the leaders",
+            )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

@@ -34,15 +34,17 @@
 #
 import unittest
 
+
 class Solution:
     def findLastIndex(self, str: str) -> int:
         pattern = "1"
         # Traverse from right
         for i in range(len(str) - 1, -1, -1):
-            if (str[i] == pattern):
+            if str[i] == pattern:
                 return i
 
         return -1
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
@@ -53,12 +55,13 @@ class Test(unittest.TestCase):
 
     def test_findLastIndex(self) -> None:
         s = Solution()
-        for str, solution in (
-                ["00001", 4],
-                ["4", -1]
-        ):
-            self.assertEqual(solution, s.findLastIndex(str), "Should return the last index of the '1' present in the given string")
+        for str, solution in (["00001", 4], ["4", -1]):
+            self.assertEqual(
+                solution,
+                s.findLastIndex(str),
+                "Should return the last index of the '1' present in the given string",
+            )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

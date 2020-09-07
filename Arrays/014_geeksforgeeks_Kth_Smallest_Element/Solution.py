@@ -41,6 +41,7 @@ import heapq
 
 import unittest
 
+
 class Solution:
 
     # O(nlgn) time
@@ -54,7 +55,7 @@ class Solution:
                 if nums[j] > nums[j + 1]:
                     # exchange elements, time consuming
                     nums[j], nums[j + 1] = nums[j + 1], nums[j]
-        return nums[k-1]
+        return nums[k - 1]
 
     # O(nk) time, selection sort idea
     def findKthSmallest3(self, nums: List[int], k: int) -> int:
@@ -64,14 +65,14 @@ class Solution:
                 if nums[j] < nums[tmp]:
                     tmp = j
             nums[tmp], nums[i - 1] = nums[i - 1], nums[tmp]
-        return nums[len(nums)-k]
-    
+        return nums[len(nums) - k]
+
     # O(k+(n-k)lgk) time, min-heap
     def findKthSmallest4(self, nums: List[int], k: int) -> int:
         heap = []
         for num in nums:
             heapq.heappush(heap, num)
-        for _ in range(k-1):
+        for _ in range(k - 1):
             heapq.heappop(heap)
         return heapq.heappop(heap)
 
@@ -97,11 +98,12 @@ class Solution:
         if nums:
             pos = self.partition(nums, 0, len(nums) - 1)
             if k > pos + 1:
-                return self.findKthSmallest(nums[pos + 1:], k - pos - 1)
+                return self.findKthSmallest(nums[pos + 1 :], k - pos - 1)
             elif k < pos + 1:
                 return self.findKthSmallest(nums[:pos], k)
             else:
                 return nums[pos]
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
@@ -113,18 +115,58 @@ class Test(unittest.TestCase):
     def test_findKthSmallest(self) -> None:
         s = Solution()
         for nums, k, solution in (
-                [[7, 10, 4, 3, 20, 15], 3, 7],         # The 3rd smallest element in the given array is 7.
-                [[7, 10, 4, 20, 15], 4, 15],           # The 4th smallest element in the given array is 15.
-                [[3, 10, 8, 20, 15], 2, 8],            # The 2nd smallest element in the given array is 8.
-                [[9, 10, 8, 11, 16, 35, 46], 5, 16]    # The 5th smallest element in the given array is 16.
+            [
+                [7, 10, 4, 3, 20, 15],
+                3,
+                7,
+            ],  # The 3rd smallest element in the given array is 7.
+            [
+                [7, 10, 4, 20, 15],
+                4,
+                15,
+            ],  # The 4th smallest element in the given array is 15.
+            [
+                [3, 10, 8, 20, 15],
+                2,
+                8,
+            ],  # The 2nd smallest element in the given array is 8.
+            [
+                [9, 10, 8, 11, 16, 35, 46],
+                5,
+                16,
+            ],  # The 5th smallest element in the given array is 16.
         ):
-            self.assertEqual(solution, s.findKthSmallest(nums, k), "Should return the Kth smallest element in the array N")
-            self.assertEqual(solution, s.findKthSmallest1(nums, k), "Should return the Kth smallest element in the array N")
-            self.assertEqual(solution, s.findKthSmallest2(nums, k), "Should return the Kth smallest element in the array N")
-            self.assertEqual(solution, s.findKthSmallest3(nums, k), "Should return the Kth smallest element in the array N")
-            self.assertEqual(solution, s.findKthSmallest4(nums, k), "Should return the Kth smallest element in the array N")
-            self.assertEqual(solution, s.findKthSmallest5(nums, k), "Should return the Kth smallest element in the array N")
+            self.assertEqual(
+                solution,
+                s.findKthSmallest(nums, k),
+                "Should return the Kth smallest element in the array N",
+            )
+            self.assertEqual(
+                solution,
+                s.findKthSmallest1(nums, k),
+                "Should return the Kth smallest element in the array N",
+            )
+            self.assertEqual(
+                solution,
+                s.findKthSmallest2(nums, k),
+                "Should return the Kth smallest element in the array N",
+            )
+            self.assertEqual(
+                solution,
+                s.findKthSmallest3(nums, k),
+                "Should return the Kth smallest element in the array N",
+            )
+            self.assertEqual(
+                solution,
+                s.findKthSmallest4(nums, k),
+                "Should return the Kth smallest element in the array N",
+            )
+            self.assertEqual(
+                solution,
+                s.findKthSmallest5(nums, k),
+                "Should return the Kth smallest element in the array N",
+            )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

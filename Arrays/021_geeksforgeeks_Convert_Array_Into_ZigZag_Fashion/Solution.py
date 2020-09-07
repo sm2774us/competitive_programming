@@ -100,6 +100,7 @@ from typing import List
 
 import unittest
 
+
 class Solution:
     def zig_zag(self, arr: List[int]) -> None:
         n = len(arr)
@@ -116,6 +117,7 @@ class Solution:
                 if arr[j] < arr[i]:
                     arr[j], arr[i] = arr[i], arr[j]
 
+
 class Test(unittest.TestCase):
     def setUp(self) -> None:
         pass
@@ -127,10 +129,19 @@ class Test(unittest.TestCase):
         s = Solution()
         arr = [4, 3, 7, 8, 6, 2, 1]
         s.zig_zag(arr)
-        self.assertEqual([3, 7, 4, 8, 2, 6, 1], arr, "Should rearrange the elements of array in zig-zag fashion")
+        self.assertEqual(
+            [3, 7, 4, 8, 2, 6, 1],
+            arr,
+            "Should rearrange the elements of array in zig-zag fashion",
+        )
         arr = [1, 4, 3, 2]
         s.zig_zag(arr)
-        self.assertEqual([1, 4, 2, 3], arr, "Should rearrange the elements of array in zig-zag fashion")
+        self.assertEqual(
+            [1, 4, 2, 3],
+            arr,
+            "Should rearrange the elements of array in zig-zag fashion",
+        )
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

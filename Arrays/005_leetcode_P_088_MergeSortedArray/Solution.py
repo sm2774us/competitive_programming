@@ -34,6 +34,7 @@ from typing import List
 
 import unittest
 
+
 class Solution:
     # Time: O(n) ; Space: O(1)
     def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
@@ -56,6 +57,7 @@ class Solution:
     #     nums1[m:] = nums2[:n]
     #     nums1.sort()
 
+
 class Test(unittest.TestCase):
     def setUp(self) -> None:
         pass
@@ -65,13 +67,23 @@ class Test(unittest.TestCase):
 
     def test_missingNumber(self) -> None:
         s = Solution()
-        nums1 = [1, 2, 3, 0, 0, 0]; m = 3; nums2 = [2, 5, 6]; n = 3
+        nums1 = [1, 2, 3, 0, 0, 0]
+        m = 3
+        nums2 = [2, 5, 6]
+        n = 3
         s.merge(nums1, m, nums2, n)
-        self.assertEqual([1,2,2,3,5,6], nums1, "Should merge and sort array - nums1 - in-place")
-        nums1 = [4, 5, 6, 0, 0, 0]; m = 3; nums2 = [1, 2]; n = 2
+        self.assertEqual(
+            [1, 2, 2, 3, 5, 6], nums1, "Should merge and sort array - nums1 - in-place"
+        )
+        nums1 = [4, 5, 6, 0, 0, 0]
+        m = 3
+        nums2 = [1, 2]
+        n = 2
         s.merge(nums1, m, nums2, n)
-        self.assertEqual([1, 2, 4, 5, 6, 0], nums1, "Should merge and sort array - nums1 - in-place")
+        self.assertEqual(
+            [1, 2, 4, 5, 6, 0], nums1, "Should merge and sort array - nums1 - in-place"
+        )
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()
-

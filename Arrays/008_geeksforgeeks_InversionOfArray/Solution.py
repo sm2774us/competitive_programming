@@ -88,6 +88,7 @@ from bisect import bisect, insort_left
 
 import unittest
 
+
 class Solution:
 
     # solution using a Binary Indexed Tree, aka a Fenwick tree
@@ -98,13 +99,17 @@ class Solution:
         rank = {v: i + 1 for i, v in enumerate(sorted(a))}
         for x in reversed(a):
             i = rank[x] - 1
-            while -i: # Returns the sum from index 1 to i
+            while -i:  # Returns the sum from index 1 to i
                 res += counts[i]
-                i -= i & -i # i & -i is used to increment i by the least significant 1 in the binary representation of i
+                i -= (
+                    i & -i
+                )  # i & -i is used to increment i by the least significant 1 in the binary representation of i
             i = rank[x]
-            while i <= len(a): # Adds k to element with index i
+            while i <= len(a):  # Adds k to element with index i
                 counts[i] += 1
-                i += i & -i # i & -i is used to increment i by the least significant 1 in the binary representation of i
+                i += (
+                    i & -i
+                )  # i & -i is used to increment i by the least significant 1 in the binary representation of i
         return res
 
     # # solution for smaller list sizes
@@ -117,6 +122,7 @@ class Solution:
     #         # res += (i - bisect(sorted_left, A[i]))
     #     return res
 
+
 class Test(unittest.TestCase):
     def setUp(self) -> None:
         pass
@@ -126,12 +132,13 @@ class Test(unittest.TestCase):
 
     def test_countPairs(self) -> None:
         s = Solution()
-        for a, solution in (
-                [[2, 4, 1, 3, 5], 3],
-                [[5, 9, 13, 11, 7], 4]
-        ):
-            self.assertEqual(solution, s.count_inversions(a), "Should return the inversion count of array")
+        for a, solution in ([[2, 4, 1, 3, 5], 3], [[5, 9, 13, 11, 7], 4]):
+            self.assertEqual(
+                solution,
+                s.count_inversions(a),
+                "Should return the inversion count of array",
+            )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

@@ -35,6 +35,7 @@ from itertools import accumulate
 
 import unittest
 
+
 class Solution:
     # def maxSubArray(self, nums: List[int]) -> int:
     #     for i in range(1, len(nums)):
@@ -52,6 +53,7 @@ class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
         return max(accumulate(nums, lambda x, y: x + y if x > 0 else y))
 
+
 class Test(unittest.TestCase):
     def setUp(self) -> None:
         pass
@@ -62,14 +64,17 @@ class Test(unittest.TestCase):
     def test_maxSubArray(self) -> None:
         s = Solution()
         for nums, solution in (
-                [[-2,1,-3,4,-1,2,1,-5,4], 6],  # [4,-1,2,1] has the largest sum = 6
-                [[3,2,-1,-2], 5],              # [3,2] has the largest sum = 5
-                [[2,-1,2], 3]                  # [2,-1,2] has the largest sum = 3
+            [[-2, 1, -3, 4, -1, 2, 1, -5, 4], 6],  # [4,-1,2,1] has the largest sum = 6
+            [[3, 2, -1, -2], 5],  # [3,2] has the largest sum = 5
+            [[2, -1, 2], 3],  # [2,-1,2] has the largest sum = 3
         ):
-            self.assertEqual(solution, s.maxSubArray(nums),
-                             """Should find the contiguous subarray with maximum sum 
-                             and return the sum""")
+            self.assertEqual(
+                solution,
+                s.maxSubArray(nums),
+                """Should find the contiguous subarray with maximum sum 
+                             and return the sum""",
+            )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

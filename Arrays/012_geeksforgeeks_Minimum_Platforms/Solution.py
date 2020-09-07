@@ -61,6 +61,7 @@ from bisect import bisect, insort_left
 
 import unittest
 
+
 class Solution:
 
     # Function to find minimum number of platforms needed in the
@@ -107,6 +108,7 @@ class Solution:
 
         return platforms
 
+
 class Test(unittest.TestCase):
     def setUp(self) -> None:
         pass
@@ -117,12 +119,16 @@ class Test(unittest.TestCase):
     def test_minPlatforms(self) -> None:
         s = Solution()
         for arrivals, departures, solution in (
-                [[200, 210, 300, 320, 350, 500], [230, 340, 320, 430, 400, 520], 2],
-                [[900, 940, 950, 1100, 1500, 1800], [910, 1200, 1120, 1130, 1900, 2000], 3],
-                [[900, 1100, 1235], [1000, 1200, 1240], 1]
+            [[200, 210, 300, 320, 350, 500], [230, 340, 320, 430, 400, 520], 2],
+            [[900, 940, 950, 1100, 1500, 1800], [910, 1200, 1120, 1130, 1900, 2000], 3],
+            [[900, 1100, 1235], [1000, 1200, 1240], 1],
         ):
-            self.assertEqual(solution, s.minPlatforms(arrivals, departures), "Should return the minimum number of platforms required for the railway station so that no train waits")
+            self.assertEqual(
+                solution,
+                s.minPlatforms(arrivals, departures),
+                "Should return the minimum number of platforms required for the railway station so that no train waits",
+            )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

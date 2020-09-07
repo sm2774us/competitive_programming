@@ -75,6 +75,7 @@ from typing import List
 
 import unittest
 
+
 class Solution:
     # Time: O(n) ; Space: O(1)
     def sortColors(self, nums: List[int]) -> None:
@@ -87,12 +88,19 @@ class Solution:
             if nums[pointer_white] == 1:  # 1
                 pointer_white += 1
             elif nums[pointer_white] == 0:  # 2
-                nums[pointer_white], nums[pointer_red] = nums[pointer_red], nums[pointer_white]  # 3
+                nums[pointer_white], nums[pointer_red] = (
+                    nums[pointer_red],
+                    nums[pointer_white],
+                )  # 3
                 pointer_white += 1
                 pointer_red += 1
             else:
-                nums[pointer_white], nums[pointer_blue] = nums[pointer_blue], nums[pointer_white]  # 4
+                nums[pointer_white], nums[pointer_blue] = (
+                    nums[pointer_blue],
+                    nums[pointer_white],
+                )  # 4
                 pointer_blue -= 1
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
@@ -103,15 +111,17 @@ class Test(unittest.TestCase):
 
     def test_sortColors(self) -> None:
         s = Solution()
-        nums = [2,0,2,1,1,0]
+        nums = [2, 0, 2, 1, 1, 0]
         s.sortColors(nums)
-        self.assertEqual([0,0,1,1,2,2], nums,
-                         """Array should now be sorted such objects of the same color are now adjacent, 
+        self.assertEqual(
+            [0, 0, 1, 1, 2, 2],
+            nums,
+            """Array should now be sorted such objects of the same color are now adjacent, 
                          with colors in the order red, white, and blue. With 0, 1, and 2 representing the colors
                          red, white, and blue respectively.                         
-                         """)
+                         """,
+        )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
-

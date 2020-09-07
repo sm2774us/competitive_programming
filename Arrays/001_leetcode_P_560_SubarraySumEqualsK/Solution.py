@@ -67,6 +67,7 @@ from typing import List
 
 import unittest
 
+
 class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
         count, sum = 0, 0
@@ -75,10 +76,11 @@ class Solution:
 
         for n in nums:
             sum += n
-            count += running_sum[sum-k]
+            count += running_sum[sum - k]
             running_sum[sum] += 1
 
         return count
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
@@ -94,11 +96,20 @@ class Test(unittest.TestCase):
         # solution = 2
         # self.assertEqual(solution, s.subarraySum(nums, k), "Should return the total number of continuous subarrays whose sum equals to K")
         for nums, k, solution in (
-            [ [1, 1, 1], 2, 2 ],            # [1,1] [1,1]
-            [ [1, 2, 3], 3, 2],             # [1,2] [3]
-            [ [2,2,3,0,4,-1,1,6], 7, 5 ]    # [2,2,3] [2,2,3,0] [3,0,4] [3,0,4,-1,1] [1,6]
+            [[1, 1, 1], 2, 2],  # [1,1] [1,1]
+            [[1, 2, 3], 3, 2],  # [1,2] [3]
+            [
+                [2, 2, 3, 0, 4, -1, 1, 6],
+                7,
+                5,
+            ],  # [2,2,3] [2,2,3,0] [3,0,4] [3,0,4,-1,1] [1,6]
         ):
-            self.assertEqual(solution, s.subarraySum(nums, k), "Should return the total number of continuous subarrays whose sum equals to K")
+            self.assertEqual(
+                solution,
+                s.subarraySum(nums, k),
+                "Should return the total number of continuous subarrays whose sum equals to K",
+            )
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

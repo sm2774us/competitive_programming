@@ -29,29 +29,29 @@ from itertools import accumulate
 
 import unittest
 
+
 class Solution:
     # Reduce to one-line using accumulate
     def stockBuySell(self, price: List[int]) -> int:
         n = len(price)
         # Prices must be given for at least two days
-        if (n == 1):
+        if n == 1:
             return
 
         result = []
         # Traverse through given price array
         i = 0
-        while (i < (n - 1)):
+        while i < (n - 1):
 
             # Find Local Minima
             # Note that the limit is (n-2) as we are
             # comparing present element to the next element
-            while ((i < (n - 1)) and
-                   (price[i + 1] <= price[i])):
+            while (i < (n - 1)) and (price[i + 1] <= price[i]):
                 i += 1
 
             # If we reached the end, break
             # as no further solution possible
-            if (i == n - 1):
+            if i == n - 1:
                 break
 
             # Store the index of minima
@@ -61,16 +61,17 @@ class Solution:
             # Find Local Maxima
             # Note that the limit is (n-1) as we are
             # comparing to previous element
-            while ((i < n) and (price[i] >= price[i - 1])):
+            while (i < n) and (price[i] >= price[i - 1]):
                 i += 1
 
             # Store the index of maxima
             sell = i - 1
 
             result.append((buy, sell))
-            #print("Buy on day: ", buy, "\t",
+            # print("Buy on day: ", buy, "\t",
             #      "Sell on day: ", sell)
         return result
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
@@ -80,19 +81,22 @@ class Test(unittest.TestCase):
         pass
 
     def test_stockBuySell(self) -> None:
-        sol1 = [ (0,3), (4,6) ]
+        sol1 = [(0, 3), (4, 6)]
         sol2 = []
-        sol3 = [ (1,4), (5,9) ]
+        sol3 = [(1, 4), (5, 9)]
         s = Solution()
         for price, solution in (
-                [[100,180,260,310,40,535,695], sol1 ],
-                [[100,50,30,20], sol2 ],
-                [[23,13,25,29,33,19,34,45,65,67], sol3 ]
+            [[100, 180, 260, 310, 40, 535, 695], sol1],
+            [[100, 50, 30, 20], sol2],
+            [[23, 13, 25, 29, 33, 19, 34, 45, 65, 67], sol3],
         ):
-            self.assertEqual(solution, s.stockBuySell(price),
-                             """Should the days on which you buy and sell the stock so that 
-                             in between those days your profit is maximum""")
+            self.assertEqual(
+                solution,
+                s.stockBuySell(price),
+                """Should the days on which you buy and sell the stock so that 
+                             in between those days your profit is maximum""",
+            )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

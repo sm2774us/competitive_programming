@@ -44,6 +44,7 @@ from typing import List
 
 import unittest
 
+
 class Solution:
     # Time: O(n)
     # Space: O(1)
@@ -70,6 +71,7 @@ class Solution:
                     return True
         return False
 
+
 class Test(unittest.TestCase):
     def setUp(self) -> None:
         pass
@@ -80,15 +82,32 @@ class Test(unittest.TestCase):
     def test_findPythagoreanTriplets(self) -> None:
         s = Solution()
         for nums, solution in (
-                [[3, 2, 4, 6, 5], True],                # 3^2 + 4^2 = 5^2 => So Pythagorean Triplets exist
-                [[3, 2, 4, 6, 7], False],               # No Pythagorean Triplets exist
-                [[1, 2, 5, 12, 13], True],              # 5^2 + 12^2 = 13^2 => So Pythagorean Triplets exist
-                [[25, 2, 24, 1, 7], True],              # 7^2 + 24^2 = 15^2 => So Pythagorean Triplets exist
-                [[9, 10, 8, 61, 60, 35, 11], True],     # 11^2 + 60^2 = 61^2 => So Pythagorean Triplets exist
-                [[9, 10, 8, 11, 16, 35, 17], False],    # No Pythagorean Triplets exist
-                [[17, 10, 15, 11, 8, 35, 46], True]    # 8^2 + 15^2 = 17^2 => So Pythagorean Triplets exist
+            [[3, 2, 4, 6, 5], True],  # 3^2 + 4^2 = 5^2 => So Pythagorean Triplets exist
+            [[3, 2, 4, 6, 7], False],  # No Pythagorean Triplets exist
+            [
+                [1, 2, 5, 12, 13],
+                True,
+            ],  # 5^2 + 12^2 = 13^2 => So Pythagorean Triplets exist
+            [
+                [25, 2, 24, 1, 7],
+                True,
+            ],  # 7^2 + 24^2 = 15^2 => So Pythagorean Triplets exist
+            [
+                [9, 10, 8, 61, 60, 35, 11],
+                True,
+            ],  # 11^2 + 60^2 = 61^2 => So Pythagorean Triplets exist
+            [[9, 10, 8, 11, 16, 35, 17], False],  # No Pythagorean Triplets exist
+            [
+                [17, 10, 15, 11, 8, 35, 46],
+                True,
+            ],  # 8^2 + 15^2 = 17^2 => So Pythagorean Triplets exist
         ):
-            self.assertEqual(solution, s.findPythagoreanTriplets(nums), "Should return true if Pythagorean Triplets exist in the array")
+            self.assertEqual(
+                solution,
+                s.findPythagoreanTriplets(nums),
+                "Should return true if Pythagorean Triplets exist in the array",
+            )
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()
