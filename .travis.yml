@@ -12,4 +12,4 @@ script:
   - coverage combine
   - coverage html
 after_success:
-  - bash <(curl -s https://codecov.io/bash) -f '*.*' -s htmlcov -t DLryZKqebgToKVJgXVRhnI3lX2S7R92at -n COMPETITIVE_PROGRAMMING_CODE_COVERAGE
+  - bash <(curl -s https://codecov.io/bash) -f '*.*' -s htmlcov -t jMYBAHdkl7L02RpSWNwpzwJPbLQG06cfF -n COMPETITIVE_PROGRAMMING_CODE_COVERAGE
