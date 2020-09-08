@@ -27,15 +27,12 @@
 # **************************************************************************
 # Time : O(N)
 # **************************************************************************
-# The time complexity is O(N): it just goes through each element in the input array for once only
-# and with the loop each operation is O(1).
+# The time complexity is O(N): The entire nums array is traversed only once.
 #
 # **************************************************************************
 # Space : O(N)
 # **************************************************************************
-# When it comes to space complexity: there is a hashmap/dictionary which can scale (in worse case)
-# with the size of input array,
-# so it can take up to O(N) space and hence the space complexity is O(N).
+# Hashmap/dictionary running_sum can contain upto nn distinct entries in the worst case.
 #
 # **************************************************************************
 # Explanation

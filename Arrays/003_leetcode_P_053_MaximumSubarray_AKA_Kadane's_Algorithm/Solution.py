@@ -19,7 +19,10 @@
 # If you have figured out the O(n) solution, try coding another solution using the divide and conquer approach,
 # which is more subtle.
 #
-# Kadane's Algorithm:
+# Kadane's Algorithm (https://en.wikipedia.org/wiki/Maximum_subarray_problem#Kadane's_algorithm):
+# **************************************************************************
+# The runtime complexity of Kadane's algorithm is O(n).
+# **************************************************************************
 # Source: https://hackernoon.com/kadanes-algorithm-explained-50316f4fd8a6#:~:text=Given%20an%20array%2C%20the%20algorithm,can%20be%20of%20any%20dimension.&text=And%20since%20we%20want%20the,anew%20from%20the%20current%20element).
 # Source: https://medium.com/@rsinghal757/kadanes-algorithm-dynamic-programming-how-and-why-does-it-work-3fd8849ed73d
 # **************************************************************************

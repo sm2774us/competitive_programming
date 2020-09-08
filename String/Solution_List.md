@@ -1,0 +1,8 @@
+## String
+
+| Problem | Description | Links | Solution |
+| ------- | ----------- | ----- | -------- |
+| [1] - Reverse Words in a given string | <p>Given an input string, reverse the string word by word.</p> | [Leetcode - Problem 151 - Reverse Words in a String](https://leetcode.com/problems/reverse-words-in-a-string/)<br>[GeeksForGeeks - Reverse words in a given string](https://practice.geeksforgeeks.org/problems/reverse-words-in-a-given-string/0) | [Python](151_leetcode_P_151_ReverseWordsInAString/Solution.py) |
+| [2] - Permutations | <p>Given a collection of distinct integers, return all possible permutations.</p> | [Leetcode - Problem 46 - Permutations](https://leetcode.com/problems/permutations/) | [Python](002_leetcode_P_46_Permutations/Solution.py) |
+| [3] - Permutations of a given string | <p>Given a string S. The task is to print all permutations of a given string.</p> | [GeeksForGeeks - Permutations of a given string](https://practice.geeksforgeeks.org/problems/permutations-of-a-given-string/0) | [Python](003_geeksforgeeks_Permutations_Of_A_Given_String/Solution.py) |
+| [4] - Longest Palindromic Substring | <p>Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.</p> | [Leetcode - Problem 5 - Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/)<br>[GeeksForGeeks - Longest Palindrome in a String](https://practice.geeksforgeeks.org/problems/longest-palindrome-in-a-string/0) | [Python](004_leetcode_P_005_Longest_Palindromic_Substring_Manacher's_Algorithm/Solution.py) |
