@@ -30,7 +30,7 @@
 #
 # Input: head = [3,2,0,-4], pos = 1
 # Output: true
-# Explanation: There is a cycle in the linked list, where the tail connects to the 1st node (0-indexed).
+# Explanation: There is a cycle in the linked list, where tail connects to the second node.
 #
 # Example 2:
 #    ___         ___
@@ -43,7 +43,7 @@
 #
 # Input: head = [1,2], pos = 0
 # Output: true
-# Explanation: There is a cycle in the linked list, where the tail connects to the 0th node.
+# Explanation: There is a cycle in the linked list, where tail connects to the first node.
 #
 # Example 3:
 #    ___
@@ -68,6 +68,10 @@
 # Floyd's Cycle Detection Algorithm:
 # Source: https://cs.stackexchange.com/questions/10360/floyds-cycle-detection-algorithm-determining-the-starting-point-of-cycle
 #         [ Floyd's Cycle detection algorithm | Determining the starting point of cycle ]
+#         https://en.wikipedia.org/wiki/Cycle_detection#Tortoise_and_hare
+#         https://en.wikipedia.org/wiki/Cycle_detection
+#         http://blog.ostermiller.org/find-loop-singly-linked-list
+#
 # Youtube:  https://www.youtube.com/watch?v=zbozWoMgKW0 [ Detect loop in linked list(floyd algo / Tortoise and hare algo) ]
 #           https://www.youtube.com/watch?v=LUm2ABqAs1w [ Why Floyd's cycle detection algorithm works? Detecting loop in a linked list. ]
 # **************************************************************************
@@ -247,17 +251,29 @@ class ListNode:
 # q
 #
 class Solution:
+    # The "trick" is to not check all the time whether we have reached the end but to handle it via an exception.
+    # "Easier to ask for forgiveness than permission." [ https://docs.python.org/3/glossary.html#term-eafp ]
+    #
+    # The algorithm is of course "Tortoise and hare" [https://en.wikipedia.org/wiki/Cycle_detection#Tortoise_and_hare].
     def hasCycle(self, head: ListNode) -> bool:
         if not head or not head.next:
             return False
         slow = fast = head
-        try:
-            while slow != fast:
-                slow = slow.next
-                fast = fast.next.next
-            return True
-        except AttributeError as e:
-            return False
+        while slow != fast:
+            if slow is None or fast is None or fast.next is None:
+                return None
+            fast = fast.next.next
+            slow = slow.next
+        return True
+        # try:
+        #     while slow != fast:
+        #         if slow is None or fast is None or fast.next is None:
+        #             return None
+        #         slow = slow.next
+        #         fast = fast.next.next
+        #     return True
+        # except AttributeError as e:
+        #     return False
 
 
 # the idea is if you switch head, the possible difference between length would be countered.
