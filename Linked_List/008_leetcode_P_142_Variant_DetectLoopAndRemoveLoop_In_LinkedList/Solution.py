@@ -5,6 +5,8 @@
 # @by  : Shaikat Majumdar
 # @date: Aug 27, 2020
 # **************************************************************************
+# LeetCode - Problem 142: Linked List Cycle II
+#
 # Given a linked list, return the node where the cycle begins. If there is no cycle, return null.
 #
 # There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. Internally, pos is used to denote the index of the node that tail's next pointer is connected to. Note that pos is not passed as a parameter.
@@ -58,8 +60,8 @@
 #   * pos is -1 or a valid index in the linked-list.
 #
 # **************************************************************************
-# Source: https://leetcode.com/problems/linked-list-cycle/ (LeetCode - Problem 141 - Linked List Cycle)
-#         https://practice.geeksforgeeks.org/problems/detect-loop-in-linked-list/1 (GeeksForGeeks - Detect Loop in linked list)
+# Source: https://leetcode.com/problems/linked-list-cycle-ii/ (LeetCode - Problem 142 - Linked List Cycle II)
+#         https://practice.geeksforgeeks.org/problems/remove-loop-in-linked-list/1  (GeeksForGeeks - Remove loop in Linked List)
 #
 # Floyd's Cycle Detection Algorithm:
 # Source: https://cs.stackexchange.com/questions/10360/floyds-cycle-detection-algorithm-determining-the-starting-point-of-cycle
@@ -204,6 +206,17 @@ class ListNode:
         else:
             return 1 + self.length(head.next)
 
+    def linkedListToList(self, head):
+        if not head:
+            return []
+
+        pointer = head
+        sll_list = []
+        while pointer:
+            sll_list.append(pointer.val)
+            pointer = pointer.next
+        return sll_list
+
     # length of linked list => iterative function
     # def length(self, head):
     #     temp = head
@@ -232,12 +245,8 @@ class ListNode:
 # q
 #
 class Solution:
-    # The "trick" is to not check all the time whether we have reached the end but to handle it via an exception.
-    # "Easier to ask for forgiveness than permission." [ https://docs.python.org/3/glossary.html#term-eafp ]
-    #
-    # The algorithm is of course "Tortoise and hare" [https://en.wikipedia.org/wiki/Cycle_detection#Tortoise_and_hare].
     def detectCycle(self, head: ListNode) -> ListNode:
-        listNode = ListNode()
+        # listNode = ListNode()
         if head is None or head.next is None:
             return None
         # slow = fast = head
@@ -253,6 +262,20 @@ class Solution:
         # print(f'Output_4: [ {listNode.printList(slow2)} ].')
         return slow2
 
+    # The "trick" is to not check all the time whether we have reached the end but to handle it via an exception.
+    # "Easier to ask for forgiveness than permission." [ https://docs.python.org/3/glossary.html#term-eafp ]
+    #
+    # The algorithm is of course "Tortoise and hare" [https://en.wikipedia.org/wiki/Cycle_detection#Tortoise_and_hare].
+    def detectAndRemoveCycle(self, head: ListNode) -> ListNode:
+        listNode = ListNode()
+        llistWithLoop = self.detectCycle(head)
+        if llistWithLoop is None or llistWithLoop.next is None:
+            return None
+        listA = listNode.linkedListToList(head)
+        listB = listNode.linkedListToList(llistWithLoop)
+        listC = [x for x in listA if x not in listB]
+        return listNode.initList(listC)
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
@@ -261,21 +284,33 @@ class Test(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_detectCycle(self) -> None:
+    def test_detectAndRemoveCycle(self) -> None:
         listNode = ListNode()
         s = Solution()
         # head = listNode.initList([3, 2, 0, -4])
         # solution = s.detectCycle(head)
-        # print(f'Output = [ {listNode.printList(solution) if solution else "NULL"} ].')
+        # llistA = head
+        # print("LINKED_LIST_A :")
+        # print(listNode.printList(llistA))
+        # llistB = solution
+        # print("LINKED_LIST_B :")
+        # print(listNode.printList(llistB))
+        # listA = listNode.linkedListToList(llistA)
+        # listB = listNode.linkedListToList(llistB)
+        # listC = [x for x in listA if x not in listB]
+        # print("LINKED_LIST_C ( LINKED_LIST_A - LINKED_LIST_B ) :")
+        # llistC = listNode.initList(listC)
+        # print(listNode.printList(llistC))
+        # self.assertEqual(llistC, listNode.initList([3]))
         for head, solution in (
-            [listNode.initList([3, 2, 0, -4]), listNode.initList([2, 0, -4])],
-            [listNode.initList([1, 2]), listNode.initList([1, 2])],
+            [listNode.initList([3, 2, 0, -4]), listNode.initList([3])],
+            [listNode.initList([1, 2]), None],
             [ListNode(1), None],
         ):
             self.assertEqual(
                 solution,
-                s.detectCycle(head),
-                "Should return the node in the linked list where cycle begins",
+                s.detectAndRemoveCycle(head),
+                "Should return the linked list without the loop",
             )
 
 
