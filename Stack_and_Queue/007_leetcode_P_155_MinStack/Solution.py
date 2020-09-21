@@ -2,9 +2,6 @@
 # Time : O(1) for all operations
 # Space: O(1)
 #
-# push O(1),
-# pop amortized O(1)
-#
 # @tag : Stack and Queue
 # @by  : Shaikat Majumdar
 # @date: Aug 27, 2020
