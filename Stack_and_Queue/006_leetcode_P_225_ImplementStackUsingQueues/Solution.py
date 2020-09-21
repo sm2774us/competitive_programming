@@ -50,7 +50,6 @@ import unittest
 # Two Queues Approach
 # Streamlining the push operation to O(1) and trading off pop to O(n).
 class MyStackStreamlinedForPush:
-
     def __init__(self):
         """
         Initialize your data structure here.
@@ -89,9 +88,9 @@ class MyStackStreamlinedForPush:
         """
         return len(self.q1) == 0
 
+
 # Streamlining pop to O(1) and trading off push to O(n).
 class MyStackStreamlinedForPop:
-
     def __init__(self):
         """
         Initialize your data structure here.
@@ -131,12 +130,14 @@ class MyStackStreamlinedForPop:
         """
         return len(self.q1) == 0
 
+
 # Your MyQueue object will be instantiated and called as such:
 # obj = MyQueue()
 # obj.push(x)
 # param_2 = obj.pop()
 # param_3 = obj.peek()
 # param_4 = obj.empty()
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
