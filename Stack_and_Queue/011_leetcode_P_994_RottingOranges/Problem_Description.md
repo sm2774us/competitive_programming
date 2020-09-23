@@ -1,7 +1,8 @@
-Space and Runtime analysis:
--------------------------------
+# Leetcode - Problem 994 - Rotting Oranges
 
-* Example 1:
+## Problem Description:
+
+### Example 1:
 
 ![Example 1](Example_1.png)
 
@@ -10,7 +11,7 @@ Input: [[2,1,1],[1,1,0],[0,1,1]]
 Output: 4
 ```
 
-* Example 2:
+### Example 2:
 
 ```
 Input: [[2,1,1],[0,1,1],[1,0,1]]
@@ -18,7 +19,7 @@ Output: -1
 Explanation:  The orange in the bottom left corner (row 2, column 0) is never rotten, because rotting only happens 4-directionally.
 ```
 
-* Example 3:
+### Example 3:
 
 ```
 Input: [[0,2]]
