@@ -1,4 +1,6 @@
-PYTHON SOLUTION EXPLANATION:
+# Leetcode - Problem 987 - Vertical Order Traversal of a Binary Tree
+
+## PYTHON SOLUTION EXPLANATION:
 
 ![Graph - 1](solution_graph_1.png)
 

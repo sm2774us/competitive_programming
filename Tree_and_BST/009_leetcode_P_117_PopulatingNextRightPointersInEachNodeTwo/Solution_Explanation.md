@@ -1,12 +1,14 @@
-# PYTHON SOLUTION EXPLANATION:
+# LeetCode - Problem 117 - Populating Next Right Pointers in Each Node II
+
+## PYTHON SOLUTION EXPLANATION:
 
 Python O(1) aux space by DFS
 
-## Hint
+### Hint
 
 Think of pre-order traversal in DFS.
 
-### Algorithm:
+#### Algorithm:
 
 For each current node,
 
@@ -19,7 +21,7 @@ Update right child'next as left child of current's next **if the current's next 
 Step_#3:
 DFS down to next level with pre-order.
 
-#### Abstract Model:
+##### Abstract Model:
 
 **Before** connection of next pointer:
 
@@ -45,7 +47,7 @@ Only left child exists
 
 ----
 
-#### Implementation:
+##### Implementation:
 
 ```python
 class Solution:
