@@ -1,6 +1,6 @@
 #
 # Time : O(N); Space: O(N)
-# @tag : Stack and Queue ; Euler Tour ; Range Minimum Query Problem
+# @tag : Tree and BST ; Euler Tour ; Range Minimum Query Problem
 # @by  : Shaikat Majumdar
 # @date: Aug 27, 2020
 # **************************************************************************

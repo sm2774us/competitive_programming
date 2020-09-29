@@ -1,6 +1,6 @@
 #
 # Time : O(N); Space: O(H), where H is height of the tree
-# @tag : Stack and Queue
+# @tag : Tree and BST
 # @by  : Shaikat Majumdar
 # @date: Aug 27, 2020
 # **************************************************************************

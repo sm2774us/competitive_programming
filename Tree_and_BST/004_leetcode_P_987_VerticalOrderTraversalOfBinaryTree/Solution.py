@@ -1,6 +1,6 @@
 #
 # Time : O(NlogN); Space: O(N)
-# @tag : Stack and Queue
+# @tag : Tree and BST
 # @by  : Shaikat Majumdar
 # @date: Aug 27, 2020
 # **************************************************************************

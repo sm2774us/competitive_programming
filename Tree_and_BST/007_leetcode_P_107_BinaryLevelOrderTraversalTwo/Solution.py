@@ -1,6 +1,6 @@
 #
 # Time : O(N); Space: O(N)
-# @tag : Stack and Queue ; BFS ( Breadth First Search )
+# @tag : Tree and BST ; BFS ( Breadth First Search )
 # @by  : Shaikat Majumdar
 # @date: Aug 27, 2020
 # **************************************************************************
