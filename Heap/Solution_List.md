@@ -1,0 +1,7 @@
+## Heap
+
+| Problem | Description | Links | Solution |
+| ------- | ----------- | ----- | -------- |
+| [1] - Find Median from Data Stream | <p>Median is the middle value in an ordered integer list.<br>If the size of the list is even, there is no middle value.<br>So the median is the mean of the two middle value.</p> | [Leetcode - Problem 295 - Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/)<br>[GeeksForGeeks - Find median in a stream](https://practice.geeksforgeeks.org/problems/find-median-in-a-stream/0) | [Python](001_leetcode_P_295_FindMedianFromDataStream/Solution.py) |
+| [2] - Heap Sort | <p>Given an array of size N.<br>The task is to sort the array elements by completing functions heapify() and buildHeap() which are used to implement Heap Sort.</p> | [GeeksForGeeks - Heap Sort](https://practice.geeksforgeeks.org/problems/heap-sort/1) | [Python](002_geeksforgeeks_Heap_Sort/Solution.py) |
+| [3] - Binary Heap Operations | <p>You are given an empty Binary Min Heap and some queries and your task is to implement the three methods insertKey,  deleteKey,  and extractMin on the Binary Min Heap.</p> | [GeeksForGeeks - Binary Heap Operations](https://practice.geeksforgeeks.org/problems/operations-on-binary-min-heap/1) | [Python](003_geeksforgeeks_Binary_Heap_Operations/Solution.py) |
