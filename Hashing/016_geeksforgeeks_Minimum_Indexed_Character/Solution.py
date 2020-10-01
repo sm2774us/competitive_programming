@@ -47,6 +47,7 @@ import sys
 
 import unittest
 
+
 class Solution:
     # Function to find the
     # minimum index character
@@ -67,7 +68,7 @@ class Solution:
         # Store the first index of
         # each character of 'str'
         for i in range(m):
-            if (str1[i] not in um):
+            if str1[i] not in um:
                 um[str1[i]] = i
 
         # traverse the string 'patt'
@@ -77,18 +78,18 @@ class Solution:
             # check if  it has the minimum
             # index or not accordingly
             # update 'minIndex'
-            if (patt[i] in um and
-                    um[patt[i]] < minIndex):
+            if patt[i] in um and um[patt[i]] < minIndex:
                 minIndex = um[patt[i]]
 
         # Print the minimum index character
-        if (minIndex != sys.maxsize):
+        if minIndex != sys.maxsize:
             return str1[minIndex]
 
         # If no character of 'patt'
         # is present in 'str'
         else:
             return ""
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
@@ -101,12 +102,12 @@ class Test(unittest.TestCase):
         s = Solution()
         for str1, patt, solution in (
             ["geeksforgeeks", "set", "e"],
-            ["adcffaet", "onkl", ""]
+            ["adcffaet", "onkl", ""],
         ):
             self.assertEqual(
                 solution,
                 s.printMinIndexChar(str1, patt),
-                "Should return the minimum indexed character"
+                "Should return the minimum indexed character",
             )
 
 

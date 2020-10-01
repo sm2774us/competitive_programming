@@ -74,12 +74,13 @@ class Solution:
         f = lambda s: s.count(min(s))
         l, wlst = len(words), [f(word) for word in words]
         biggerthan, m = [0] * 11, [0] * 11
-        for i in wlst: m[i] += 1
-        #compute a list contain bigger than frequence occurence
+        for i in wlst:
+            m[i] += 1
+        # compute a list contain bigger than frequence occurence
         for i in range(1, 11):
-            #the sum of frequence less or equal than i, prefix sum
-            m[i] += m[i-1]
-            #the amount of frequence greater than i
+            # the sum of frequence less or equal than i, prefix sum
+            m[i] += m[i - 1]
+            # the amount of frequence greater than i
             biggerthan[i] = l - m[i]
         return [biggerthan[f(i)] for i in queries]
 
@@ -93,14 +94,13 @@ class Test(unittest.TestCase):
 
     def test_compareStringsGoogle_OA_2019(self) -> None:
         sol = Solution()
-        self.assertEqual([3,2], sol.solve("abcd,aabc,bd","aaa,aa"))
+        self.assertEqual([3, 2], sol.solve("abcd,aabc,bd", "aaa,aa"))
         for A, B, solution in (
             ["abcd,aabc,bd", "aaa,aa", [3, 2]],
             ["abcd", "aaa", [1]],
-            ["a", "bb", [1]]
+            ["a", "bb", [1]],
         ):
             self.assertEqual(solution, sol.solve(A, B))
-
 
     def test_numSmallerByFrequencyLeetcode(self) -> None:
         sol = Solution()

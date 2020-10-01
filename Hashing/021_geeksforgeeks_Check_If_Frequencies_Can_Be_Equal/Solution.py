@@ -52,11 +52,12 @@ import unittest
 
 M = 26
 
+
 class Solution:
     # Utility method to get index of character ch
     # in lower alphabet characters
     def getIdx(self, ch: str) -> int:
-        return (ord(ch) - ord('a'))
+        return ord(ch) - ord("a")
 
         # Returns true if all non-zero elements
 
@@ -64,14 +65,14 @@ class Solution:
     def allSame(self, freq: List[int], N: int) -> bool:
         # get first non-zero element
         for i in range(0, N):
-            if (freq[i] > 0):
+            if freq[i] > 0:
                 same = freq[i]
                 break
 
         # check equality of each element
         # with variable same
         for j in range(i + 1, N):
-            if (freq[j] > 0 and freq[j] != same):
+            if freq[j] > 0 and freq[j] != same:
                 return False
 
         return True
@@ -88,7 +89,7 @@ class Solution:
 
         # if all frequencies are same,
         # then return true
-        if (self.allSame(freq, M)):
+        if self.allSame(freq, M):
             return True
 
         # Try decreasing frequency of all character
@@ -98,14 +99,15 @@ class Solution:
 
             # Check character only if it
             # occurs in str
-            if (freq[i] > 0):
+            if freq[i] > 0:
                 freq[i] -= 1
 
-                if (self.allSame(freq, M)):
+                if self.allSame(freq, M):
                     return True
                 freq[i] += 1
 
         return False
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
@@ -116,14 +118,11 @@ class Test(unittest.TestCase):
 
     def test_printMinIndexChar(self) -> None:
         s = Solution()
-        for str1, solution in (
-            ["xyyz", True],
-            ["xxxxyyzz", False]
-        ):
+        for str1, solution in (["xyyz", True], ["xxxxyyzz", False]):
             self.assertEqual(
                 solution,
                 s.possibleSameCharFreqByOneRemoval(str1),
-                "Should determine if it is possible to remove at most one character from this string in such a way that frequency of each distinct character becomes same in the string"
+                "Should determine if it is possible to remove at most one character from this string in such a way that frequency of each distinct character becomes same in the string",
             )
 
 

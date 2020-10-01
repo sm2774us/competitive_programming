@@ -54,8 +54,8 @@ import heapq
 
 import unittest
 
-class Solution:
 
+class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         # to store frequency of occurence of every element
         frequencyMap = {}
@@ -90,6 +90,7 @@ class Solution:
 
         return ans[0]
 
+
 class Test(unittest.TestCase):
     def setUp(self) -> None:
         pass
@@ -100,28 +101,29 @@ class Test(unittest.TestCase):
     def test_topKFrequent(self) -> None:
         sol = Solution()
         for nums, k, solution in (
-                [[1, 1, 1, 2, 2, 3], 2, [1, 2]],
-                [[1], 1, [1]],
-                [[1, 7, 4, 3, 4, 8, 7], 2, [4, 7]]
+            [[1, 1, 1, 2, 2, 3], 2, [1, 2]],
+            [[1], 1, [1]],
+            [[1, 7, 4, 3, 4, 8, 7], 2, [4, 7]],
         ):
             self.assertEqual(
                 solution,
                 sol.topKFrequent(nums, k),
-                "Should return the minimum window in S which will contain all the characters in T"
+                "Should return the minimum window in S which will contain all the characters in T",
             )
 
     def test_topKFrequentGFG(self) -> None:
         sol = Solution()
         for nums, k, solution in (
-                [[1, 1, 1, 2, 2, 3], 2, 1],
-                [[1], 1, 1],
-                [[1, 7, 4, 3, 4, 8, 7], 2, 4]
+            [[1, 1, 1, 2, 2, 3], 2, 1],
+            [[1], 1, 1],
+            [[1, 7, 4, 3, 4, 8, 7], 2, 4],
         ):
             self.assertEqual(
                 solution,
                 sol.topKFrequentGFG(nums, k),
-                "Should return the minimum window in S which will contain all the characters in T"
+                "Should return the minimum window in S which will contain all the characters in T",
             )
+
 
 if __name__ == "__main__":
     unittest.main()

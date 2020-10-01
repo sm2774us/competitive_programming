@@ -56,6 +56,7 @@ import functools
 
 import unittest
 
+
 class Solution:
     # This is a chance in the interview to display your knowledge of the Python language and
     # present multiple solutions with their tradeoffs.
@@ -82,7 +83,6 @@ class Solution:
     def checkListsEqualMethodTwo(self, list1: List[int], list2: List[int]) -> bool:
         return collections.Counter(list1) == collections.Counter(list2)
 
-
     # Method 3 : Using sum() + zip() + len()
     # Using sum() + zip(), we can get sum of one of the list as summation of 1 if both the index in two lists have
     # equal elements, and then compare that number with size of other list. This also requires first to check
@@ -92,8 +92,9 @@ class Solution:
     #            2) Avoids making use of the collections library and an additional data structure.
     #
     def checkListsEqualMethodThree(self, list1: List[int], list2: List[int]) -> bool:
-        return len(list1)==len(list2) and len(list1)==sum([1 for i,j in zip(list1,list2) if i==j])
-
+        return len(list1) == len(list2) and len(list1) == sum(
+            [1 for i, j in zip(list1, list2) if i == j]
+        )
 
     # Method 4 : Using reduce() + map()
     # Carefully coupling power of map() to hash values and utility of reduce(),
@@ -104,7 +105,10 @@ class Solution:
     #
     # Drawback: Requires that the two lists be of equal size.
     def checkListsEqualMethodFour(self, list1: List[int], list2: List[int]) -> bool:
-        return functools.reduce(lambda b1,b2: b1 and b2, map(lambda e1,e2: e1==e2, list1, list2), True)
+        return functools.reduce(
+            lambda b1, b2: b1 and b2, map(lambda e1, e2: e1 == e2, list1, list2), True
+        )
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
@@ -117,28 +121,29 @@ class Test(unittest.TestCase):
         s = Solution()
         for list1, list2, solution in (
             [[1, 2, 5, 4, 0], [2, 4, 5, 0, 1], True],
-            [[1, 2, 5], [2, 4, 15], False]
+            [[1, 2, 5], [2, 4, 15], False],
         ):
             self.assertEqual(
                 solution,
                 s.checkListsEqualMethodOne(list1, list2),
-                "Should determine if the two lists are equal or not"
+                "Should determine if the two lists are equal or not",
             )
             self.assertEqual(
                 solution,
                 s.checkListsEqualMethodTwo(list1, list2),
-                "Should determine if the two lists are equal or not"
+                "Should determine if the two lists are equal or not",
             )
             self.assertEqual(
                 solution,
                 s.checkListsEqualMethodThree(list1, list2),
-                "Should determine if the two lists are equal or not"
+                "Should determine if the two lists are equal or not",
             )
             self.assertEqual(
                 solution,
                 s.checkListsEqualMethodFour(list1, list2),
-                "Should determine if the two lists are equal or not"
+                "Should determine if the two lists are equal or not",
             )
+
 
 if __name__ == "__main__":
     unittest.main()

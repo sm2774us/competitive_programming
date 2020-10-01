@@ -49,6 +49,7 @@ import collections
 
 import unittest
 
+
 class Solution:
     # This is a chance in the interview to display your knowledge of the Python language and
     # present multiple solutions with their tradeoffs.
@@ -67,20 +68,24 @@ class Solution:
     # | O(T): O(n+m) | O(S): O(n) | Rt: 52ms |
     def findTheDifferenceMethodTwo(self, s: str, t: str) -> str:
         dt = {}
-        for i in s: dt[i] = dt.get(i, 0) + 1
+        for i in s:
+            dt[i] = dt.get(i, 0) + 1
         for i in t:
             dt[i] = dt.get(i, 0) - 1
-            if dt[i] < 0: return i
+            if dt[i] < 0:
+                return i
         return
 
     # Method 3 : Limited State
     # | O(T): O(n + m) | O(S): O(1) | Rt: 36ms |
     def findTheDifferenceMethodThree(self, s: str, t: str) -> str:
-        base, a = ord('a'), [0] * 26
-        for i in s: a[ord(i) - base] += 1
+        base, a = ord("a"), [0] * 26
+        for i in s:
+            a[ord(i) - base] += 1
         for i in t:
             ind = ord(i) - base
-            if a[ind] <= 0: return i
+            if a[ind] <= 0:
+                return i
             a[ind] -= 1
 
     # Method 4 : Count
@@ -92,7 +97,8 @@ class Solution:
     # | O(T): O(m+n) | O(S): O(m+n) | Rt: 24ms |
     def findTheDifferenceMethodFive(self, s: str, t: str) -> str:
         xor = 0
-        for i in s + t: xor ^= ord(i)
+        for i in s + t:
+            xor ^= ord(i)
         return chr(xor)
 
     # Method 6 : XOR - transfer this problem to a "find unique" problem. Very good solution. Alternative to save space.
@@ -110,7 +116,7 @@ class Solution:
     def findTheDifferenceMethodSeven(self, s: str, t: str) -> str:
         return chr(sum(map(ord, t)) - sum(map(ord, s)))
 
-    
+
 class Test(unittest.TestCase):
     def setUp(self) -> None:
         pass
@@ -124,47 +130,47 @@ class Test(unittest.TestCase):
         def test_findTheDifference(self) -> None:
             sol = Solution()
             for s, t, solution in (
-                    ["geeksforgeeks", "geeksquiz", "fioqruz"],
-                    ["characters", "alphabets", "bclpr"],
-                    ["abcd", "abcde", "e"],
-                    ["", "y", "y"],
-                    ["a", "aa", "a"],
-                    ["ae", "aea", "a"]
+                ["geeksforgeeks", "geeksquiz", "fioqruz"],
+                ["characters", "alphabets", "bclpr"],
+                ["abcd", "abcde", "e"],
+                ["", "y", "y"],
+                ["a", "aa", "a"],
+                ["ae", "aea", "a"],
             ):
                 self.assertEqual(
                     solution,
                     sol.findTheDifferenceMethodOne(s, t),
-                    "Should return the difference between the two strings"
+                    "Should return the difference between the two strings",
                 )
                 self.assertEqual(
                     solution,
                     sol.findTheDifferenceMethodTwo(s, t),
-                    "Should return the difference between the two strings"
+                    "Should return the difference between the two strings",
                 )
                 self.assertEqual(
                     solution,
                     sol.findTheDifferenceMethodThree(s, t),
-                    "Should return the difference between the two strings"
+                    "Should return the difference between the two strings",
                 )
                 self.assertEqual(
                     solution,
                     sol.findTheDifferenceMethodFour(s, t),
-                    "Should return the difference between the two strings"
+                    "Should return the difference between the two strings",
                 )
                 self.assertEqual(
                     solution,
                     sol.findTheDifferenceMethodFive(s, t),
-                    "Should return the difference between the two strings"
+                    "Should return the difference between the two strings",
                 )
                 self.assertEqual(
                     solution,
                     sol.findTheDifferenceMethodSix(s, t),
-                    "Should return the difference between the two strings"
+                    "Should return the difference between the two strings",
                 )
                 self.assertEqual(
                     solution,
                     sol.findTheDifferenceMethodSeven(s, t),
-                    "Should return the difference between the two strings"
+                    "Should return the difference between the two strings",
                 )
 
 

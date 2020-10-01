@@ -47,15 +47,21 @@ from collections import defaultdict
 
 import unittest
 
-class Solution:
 
+class Solution:
     def minWindow(self, s: str, t: str) -> str:
         """
         :type s: str
         :type t: str
         :rtype: str
         """
-        st, c1, min_so_far, result, fmap = 0, Counter(t), len(s) + 1, "", defaultdict(int)
+        st, c1, min_so_far, result, fmap = (
+            0,
+            Counter(t),
+            len(s) + 1,
+            "",
+            defaultdict(int),
+        )
         unique_ch = len(c1)
         for end in range(len(s)):
             if s[end] in c1:
@@ -64,7 +70,7 @@ class Solution:
                     unique_ch -= 1
                 while st <= end and unique_ch == 0:
                     if end - st + 1 < min_so_far:
-                        min_so_far, result = end - st + 1, s[st:end + 1]
+                        min_so_far, result = end - st + 1, s[st : end + 1]
                     if s[st] in fmap:
                         fmap[s[st]] -= 1
                         if fmap[s[st]] < c1[s[st]]:
@@ -72,7 +78,7 @@ class Solution:
                     st += 1
         return result
 
-    
+
 class Test(unittest.TestCase):
     def setUp(self) -> None:
         pass
@@ -86,14 +92,14 @@ class Test(unittest.TestCase):
         def test_findTheDifference(self) -> None:
             sol = Solution()
             for s, t, solution in (
-                    ["timetopractice", "toc", "toprac"],
-                    ["zoomlazapzo", "oza", "apzo"],
-                    ["ADOBECODEBANC", "ABC", "BANC"]
+                ["timetopractice", "toc", "toprac"],
+                ["zoomlazapzo", "oza", "apzo"],
+                ["ADOBECODEBANC", "ABC", "BANC"],
             ):
                 self.assertEqual(
                     solution,
                     sol.minWindow(s, t),
-                    "Should return the minimum window in S which will contain all the characters in T"
+                    "Should return the minimum window in S which will contain all the characters in T",
                 )
 
 

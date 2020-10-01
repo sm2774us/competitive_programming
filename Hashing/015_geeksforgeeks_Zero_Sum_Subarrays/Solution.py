@@ -57,6 +57,7 @@ from typing import List
 from collections import defaultdict
 import unittest
 
+
 class Solution:
     def subarrayZeroSum(self, nums: List[int], k: int = 0) -> int:
         prefix_sum = 0
@@ -80,6 +81,7 @@ class Solution:
 
         return counter
 
+
 class Test(unittest.TestCase):
     def setUp(self) -> None:
         pass
@@ -90,8 +92,8 @@ class Test(unittest.TestCase):
     def test_subarrayZeroSum(self) -> None:
         s = Solution()
         for nums, solution in (
-            [[0,0,5,5,0,0], 6],
-            [[6,-1,-3,4,-2,2,4,6,-12,-7], 4]
+            [[0, 0, 5, 5, 0, 0], 6],
+            [[6, -1, -3, 4, -2, 2, 4, 6, -12, -7], 4],
         ):
             self.assertEqual(
                 solution,

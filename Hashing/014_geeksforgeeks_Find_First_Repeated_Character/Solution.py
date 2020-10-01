@@ -43,11 +43,12 @@
 #
 import unittest
 
+
 class Solution:
     # Suggest this approach first in an interview situation, if no additional data structures allowed
     def first_repeated_char(self, str1: str) -> str:
         for index, c in enumerate(str1):
-            if str1[:index + 1].count(c) > 1:
+            if str1[: index + 1].count(c) > 1:
                 return c
         return ""
 
@@ -61,6 +62,7 @@ class Solution:
                 seen.add(letter)
         return ""
 
+
 class Test(unittest.TestCase):
     def setUp(self) -> None:
         pass
@@ -70,10 +72,7 @@ class Test(unittest.TestCase):
 
     def test_first_repeated_char(self) -> None:
         sol = Solution()
-        for str1, solution in (
-            ["geeksforgeeks", "e"],
-            ["hellogeeks", "l"]
-        ):
+        for str1, solution in (["geeksforgeeks", "e"], ["hellogeeks", "l"]):
             self.assertEqual(solution, sol.first_repeated_char(str1))
             self.assertEqual(solution, sol.first_repeated_char_using_set(str1))
 
