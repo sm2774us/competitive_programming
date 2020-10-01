@@ -59,7 +59,7 @@ class Test(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_maxA(self) -> None:
+    def test_josephus(self) -> None:
         sol = Solution()
         for n, k, solution in ([3, 2, 3], [5, 3, 4]):
             self.assertEqual(

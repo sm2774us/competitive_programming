@@ -84,7 +84,7 @@ class Test(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_floodFillRecursiveUsingDFS(self) -> None:
+    def test_numIslands_using_DFS_and_Recursion(self) -> None:
         s = Solution()
         grid = [
             ["1", "1", "1", "1", "0"],
