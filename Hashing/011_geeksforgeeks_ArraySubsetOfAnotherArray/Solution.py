@@ -67,7 +67,7 @@ class Solution:
             # if a_count.__contains__(key) == False:
             # or more pythonic
             # [ Time Complexity for 'in' statement => { lists - Average: O(n) ; set/dict - Average: O(1), Worst: O(n) } ]
-            if not key in a_count.keys():
+            if not key in a_count:
                 return False
             if b_count[key] > a_count[key]:
                 return False

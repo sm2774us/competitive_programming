@@ -46,18 +46,21 @@ class Solution:
             # if unions.__contains__(n):  # duplicate n, skip
             # or more pythonic
             # [ Time Complexity for 'in' statement => { lists - Average: O(n) ; set/dict - Average: O(1), Worst: O(n) } ]
-            if n in unions.keys():
+            # you don't need the call .keys(). x in dict already checks if the key is in the dict
+            if n in unions:
                 continue
             start = end = n
             # if unions.__contains__(n + 1):  # update end if has bigger neighbouring section
             # or more pythonic
             # [ Time Complexity for 'in' statement => { lists - Average: O(n) ; set/dict - Average: O(1), Worst: O(n) } ]
-            if (n + 1) in unions.keys():
+            # you don't need the call .keys(). x in dict already checks if the key is in the dict
+            if (n + 1) in unions:
                 end = unions[n + 1][1]
             # if unions.__contains__(n - 1):  # update start if has smaller neighbouring section
             # or more pythonic
             # [ Time Complexity for 'in' statement => { lists - Average: O(n) ; set/dict - Average: O(1), Worst: O(n) } ]
-            if (n - 1) in unions.keys():
+            # you don't need the call .keys(). x in dict already checks if the key is in the dict
+            if (n - 1) in unions:
                 start = unions[n - 1][0]
             unions[start] = unions[end] = unions[n] = (start, end)
             maxlen = max(end - start + 1, maxlen)
