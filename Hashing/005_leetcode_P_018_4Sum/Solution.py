@@ -39,6 +39,7 @@ from typing import List
 
 import unittest
 
+
 class Solution:
     # O(N^3) Solution
     # Complexity of: 2-sum is O(N),
@@ -50,7 +51,9 @@ class Solution:
     #                and in general is complexity of k-sum is O(N^k-1)
     def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
         def findNsum(nums: List[int], target: int, N: int, cur: List[int]):
-            if len(nums) < N or N < 2 or nums[0] * N > target or nums[-1] * N < target:  # if minimum possible sum (every element is first element) > target
+            if (
+                len(nums) < N or N < 2 or nums[0] * N > target or nums[-1] * N < target
+            ):  # if minimum possible sum (every element is first element) > target
                 return  # or maximum possible sum (every element is first element) < target, it's impossible to get target anyway
             if N == 2:  # 2-sum problem
                 l, r = 0, len(nums) - 1
@@ -71,11 +74,16 @@ class Solution:
             else:  # reduce to N-1 sum problem
                 for i in range(len(nums) - N + 1):
                     if i == 0 or nums[i - 1] != nums[i]:
-                        findNsum(nums[i + 1 :], target - nums[i], N - 1, cur + [nums[i]])
+                        findNsum(
+                            nums[i + 1 :], target - nums[i], N - 1, cur + [nums[i]]
+                        )
 
         res = []
         findNsum(sorted(nums), target, 4, [])
         return res
+
+    def checkEqual(self, L1, L2):
+        return len(L1) == len(L2) and sorted(L1) == sorted(L2)
 
 
 class Test(unittest.TestCase):
@@ -87,7 +95,13 @@ class Test(unittest.TestCase):
 
     def test_fourSum(self) -> None:
         sol = Solution()
-        self.assertEqual(sorted([[-1,  0, 0, 1],[-2, -1, 1, 2],[-2,  0, 0, 2]]), sol.fourSum([1, 0, -1, 0, -2, 2], 0))
+        self.assertEqual(
+            sol.checkEqual(
+                [[-1, 0, 0, 1], [-2, -1, 1, 2], [-2, 0, 0, 2]],
+                sol.fourSum([1, 0, -1, 0, -2, 2], 0),
+            ),
+            True,
+        )
 
 
 if __name__ == "__main__":

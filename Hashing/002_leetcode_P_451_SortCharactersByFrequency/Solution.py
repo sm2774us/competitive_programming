@@ -76,14 +76,15 @@ class Solution:
             c2.setdefault(v, []).append(k * v)
         return "".join(["".join(c2[i]) for i in range(len(s), -1, -1) if i in c2])
 
-    #Time: O(n), one pass
-    #Space: O(k), where k is the number of unique characters... worst case O(n)
+    # Time: O(n), one pass
+    # Space: O(k), where k is the number of unique characters... worst case O(n)
     def frequencySortFasterSolutionUsing_Counter_most_common(self, s: str) -> str:
         """
         :type s: str
         :rtype: str
         """
-        return ''.join(c*x for x,c in Counter(s).most_common())
+        return "".join(c * x for x, c in Counter(s).most_common())
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
@@ -98,7 +99,9 @@ class Test(unittest.TestCase):
         # for s, solution in (["tree", "eert"], ["cccaaa", "cccaaa"], ["Aabb", "bbAa"]):
         for s, solution in (["tree", "eetr"], ["cccaaa", "cccaaa"], ["Aabb", "bbAa"]):
             self.assertEqual(solution, sol.frequencySort(s))
-            self.assertEqual(solution, sol.frequencySortFasterSolutionUsing_Counter_most_common(s))
+            self.assertEqual(
+                solution, sol.frequencySortFasterSolutionUsing_Counter_most_common(s)
+            )
 
 
 if __name__ == "__main__":

@@ -50,6 +50,7 @@
 #
 import unittest
 
+
 class Solution:
     # Returns sum of elements in list
     def getSum(self, X):
@@ -66,7 +67,7 @@ class Solution:
         sum2 = self.getSum(B)
 
         # Because that target must be an integer
-        if ((sum1 - sum2) % 2 != 0):
+        if (sum1 - sum2) % 2 != 0:
             return 0
         return (sum1 - sum2) / 2
 
@@ -79,10 +80,10 @@ class Solution:
         target = self.getTarget(A, B)
 
         # target 0 means, answer is not possible
-        if (target == 0):
+        if target == 0:
             return False
         i, j = 0, 0
-        while (i < len(A) and j < len(B)):
+        while i < len(A) and j < len(B):
             diff = A[i] - B[j]
             if diff == target:
                 return True
@@ -92,6 +93,7 @@ class Solution:
             # Look for a greater value in list B
             else:
                 j += 1
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
@@ -103,16 +105,8 @@ class Test(unittest.TestCase):
     def test_fourSum(self) -> None:
         sol = Solution()
         for A, B, solution in (
-            [
-                [4, 1, 2, 1, 1, 2],
-                [3, 6, 3, 3],
-                True
-            ],
-            [
-                [5, 7, 4, 6],
-                [1, 2, 3, 8],
-                True
-            ]
+            [[4, 1, 2, 1, 1, 2], [3, 6, 3, 3], True],
+            [[5, 7, 4, 6], [1, 2, 3, 8], True],
         ):
             self.assertEqual(solution, sol.findSwapValues(A, B))
 

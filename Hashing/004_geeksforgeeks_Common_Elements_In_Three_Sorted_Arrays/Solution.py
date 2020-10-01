@@ -55,6 +55,7 @@ from typing import List
 
 import unittest
 
+
 class Solution:
     # Python function to print common elements in three sorted arrays
     def commonElements(self, A: List[int], B: List[int], C: List[int]) -> List[int]:
@@ -63,11 +64,11 @@ class Solution:
         i, j, k = 0, 0, 0
         ans = []
         # Iterate through three arrays while all arrays have elements
-        while (i < n1 and j < n2 and k < n3):
+        while i < n1 and j < n2 and k < n3:
 
             # If x = y and y = z, print any of them and move ahead
             # in all arrays
-            if (A[i] == B[j] and B[j] == C[k]):
+            if A[i] == B[j] and B[j] == C[k]:
                 ans.append(A[i])
                 i += 1
                 j += 1
@@ -87,7 +88,9 @@ class Solution:
 
         return ans
 
-    def commonElementsUsingSet(self, A: List[int], B: List[int], C: List[int]) -> List[int]:
+    def commonElementsUsingSet(
+        self, A: List[int], B: List[int], C: List[int]
+    ) -> List[int]:
         # Converting the arrays into sets
         s1 = set(A)
         s2 = set(B)
@@ -102,7 +105,10 @@ class Solution:
         result_set = set1.intersection(s3)
 
         # Converts resulting set to list and return
-        return(list(result_set))
+        return list(result_set)
+
+    def checkEqual(self, L1, L2):
+        return len(L1) == len(L2) and sorted(L1) == sorted(L2)
 
 
 class Test(unittest.TestCase):
@@ -114,8 +120,28 @@ class Test(unittest.TestCase):
 
     def test_commonElements(self) -> None:
         sol = Solution()
-        self.assertEqual([20, 80], sorted(sol.commonElements([1, 5, 10, 20, 40, 80], [6, 7, 20, 80, 100], [3, 4, 15, 20, 30, 70, 80, 120])))
-        self.assertEqual([20, 80], sorted(sol.commonElementsUsingSet([1, 5, 10, 20, 40, 80], [6, 7, 20, 80, 100], [3, 4, 15, 20, 30, 70, 80, 120])))
+        self.assertEqual(
+            sol.checkEqual(
+                [20, 80],
+                sol.commonElements(
+                    [1, 5, 10, 20, 40, 80],
+                    [6, 7, 20, 80, 100],
+                    [3, 4, 15, 20, 30, 70, 80, 120],
+                ),
+            ),
+            True,
+        )
+        self.assertEqual(
+            sol.checkEqual(
+                [20, 80],
+                sol.commonElementsUsingSet(
+                    [1, 5, 10, 20, 40, 80],
+                    [6, 7, 20, 80, 100],
+                    [3, 4, 15, 20, 30, 70, 80, 120],
+                ),
+            ),
+            True,
+        )
 
 
 if __name__ == "__main__":

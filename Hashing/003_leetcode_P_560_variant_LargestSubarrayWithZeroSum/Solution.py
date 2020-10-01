@@ -93,9 +93,10 @@ class Solution:
                 first_with_sum[current_sum] = start_index
 
         if best_len > 0:
-            return array[best_start:best_start + best_len]
+            return array[best_start : best_start + best_len]
         else:
             return None
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
@@ -106,9 +107,16 @@ class Test(unittest.TestCase):
 
     def test_sub_array_sum(self) -> None:
         sol = Solution()
-        self.assertEqual([-2,2,-8,1,7], sol.sub_array_sum([15,-2,2,-8,1,7,10,23]))
-        self.assertEqual([-3,-7,10], sol.sub_array_sum([15,-3,2,-8,-3,-7,10,23]))
-        self.assertEqual([4,-9,-1,-2,-3,1,2,3,9,-4], sol.sub_array_sum([17,15,13,4,-9,-1,-2,-3,1,2,3,9,-4,7]))
+        self.assertEqual(
+            [-2, 2, -8, 1, 7], sol.sub_array_sum([15, -2, 2, -8, 1, 7, 10, 23])
+        )
+        self.assertEqual(
+            [-3, -7, 10], sol.sub_array_sum([15, -3, 2, -8, -3, -7, 10, 23])
+        )
+        self.assertEqual(
+            [4, -9, -1, -2, -3, 1, 2, 3, 9, -4],
+            sol.sub_array_sum([17, 15, 13, 4, -9, -1, -2, -3, 1, 2, 3, 9, -4, 7]),
+        )
 
 
 if __name__ == "__main__":

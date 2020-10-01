@@ -36,8 +36,6 @@ A[] and 2 from array B[]
 >
 > Time Complexity   : O(nlog(n) + mlog(m)) [ if arrays are not sorted]
 
-#### <ins>Approach 1> Intersection of three arrays</ins>
- 
 - Sort the arrays.
 - Traverse both array simultaneously and do following for every pair.
     1. If the difference is too small then, make it bigger by moving ‘a’ to a bigger value.
