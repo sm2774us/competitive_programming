@@ -41,7 +41,12 @@
 # Source: https://leetcode.com/problems/course-schedule/ (LeetCode - Problem 207 - Course Schedule)
 #
 # **************************************************************************
-# Solution Hint: https://leetcode.com/problems/course-schedule/discuss/658442/Python-Cycle-Detection
+# Solution Hint: https://leetcode.com/problems/course-schedule/discuss/267234/python-solutions-with-Kahn's-algorithms-and-Tarjan-Algorithms
+# **************************************************************************
+# **************************************************************************
+# Kahn's Algorithm - Solution Explanation
+# **************************************************************************
+# Refer to Kahns_Algorithm_Solution_Explanation.md.
 # **************************************************************************
 #
 from typing import List
@@ -50,56 +55,39 @@ from collections import defaultdict
 import unittest
 
 
-class Graph:
-    def __init__(self, vertices: int) -> None:
-        self.graph = defaultdict(list)
-        self.V = vertices
-
-    def addEdge(self, u: int, v: int) -> None:
-        self.graph[u].append(v)
-
-    def isCyclicUtil(self, v: int, visited: List[bool], recStack: List[bool]) -> bool:
-
-        # Mark current node as visited and
-        # adds to recursion stack
-        visited[v] = True
-        recStack[v] = True
-
-        # Recur for all neighbours
-        # if any neighbour is visited and in
-        # recStack then graph is cyclic
-        for neighbour in self.graph[v]:
-            if visited[neighbour] == False:
-                if self.isCyclicUtil(neighbour, visited, recStack) == True:
-                    return True
-            elif recStack[neighbour] == True:
-                return True
-
-        # The node needs to be poped from
-        # recursion stack before function ends
-        recStack[v] = False
-        return False
-
-    # Returns true if graph is cyclic else false
-    def isCyclic(self) -> bool:
-        visited = [False] * self.V
-        recStack = [False] * self.V
-        for node in range(self.V):
-            if visited[node] == False:
-                if self.isCyclicUtil(node, visited, recStack) == True:
-                    return True
-        return False
-
-
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        g = Graph(numCourses)
-        for i in prerequisites:
-            u = i[0]
-            v = i[1]
-            g.addEdge(u, v)
-        if g.isCyclic():
-            return False
+        """
+        :type numCourses: int
+        :type prerequisites: List[List[int]]
+        :rtype:bool
+        """
+        if not prerequisites:
+            return True
+
+        L = []
+
+        in_degrees = defaultdict(int)
+        graph = defaultdict(list)
+        # Construct the graph
+        for u, v in prerequisites:
+            graph[v].append(u)
+            in_degrees[u] += 1
+
+        Q = [u for u in graph if in_degrees[u] == 0]
+
+        while Q:  # while Q is not empty
+            start = Q.pop()  # remove a node from Q
+            L.append(start)  # add n to tail of L
+            for v in graph[start]:  # for each node v with a edge e
+                in_degrees[v] -= 1  # remove edge
+                if in_degrees[v] == 0:
+                    Q.append(v)
+        # check there exist a cycle
+        for u in in_degrees:  # if graph has edge
+            if in_degrees[u]:
+                return False
+                # print(f"L: {L}")
         return True
 
 

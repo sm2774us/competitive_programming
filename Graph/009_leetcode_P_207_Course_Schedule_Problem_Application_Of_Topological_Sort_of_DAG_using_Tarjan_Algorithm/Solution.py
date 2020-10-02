@@ -41,65 +41,58 @@
 # Source: https://leetcode.com/problems/course-schedule/ (LeetCode - Problem 207 - Course Schedule)
 #
 # **************************************************************************
-# Solution Hint: https://leetcode.com/problems/course-schedule/discuss/658442/Python-Cycle-Detection
+# Solution Hint: https://leetcode.com/problems/course-schedule/discuss/267234/python-solutions-with-Kahn's-algorithms-and-Tarjan-Algorithms
 # **************************************************************************
+# **************************************************************************
+# Tarjan Algorithm - Solution Explanation
+# **************************************************************************
+# Refer to Tarjan_Algorithm_Solution_Explanation.md.
 #
 from typing import List
-from collections import defaultdict
 
 import unittest
 
 
-class Graph:
-    def __init__(self, vertices: int) -> None:
-        self.graph = defaultdict(list)
-        self.V = vertices
-
-    def addEdge(self, u: int, v: int) -> None:
-        self.graph[u].append(v)
-
-    def isCyclicUtil(self, v: int, visited: List[bool], recStack: List[bool]) -> bool:
-
-        # Mark current node as visited and
-        # adds to recursion stack
-        visited[v] = True
-        recStack[v] = True
-
-        # Recur for all neighbours
-        # if any neighbour is visited and in
-        # recStack then graph is cyclic
-        for neighbour in self.graph[v]:
-            if visited[neighbour] == False:
-                if self.isCyclicUtil(neighbour, visited, recStack) == True:
-                    return True
-            elif recStack[neighbour] == True:
-                return True
-
-        # The node needs to be poped from
-        # recursion stack before function ends
-        recStack[v] = False
-        return False
-
-    # Returns true if graph is cyclic else false
-    def isCyclic(self) -> bool:
-        visited = [False] * self.V
-        recStack = [False] * self.V
-        for node in range(self.V):
-            if visited[node] == False:
-                if self.isCyclicUtil(node, visited, recStack) == True:
-                    return True
-        return False
-
-
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        g = Graph(numCourses)
-        for i in prerequisites:
-            u = i[0]
-            v = i[1]
-            g.addEdge(u, v)
-        if g.isCyclic():
-            return False
+        """
+        :type numCourses: int
+        :type prerequisites: List[List[int]]
+        :rtype:bool
+        """
+        # base case
+        if numCourses == None or prerequisites == None:
+            return None
+
+        # Construct a directed graph from `prerequisites`.
+        # initiate the graph, The nodes are `0` to `n-1`(nodes are origins)
+        graph = [[] for _ in range(numCourses)]
+        # there is an edge from `i` to `j` if `i` is the prerequisite of `j`.
+        for x, y in prerequisites:
+            graph[x].append(y)
+            # hold the paint status
+        # we initiate nodes which have not been visited, paint them as 0
+        paint = [0 for _ in range(numCourses)]
+
+        # if node is being visiting, paint it as -1, if we find a node painted as -1 in dfs,then there is a ring
+        # if node has been visited, paint it as 1
+
+        def dfs(i):
+            # base cases
+            if paint[i] == -1:  # a ring
+                return False
+            if paint[i] == 1:  # visited
+                return True
+            paint[i] = -1  # paint it as being visiting.
+            for j in graph[i]:  # traverse i's neighbors
+                if not dfs(j):  # if there exist a ring.
+                    return False
+            paint[i] = 1  # paint as visited and jump to the next.
+            return True
+
+        for i in range(numCourses):
+            if not dfs(i):  # if there exist a ring.
+                return False
         return True
 
 
