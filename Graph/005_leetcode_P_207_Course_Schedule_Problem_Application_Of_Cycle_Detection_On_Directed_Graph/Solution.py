@@ -4,65 +4,41 @@
 # @by  : Shaikat Majumdar
 # @date: Aug 27, 2020
 # **************************************************************************
-# GeeksForGeeks - Detect cycle in a directed graph
+# LeetCode - Problem 207: Course Schedule
 #
 # Description:
 #
-# Given a Directed Graph. Check whether it contains any cycle or not.
+# There are a total of numCourses courses you have to take, labeled from 0 to numCourses-1.
 #
-# Input: The first line of the input contains an integer 'T' denoting the number of test cases. Then 'T' test cases follow. Each test case consists of two lines. Description of testcases is as follows: The First line of each test case contains two integers 'N' and 'M'  which denotes the no of vertices and no of edges respectively. The Second line of each test case contains 'M'  space separated pairs u and v denoting that there is an uni-directed  edge from u to v .
+# Some courses may have prerequisites, for example to take course 0 you have to first take course 1, which is expressed as a pair: [0,1]
 #
-# Output:
-# The method should return 1 if there is a cycle else it should return 0.
+# Given the total number of courses and a list of prerequisite pairs, is it possible for you to finish all courses?
 #
-# User task:
-# You don't need to read input or print anything. Your task is to complete the function isCyclic which takes the Graph and the number of vertices and inputs and returns true if the given directed graph contains a cycle. Else, it returns false.
 #
-# Expected Time Complexity: O(V + E).
-# Expected Auxiliary Space: O(V).
+#
+# Example 1:
+#
+# Input: numCourses = 2, prerequisites = [[1,0]]
+# Output: true
+# Explanation: There are a total of 2 courses to take.
+#              To take course 1 you should have finished course 0. So it is possible.
+# Example 2:
+#
+# Input: numCourses = 2, prerequisites = [[1,0],[0,1]]
+# Output: false
+# Explanation: There are a total of 2 courses to take.
+#              To take course 1 you should have finished course 0, and to take course 0 you should
+#              also have finished course 1. So it is impossible.
+#
 #
 # Constraints:
-# 1 <= T <= 1000
-# 1<= N,M <= 1000
-# 0 <= u,v <= N-1
 #
-# Example:
-# Input:
-# 3
-# 2 2
-# 0 1 0 0
-# 4 3
-# 0 1 1 2 2 3
-# 4 3
-# 0 1 2 3 3 2
-# Output:
-# 1
-# 0
-# 1
-#
-# Explanation:
-# Testcase 1: In the above graph there are 2 vertices. The edges are as such among the vertices.
-#
-#   _____
-# /       \
-# \ _____ /
-#  /     \
-# +       +
-# +   0   +
-#  \     / \
-#   -----   \
-#            \
-#             \  _____
-#              +/     \
-#              +       +
-#              +   1   +
-#               \     /
-#                -----
-#
-# From graph it is clear that it contains cycle.
+#   * The input prerequisites is a graph represented by a list of edges, not adjacency matrices. Read more about how a graph is represented.
+#   * You may assume that there are no duplicate edges in the input prerequisites.
+#   * 1 <= numCourses <= 10^5
 #
 # **************************************************************************
-# Source: https://practice.geeksforgeeks.org/problems/detect-cycle-in-a-directed-graph/1 (GeeksForGeeks - Detect cycle in a directed graph)
+# Source: https://leetcode.com/problems/course-schedule/ (LeetCode - Problem 207 - Course Schedule)
 #
 # **************************************************************************
 # Solution Explanation
@@ -71,6 +47,7 @@
 #
 # **************************************************************************
 #
+from typing import List
 from collections import defaultdict
 
 import unittest
@@ -117,6 +94,18 @@ class Graph:
         return False
 
 
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        g = Graph(numCourses)
+        for i in prerequisites:
+            u = i[0]
+            v = i[1]
+            g.addEdge(u, v)
+        if g.isCyclic():
+            return False
+        return True
+
+
 class Test(unittest.TestCase):
     def setUp(self) -> None:
         pass
@@ -124,15 +113,17 @@ class Test(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_isDirectedGraphCyclic(self) -> None:
-        g = Graph(4)
-        g.addEdge(0, 1)
-        g.addEdge(0, 2)
-        g.addEdge(1, 2)
-        g.addEdge(2, 0)
-        g.addEdge(2, 3)
-        g.addEdge(3, 3)
-        self.assertEqual(True, g.isCyclic())
+    def test_canFinishAllCourses(self) -> None:
+        sol = Solution()
+        for numCourses, prerequisites, solution in (
+            [2, [[1, 0]], True],
+            [2, [[1, 0], [0, 1]], False],
+        ):
+            self.assertEqual(
+                solution,
+                sol.canFinish(numCourses, prerequisites),
+                "Should return if it is possible to finish all the courses",
+            )
 
 
 # main

@@ -115,7 +115,7 @@ class Test(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_isCyclic(self) -> None:
+    def test_isUndirectedGraphCyclic(self) -> None:
         g = Graph(5)
         g.addEdge(1, 0)
         g.addEdge(0, 2)
