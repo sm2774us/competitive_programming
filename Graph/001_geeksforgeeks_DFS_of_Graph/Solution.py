@@ -1,22 +1,22 @@
 # http://www.geeksforgeeks.org/breadth-first-traversal-for-a-graph/
-
+from typing import List
 from collections import defaultdict
 
 import unittest
 
 # Basic Tree structure
 class Node:
-    def __init__(self):
+    def __init__(self) -> None:
         # default dictionary to store graph
         # key : Node , values : NeighbouringNodes
         self.graph = defaultdict(list)
 
     # since graph is bidirectional, add as neighbour both ways (both sources)
-    def add_edge(self, u: int, v: int):
+    def add_edge(self, u: int, v: int) -> None:
         self.graph[u].append(v)
         self.graph[v].append(u)
 
-    def dfs(self, source: int):
+    def dfs(self, source: int) -> List[int]:
 
         dfs_traverse = []
 
@@ -78,7 +78,7 @@ class Test(unittest.TestCase):
         self.assertEqual([0, 1, 3, 4, 2, 5], node.dfs(0))
 
 
-def run_dfs(node: Node, source: int):
+def run_dfs(node: Node, source: int) -> List[int]:
     return node.dfs(source)
 
 

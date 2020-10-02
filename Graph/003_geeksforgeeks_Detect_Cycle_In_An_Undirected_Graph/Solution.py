@@ -59,24 +59,25 @@
 #
 # **************************************************************************
 #
+from typing import List
 from collections import defaultdict
 
 import unittest
 
 # This class represents a undirected graph using adjacency list representation
 class Graph:
-    def __init__(self, vertices):
+    def __init__(self, vertices: int) -> None:
         self.V = vertices  # No. of vertices
         self.graph = defaultdict(list)  # default dictionary to store graph
 
     # function to add an edge to graph
-    def addEdge(self, v, w):
+    def addEdge(self, v: int, w: int) -> None:
         self.graph[v].append(w)  # Add w to v_s list
         self.graph[w].append(v)  # Add v to w_s list
 
     # A recursive function that uses visited[] and parent to detect
     # cycle in subgraph reachable from vertex v.
-    def isCyclicUtil(self, v, visited, parent):
+    def isCyclicUtil(self, v: int, visited: List[bool], parent: List[bool]) -> bool:
 
         # Mark the current node as visited
         visited[v] = True
@@ -95,7 +96,7 @@ class Graph:
         return False
 
     # Returns true if the graph contains a cycle, else false.
-    def isCyclic(self):
+    def isCyclic(self) -> bool:
         # Mark all the vertices as not visited
         visited = [False] * (self.V)
         # Call the recursive helper function to detect cycle in different

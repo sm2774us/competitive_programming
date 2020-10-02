@@ -71,20 +71,21 @@
 #
 # **************************************************************************
 #
+from typing import List
 from collections import defaultdict
 
 import unittest
 
 
 class Graph:
-    def __init__(self, vertices):
+    def __init__(self, vertices: int) -> None:
         self.graph = defaultdict(list)
         self.V = vertices
 
-    def addEdge(self, u, v):
+    def addEdge(self, u: int, v: int) -> None:
         self.graph[u].append(v)
 
-    def isCyclicUtil(self, v, visited, recStack):
+    def isCyclicUtil(self, v: int, visited: List[bool], recStack: List[bool]) -> bool:
 
         # Mark current node as visited and
         # adds to recursion stack
@@ -107,7 +108,7 @@ class Graph:
         return False
 
     # Returns true if graph is cyclic else false
-    def isCyclic(self):
+    def isCyclic(self) -> bool:
         visited = [False] * self.V
         recStack = [False] * self.V
         for node in range(self.V):
