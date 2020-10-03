@@ -46,8 +46,13 @@ import math
 
 import unittest
 
+
 class Solution:
-    def networkDelayTimeUsingDijkstraAlgorithm(self, times: List[List[int]], N: int, K: int) -> int:
+    # In an interview - always choose Dijkstra since it is the faster algorithm of the two Shortest Path Algorithms [ i.e., Bellmand Ford and Dikstra ]
+
+    def networkDelayTimeUsingDijkstraAlgorithm(
+        self, times: List[List[int]], N: int, K: int
+    ) -> int:
         graph = collections.defaultdict(dict)
 
         for frm, to, cost in times:
@@ -61,29 +66,36 @@ class Solution:
         while min_dist:
 
             cur_dist, cur = heapq.heappop(min_dist)
-            if cur in visited: continue
+            if cur in visited:
+                continue
             visited.add(cur)
 
             for neighbor in graph[cur]:
-                if neighbor in visited: continue
+                if neighbor in visited:
+                    continue
                 this_dist = cur_dist + graph[cur][neighbor]
                 if this_dist < distances[neighbor]:
                     distances[neighbor] = this_dist
                     heapq.heappush(min_dist, (this_dist, neighbor))
 
-        if len(visited) != len(distances): return -1
+        if len(visited) != len(distances):
+            return -1
         return distances[max(distances, key=distances.get)]
 
-    def networkDelayTimeUsingFloydWarshallAlgorithm(self, times: List[List[int]], N: int, K: int) -> int:
-        """Floyd-Warshall algorithm"""
+    #  Time Complexity: O(VE)
+    def networkDelayTimeUsingBellmanFordAlgorithm(
+        self, times: List[List[int]], N: int, K: int
+    ) -> int:
+        """Bellman Ford algorithm"""
         dp = [0] + [math.inf] * N
         dp[K] = 0
         for _ in range(N):
             for u, v, w in times:
-                if dp[u] != float('inf') and dp[u] + w < dp[v]:
+                if dp[u] != float("inf") and dp[u] + w < dp[v]:
                     dp[v] = dp[u] + w
         res = max(dp or [0])
-        return -1 if res == float('inf') else res
+        return -1 if res == float("inf") else res
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
@@ -94,8 +106,18 @@ class Test(unittest.TestCase):
 
     def test_findTheCity(self) -> None:
         sol = Solution()
-        self.assertEqual(2, sol.networkDelayTimeUsingDijkstraAlgorithm([[2,1,1],[2,3,1],[3,4,1]], 4, 2))
-        self.assertEqual(2, sol.networkDelayTimeUsingFloydWarshallAlgorithm([[2, 1, 1], [2, 3, 1], [3, 4, 1]], 4, 2))
+        self.assertEqual(
+            2,
+            sol.networkDelayTimeUsingDijkstraAlgorithm(
+                [[2, 1, 1], [2, 3, 1], [3, 4, 1]], 4, 2
+            ),
+        )
+        self.assertEqual(
+            2,
+            sol.networkDelayTimeUsingBellmanFordAlgorithm(
+                [[2, 1, 1], [2, 3, 1], [3, 4, 1]], 4, 2
+            ),
+        )
 
 
 # main

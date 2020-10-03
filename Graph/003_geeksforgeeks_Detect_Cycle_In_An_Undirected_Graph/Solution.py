@@ -103,7 +103,7 @@ class Graph:
         # DFS trees
         for i in range(self.V):
             if not visited[i]:  # Don't recur for u if it is already visited
-                if (self.isCyclicUtil(i, visited, -1)):
+                if self.isCyclicUtil(i, visited, -1):
                     return True
 
         return False

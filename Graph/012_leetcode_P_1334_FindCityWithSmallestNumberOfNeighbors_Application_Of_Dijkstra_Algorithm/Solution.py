@@ -43,8 +43,11 @@ import math
 
 import unittest
 
+
 class Solution:
-    def findTheCityUsingDijkstraAlgorithm(self, n: int, edges: List[List[int]], distanceThreshold: int) -> int:
+    def findTheCityUsingDijkstraAlgorithm(
+        self, n: int, edges: List[List[int]], distanceThreshold: int
+    ) -> int:
         graph = collections.defaultdict(list)
 
         for u, v, w in edges:
@@ -68,13 +71,20 @@ class Solution:
                         heapq.heappush(heap, (currW + w, v))
             return len(dist)
 
-        return max([(getNumberOfNeighbors(city), city) for city in range(n)], key=lambda x: (-x[0], x[1]))[-1]
+        return max(
+            [(getNumberOfNeighbors(city), city) for city in range(n)],
+            key=lambda x: (-x[0], x[1]),
+        )[-1]
 
-    def findTheCityUsingFloydWarshallAlgorithm(self, n: int, edges: List[List[int]], distanceThreshold: int) -> int:
+    def findTheCityUsingFloydWarshallAlgorithm(
+        self, n: int, edges: List[List[int]], distanceThreshold: int
+    ) -> int:
         """Floyd-Warshall algorithm"""
         dist = [[math.inf] * n for _ in range(n)]
-        for i in range(n): dist[i][i] = 0
-        for i, j, w in edges: dist[i][j] = dist[j][i] = w
+        for i in range(n):
+            dist[i][i] = 0
+        for i, j, w in edges:
+            dist[i][j] = dist[j][i] = w
 
         for k in range(n):
             for i in range(n):
@@ -83,6 +93,7 @@ class Solution:
 
         ans = {sum(d <= distanceThreshold for d in dist[i]): i for i in range(n)}
         return ans[min(ans)]
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
@@ -94,18 +105,23 @@ class Test(unittest.TestCase):
     def test_findTheCity(self) -> None:
         sol = Solution()
         for n, edges, distanceThreshold, solution in (
-            [4, [[0,1,3],[1,2,1],[1,3,4],[2,3,1]], 4, 3],
-            [5, [[0,1,2],[0,4,8],[1,2,3],[1,4,2],[2,3,1],[3,4,1]], 2, 0]
+            [4, [[0, 1, 3], [1, 2, 1], [1, 3, 4], [2, 3, 1]], 4, 3],
+            [
+                5,
+                [[0, 1, 2], [0, 4, 8], [1, 2, 3], [1, 4, 2], [2, 3, 1], [3, 4, 1]],
+                2,
+                0,
+            ],
         ):
             self.assertEqual(
                 solution,
                 sol.findTheCityUsingDijkstraAlgorithm(n, edges, distanceThreshold),
-                "Should return the city with the smallest number of cities that are reachable through some path and whose distance is at most distanceThreshold"
+                "Should return the city with the smallest number of cities that are reachable through some path and whose distance is at most distanceThreshold",
             )
             self.assertEqual(
                 solution,
                 sol.findTheCityUsingFloydWarshallAlgorithm(n, edges, distanceThreshold),
-                "Should return the city with the smallest number of cities that are reachable through some path and whose distance is at most distanceThreshold"
+                "Should return the city with the smallest number of cities that are reachable through some path and whose distance is at most distanceThreshold",
             )
 
 
