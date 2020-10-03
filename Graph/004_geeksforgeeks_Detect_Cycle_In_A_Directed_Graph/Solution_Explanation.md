@@ -85,10 +85,10 @@ class Graph():
         # if any neighbour is visited and in
         # recStack then graph is cyclic
         for neighbour in self.graph[v]:
-            if visited[neighbour] == False:
-                if self.isCyclicUtil(neighbour, visited, recStack) == True:
+            if not visited[neighbour]:
+                if self.isCyclicUtil(neighbour, visited, recStack):
                     return True
-            elif recStack[neighbour] == True:
+            elif recStack[neighbour]:
                 return True
 
         # The node needs to be poped from
@@ -101,8 +101,8 @@ class Graph():
         visited = [False] * self.V
         recStack = [False] * self.V
         for node in range(self.V):
-            if visited[node] == False:
-                if self.isCyclicUtil(node, visited, recStack) == True:
+            if not visited[node]:
+                if self.isCyclicUtil(node, visited, recStack):
                     return True
         return False
 ```

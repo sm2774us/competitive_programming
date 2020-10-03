@@ -1,6 +1,6 @@
 #
 # Time : O(N); Space: O(N)
-# @tag : Hashing ; HashMap
+# @tag : Graph
 # @by  : Shaikat Majumdar
 # @date: Aug 27, 2020
 # **************************************************************************

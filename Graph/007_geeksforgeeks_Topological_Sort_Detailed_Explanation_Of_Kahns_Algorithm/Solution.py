@@ -5,7 +5,7 @@
 # Space: O(V)
 # The queue needs to store all the vertices of the graph. So the space required is O(V)
 #
-# @tag : Hashing ; HashMap
+# @tag : Graph
 # @by  : Shaikat Majumdar
 # @date: Aug 27, 2020
 # **************************************************************************

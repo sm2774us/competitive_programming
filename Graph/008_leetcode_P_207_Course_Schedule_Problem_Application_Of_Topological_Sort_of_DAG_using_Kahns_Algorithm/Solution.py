@@ -1,6 +1,6 @@
 #
 # Time : O(V + E); Space: O(V)
-# @tag : Hashing ; HashMap
+# @tag : Graph
 # @by  : Shaikat Majumdar
 # @date: Aug 27, 2020
 # **************************************************************************

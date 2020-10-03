@@ -1,6 +1,6 @@
 #
 # Time : O(N); Space: O(k) where k is the number of unique characters , worst case O(N)
-# @tag : Hashing ; HashMap
+# @tag : Graph
 # @by  : Shaikat Majumdar
 # @date: Aug 27, 2020
 # **************************************************************************

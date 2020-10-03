@@ -1,7 +1,7 @@
 #  Google | OA 2019 | Interview Question | Compare Strings
 #
 # Time : O(N); Space: O(N)
-# @tag : Hashing ; HashMap
+# @tag : Graph
 # @by  : Shaikat Majumdar
 # @date: Aug 27, 2020
 # **************************************************************************

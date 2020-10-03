@@ -1,7 +1,7 @@
 #  Amazon | OA 2019 | Interview Question | Find Pair With Given Sum
 #
 # Time : O(N); Space: O(N)
-# @tag : Hashing ; HashMap
+# @tag : Graph
 # @by  : Shaikat Majumdar
 # @date: Aug 27, 2020
 # **************************************************************************

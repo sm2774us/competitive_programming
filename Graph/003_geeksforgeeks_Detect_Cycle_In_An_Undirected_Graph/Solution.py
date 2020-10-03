@@ -1,6 +1,6 @@
 #
 # Time : O(V + E); Space: O(V)
-# @tag : Hashing ; HashMap
+# @tag : Graph
 # @by  : Shaikat Majumdar
 # @date: Aug 27, 2020
 # **************************************************************************
@@ -85,7 +85,7 @@ class Graph:
         # Recur for all the vertices adjacent to this vertex
         for i in self.graph[v]:
             # If the node is not visited then recurse on it
-            if visited[i] == False:
+            if not visited[i]:
                 if self.isCyclicUtil(i, visited, v):
                     return True
             # If an adjacent vertex is visited and not parent of current vertex,
@@ -102,8 +102,8 @@ class Graph:
         # Call the recursive helper function to detect cycle in different
         # DFS trees
         for i in range(self.V):
-            if visited[i] == False:  # Don't recur for u if it is already visited
-                if (self.isCyclicUtil(i, visited, -1)) == True:
+            if not visited[i]:  # Don't recur for u if it is already visited
+                if (self.isCyclicUtil(i, visited, -1)):
                     return True
 
         return False
