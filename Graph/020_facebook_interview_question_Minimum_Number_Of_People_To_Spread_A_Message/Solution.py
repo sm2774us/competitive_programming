@@ -1,100 +1,102 @@
+# Facebook | Interview Question | Minimum number of people to spread a message
 #
-# Time : O(|E| log |V|); Space: O(|E|)
-# using Dijkstra Algorithm
-# where, V = number of vertices
-# @tag : Graph ; Dikstra
+# @tag : Graph ; Topological Sort
 # @by  : Shaikat Majumdar
 # @date: Aug 27, 2020
 # **************************************************************************
-# LeetCode - Problem 743: Network Delay Time
+# Facebook | Interview Question | Minimum number of people to spread a message
 #
 # Description:
 #
-# There are N network nodes, labelled 1 to N.
+# Considering that I'ld would like to spread a promotion message across all people in twitter.
+# Assuming the ideal case, if a person tweets a message, then every follower will re-tweet the message.
 #
-# Given times, a list of travel times as directed edges times[i] = (u, v, w), where u is the source node,
-# v is the target node, and w is the time it takes for a signal to travel from source to target.
+# You need to find the minimum number of people to reach out (for example, who doesn't follow anyone etc)
+# so that your promotion message is spread out across entire network in twitter.
 #
-# Now, we send a signal from a certain node K. How long will it take for all nodes to receive the signal?
-# If it is impossible, return -1.
+# Also, we need to consider loops like, if A follows B, B follows C, C follows D, D follows A (A -> B -> C -> D -> A)
+# then reaching only one of them is sufficient to spread your message.
 #
-# **************************************************************************
-# Examples
-# **************************************************************************
-# Refer to Examples.md.
-# **************************************************************************
+# Input: A 2x2 matrix like below. In this case, a follows b, b follows c, c follows a.
 #
-# Note:
-#
-#   1. N will be in the range [1, 100].
-#   2. K will be in the range [1, N].
-#   3. The length of times will be in the range [1, 6000].
-#   4. All edges times[i] = (u, v, w) will have 1 <= u, v <= N and 0 <= w <= 100.
+#     a b c
+# a  1 1 0
+# b  0 1 1
+# c  1 0 1
+# Output: List of people to be reached to spread out message across everyone in the network.
 #
 # **************************************************************************
-# Source: https://leetcode.com/problems/network-delay-time/ (LeetCode - Problem 743 - Network Delay Time)
+# Source: https://leetcode.com/discuss/interview-question/124827/Find-minimum-number-of-people-to-reach-to-spread-a-message-across-all-people-in-twitter/ (Facebook | Interview Question | Minimum number of people to spread a message)
 #
 # **************************************************************************
 # Solution Explanation
 # **************************************************************************
-# Refer to Solution_Explanation.md
+# Steps:
 #
-from typing import List
+#   - Create a directed graph which captures followee -> follower relationship
+#   - Now create the topological sort for the entire graph
+#   - For each unvisited node in the topological sort result, add it to the final result and then visit all the nodes in that tree
+#   - The reason this works is, in the topological sort order the node that appears first is the left most node in the given connected component. So you would use that to traverse the curr node and all its children node.
+#
+# **************************************************************************
+# References:
+# **************************************************************************
+# Similar Problem: https://www.youtube.com/watch?v=qz9tKlF431k
+#
 import collections
-import heapq
-import math
 
 import unittest
 
 
 class Solution:
-    # In an interview - always choose Dijkstra since it is the faster algorithm of the two Shortest Path Algorithms [ i.e., Bellmand Ford and Dikstra ]
 
-    def networkDelayTimeUsingDijkstraAlgorithm(
-        self, times: List[List[int]], N: int, K: int
-    ) -> int:
-        graph = collections.defaultdict(dict)
+    #     2
+    #     |       4
+    #     0       |
+    #    / \      5
+    #   1   3
+    #
+    # In this example 0 follows 2. so if we reach 2 then we will reach 0 and all its descendents as well.
+    # So the final result will be [2,4]
+    #
 
-        for frm, to, cost in times:
-            graph[frm][to] = cost
+    def minPeopleToSpreadAMessage(self, num_people, follows):
+        # in this graph we will store
+        # followee -> follower relation
+        graph = collections.defaultdict(set)
 
-        distances = {i: math.inf for i in range(1, N + 1)}
-        distances[K] = 0
-        min_dist = [(0, K)]
-        visited = set()
+        # a follows b
+        for a, b in follows:
+            graph[b].add(a)
 
-        while min_dist:
+        def topo(node, graph, visited, result):
+            visited.add(node)
+            for nei in graph[node]:
+                if nei not in visited:
+                    topo(nei, graph, visited, result)
+            result.append(node)
 
-            cur_dist, cur = heapq.heappop(min_dist)
-            if cur in visited:
-                continue
-            visited.add(cur)
+        visited = set([])
+        result = []
+        for i in range(num_people):
+            if i not in visited:
+                topo(i, graph, visited, result)
+        result = list(reversed(result))
 
-            for neighbor in graph[cur]:
-                if neighbor in visited:
-                    continue
-                this_dist = cur_dist + graph[cur][neighbor]
-                if this_dist < distances[neighbor]:
-                    distances[neighbor] = this_dist
-                    heapq.heappush(min_dist, (this_dist, neighbor))
+        def visit(node, visited, graph):
+            visited.add(node)
+            for nei in graph[node]:
+                if nei not in visited:
+                    visit(nei, visited, graph)
 
-        if len(visited) != len(distances):
-            return -1
-        return distances[max(distances, key=distances.get)]
+        visited = set([])
+        start_with = []
+        for r in result:
+            if r not in visited:
+                start_with.append(r)
+                visit(r, visited, graph)
 
-    #  Time Complexity: O(VE)
-    def networkDelayTimeUsingBellmanFordAlgorithm(
-        self, times: List[List[int]], N: int, K: int
-    ) -> int:
-        """Bellman Ford algorithm"""
-        dp = [0] + [math.inf] * N
-        dp[K] = 0
-        for _ in range(N):
-            for u, v, w in times:
-                if dp[u] != float("inf") and dp[u] + w < dp[v]:
-                    dp[v] = dp[u] + w
-        res = max(dp or [0])
-        return -1 if res == float("inf") else res
+        return start_with
 
 
 class Test(unittest.TestCase):
@@ -104,20 +106,10 @@ class Test(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_findTheCity(self) -> None:
+    def test_minPeopleToSpreadAMessage(self) -> None:
         sol = Solution()
-        self.assertEqual(
-            2,
-            sol.networkDelayTimeUsingDijkstraAlgorithm(
-                [[2, 1, 1], [2, 3, 1], [3, 4, 1]], 4, 2
-            ),
-        )
-        self.assertEqual(
-            2,
-            sol.networkDelayTimeUsingBellmanFordAlgorithm(
-                [[2, 1, 1], [2, 3, 1], [3, 4, 1]], 4, 2
-            ),
-        )
+        follows = [(0, 2), (1, 0), (3, 0), (5, 4)]
+        self.assertEqual([4, 2], sol.minPeopleToSpreadAMessage(6, follows))
 
 
 # main

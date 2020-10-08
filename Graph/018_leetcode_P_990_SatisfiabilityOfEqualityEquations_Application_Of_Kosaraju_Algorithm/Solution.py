@@ -1,8 +1,5 @@
 #
-# Time : O(V+E); Space: O(E)
-# using Kosaraju's Algorithm
-# where, V = number of vertices
-# @tag : Graph ; Dikstra
+# @tag : Graph ; DFS (coloring connect components) ; BFS ; Union Find
 # @by  : Shaikat Majumdar
 # @date: Aug 27, 2020
 # **************************************************************************
@@ -84,7 +81,9 @@ class Solution:
     # complexity analysis:
     #   - Time  : DFS is O(N^2). We do dfs number of inequalities times. In worest case, they are N inequalities ( N is length of input). The overall complexity is O(N^3).
     #   - Space : O(N).
-    def equationsPossibleUsingDFSColoringConnectComponents(self, equations: List[str]) -> bool:
+    def equationsPossibleUsingDFSColoringConnectComponents(
+        self, equations: List[str]
+    ) -> bool:
         graph = collections.defaultdict(set)
         for eq in equations:
             if eq[1] == "=":
@@ -92,6 +91,7 @@ class Solution:
                 graph[eq[3]].add(eq[0])
 
         colored = {}
+
         def dfs(node, color):
             if node not in colored:
                 colored[node] = color
@@ -106,8 +106,10 @@ class Solution:
 
         for eq in equations:
             if eq[1] == "!":
-                if eq[0] == eq[3]: return False
-                if colored.get(eq[0], eq[0]) == colored.get(eq[3], eq[3]): return False
+                if eq[0] == eq[3]:
+                    return False
+                if colored.get(eq[0], eq[0]) == colored.get(eq[3], eq[3]):
+                    return False
         return True
 
     # Method 2: BFS
@@ -118,20 +120,22 @@ class Solution:
     def equationsPossibleUsingBFS(self, equations: List[str]) -> bool:
         graph = collections.defaultdict(set)
         check = []
-        '''
+        """
         def dfs(u, target, visited):
             if u == target: return True
             visited.add(u)
             for v in graph[u]:
                 if v in visited: continue
                 return dfs(v, target, visited):
-        '''
+        """
+
         def bfs(u, target):
             Q = collections.deque([u])
             visited = set([u])
             while Q:
                 u = Q.popleft()
-                if u == target: return True
+                if u == target:
+                    return True
                 for v in graph[u]:
                     if v not in visited:
                         visited.add(v)
@@ -139,11 +143,11 @@ class Solution:
             return False
 
         for eq in equations:
-            if eq[1:3] == '!=':
-                a, b = eq.split('!=')
+            if eq[1:3] == "!=":
+                a, b = eq.split("!=")
                 check.append((a, b))
                 continue
-            u, v = eq.split('==')
+            u, v = eq.split("==")
             graph[u].add(v)
             graph[v].add(u)
 
@@ -168,7 +172,8 @@ class Solution:
     #   - Time  : O(N) where is the length of the input
     #   - Space : O(1) since we only store 26 characters in the parent dictionary.
     def equationsPossibleUsingUnionFind(self, equations: List[str]) -> bool:
-        if not equations: return True
+        if not equations:
+            return True
         parent = {i: i for i in string.ascii_lowercase}
 
         def find(x):
@@ -183,7 +188,7 @@ class Solution:
 
         checks = []
         for eq in equations:
-            if eq[1] == '!':
+            if eq[1] == "!":
                 checks.append(eq)
                 continue
             union(eq[0], eq[3])
@@ -192,6 +197,7 @@ class Solution:
             if find(chk[0]) == find(chk[3]):
                 return False
         return True
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
@@ -203,26 +209,26 @@ class Test(unittest.TestCase):
     def test_equationsPossible(self) -> None:
         sol = Solution()
         for equations, solution in (
-            [["a==b","b!=a"], False ],
-            [["b==a","a==b"], True],
-            [["a==b","b==c","a==c"], True],
-            [["a==b","b!=c","c==a"], False],
-            [["c==c","b==d","x!=z"], True]
+            [["a==b", "b!=a"], False],
+            [["b==a", "a==b"], True],
+            [["a==b", "b==c", "a==c"], True],
+            [["a==b", "b!=c", "c==a"], False],
+            [["c==c", "b==d", "x!=z"], True],
         ):
             self.assertEqual(
                 solution,
                 sol.equationsPossibleUsingDFSColoringConnectComponents(equations),
-                "Should determine if it is possible to assign integers to variable names so as to satisfy all the given equations"
+                "Should determine if it is possible to assign integers to variable names so as to satisfy all the given equations",
             )
             self.assertEqual(
                 solution,
                 sol.equationsPossibleUsingBFS(equations),
-                "Should determine if it is possible to assign integers to variable names so as to satisfy all the given equations"
+                "Should determine if it is possible to assign integers to variable names so as to satisfy all the given equations",
             )
             self.assertEqual(
                 solution,
                 sol.equationsPossibleUsingUnionFind(equations),
-                "Should determine if it is possible to assign integers to variable names so as to satisfy all the given equations"
+                "Should determine if it is possible to assign integers to variable names so as to satisfy all the given equations",
             )
 
 

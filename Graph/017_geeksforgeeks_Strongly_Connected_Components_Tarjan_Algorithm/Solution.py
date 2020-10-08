@@ -1,6 +1,8 @@
 #
-# Time : O(N log N); Space: O(N)
-# @tag : Graph ; Kosaraju's Algorithm
+# Time : O(V+E); Space: O(E)
+# where, V = number of vertices
+#        E = number of edges
+# @tag : Graph ; Tarjan's Algorithm
 # @by  : Shaikat Majumdar
 # @date: Aug 27, 2020
 # **************************************************************************
@@ -56,7 +58,7 @@
 
 # Python program to find strongly connected components in a given
 # directed graph using Tarjan's algorithm (single DFS)
-#Complexity : O(V+E)
+# Complexity : O(V+E)
 
 from collections import defaultdict
 
@@ -78,7 +80,7 @@ class Graph:
     def addEdge(self, u, v):
         self.graph[u].append(v)
 
-    '''A recursive function that find finds and prints strongly connected 
+    """A recursive function that find finds and prints strongly connected 
     components using DFS traversal 
     u --> The vertex to be visited next 
     disc[] --> Stores discovery times of visited vertices 
@@ -89,7 +91,8 @@ class Graph:
            of SCC) 
      stackMember[] --> bit/index array for faster check whether 
                   a node is in stack 
-    '''
+    """
+
     def SCCUtil(self, u, low, disc, stackMember, st):
 
         # Initialize discovery time and low value
@@ -114,9 +117,9 @@ class Graph:
 
             elif stackMember[v] == True:
 
-                '''Update low value of 'u' only if 'v' is still in stack 
+                """Update low value of 'u' only if 'v' is still in stack 
                 (i.e. it's a back edge, not cross edge). 
-                Case 2 (per above discussion on Disc and Low value) '''
+                Case 2 (per above discussion on Disc and Low value) """
                 low[u] = min(low[u], disc[v])
 
         # head node found, pop the stack and print an SCC
@@ -147,6 +150,7 @@ class Graph:
         for i in range(self.V):
             if disc[i] == -1:
                 self.SCCUtil(i, low, disc, stackMember, st)
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
@@ -214,6 +218,7 @@ class Test(unittest.TestCase):
         g5.addEdge(4, 2)
         print("SSC in fifth graph ")
         g5.SCC()
+
 
 # main
 if __name__ == "__main__":

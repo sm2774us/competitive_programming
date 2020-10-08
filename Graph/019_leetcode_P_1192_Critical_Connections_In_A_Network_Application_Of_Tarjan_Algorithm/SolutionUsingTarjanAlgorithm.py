@@ -50,7 +50,9 @@ import unittest
 
 
 class Solution:
-    def criticalConnections(self, n: int, connections: List[List[int]]) -> List[List[int]]:
+    def criticalConnections(
+        self, n: int, connections: List[List[int]]
+    ) -> List[List[int]]:
         """
         :type n: int
         :type connections: List[List[int]]
@@ -98,7 +100,10 @@ class Test(unittest.TestCase):
 
     def test_criticalConnections(self) -> None:
         sol = Solution()
-        self.assertEqual([[1, 3]], sol.criticalConnections(4, [[0, 1], [1, 2], [2, 0], [1, 3]]))
+        self.assertEqual(
+            [[1, 3]], sol.criticalConnections(4, [[0, 1], [1, 2], [2, 0], [1, 3]])
+        )
+
 
 # main
 if __name__ == "__main__":

@@ -1,8 +1,8 @@
 #
 # Time : O(V+E); Space: O(E)
-# using Kosaraju's Algorithm
 # where, V = number of vertices
-# @tag : Graph ; Dikstra
+#        E = number of edges
+# @tag : Graph ; Kosaraju's Algorithm
 # @by  : Shaikat Majumdar
 # @date: Aug 27, 2020
 # **************************************************************************
@@ -59,6 +59,7 @@ from typing import List
 from collections import defaultdict
 
 import unittest
+
 
 def postorder_dfs(G):
     visited = set()
@@ -122,6 +123,7 @@ def kosaraju_sharir(G):
 
     return sccs.values()
 
+
 class Solution:
     def equationsPossible(self, equations: List[str]) -> bool:
         G = defaultdict(set)
@@ -129,8 +131,8 @@ class Solution:
         vertices = set()
 
         for eq in equations:
-            if '==' in eq:
-                x, y = eq.split('==')
+            if "==" in eq:
+                x, y = eq.split("==")
                 vertices.add(x)
                 vertices.add(y)
                 G[x].add(y)
@@ -140,7 +142,7 @@ class Solution:
         sccs = kosaraju_sharir(G)
 
         for x, e, _, y in equations:
-            if e == '!':
+            if e == "!":
                 if x == y:
                     return False
                 for scc in sccs:
@@ -149,6 +151,7 @@ class Solution:
                         return False
 
         return True
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
@@ -160,16 +163,16 @@ class Test(unittest.TestCase):
     def test_equationsPossible(self) -> None:
         sol = Solution()
         for equations, solution in (
-            [["a==b","b!=a"], False ],
-            [["b==a","a==b"], True],
-            [["a==b","b==c","a==c"], True],
-            [["a==b","b!=c","c==a"], False],
-            [["c==c","b==d","x!=z"], True]
+            [["a==b", "b!=a"], False],
+            [["b==a", "a==b"], True],
+            [["a==b", "b==c", "a==c"], True],
+            [["a==b", "b!=c", "c==a"], False],
+            [["c==c", "b==d", "x!=z"], True],
         ):
             self.assertEqual(
                 solution,
                 sol.equationsPossible(equations),
-                "Should determine if it is possible to assign integers to variable names so as to satisfy all the given equations"
+                "Should determine if it is possible to assign integers to variable names so as to satisfy all the given equations",
             )
 
 

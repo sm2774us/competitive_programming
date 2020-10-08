@@ -1,5 +1,7 @@
 #
-# Time : O(N log N); Space: O(N)
+# Time : O(V+E); Space: O(E)
+# where, V = number of vertices
+#        E = number of edges
 # @tag : Graph ; Kosaraju's Algorithm
 # @by  : Shaikat Majumdar
 # @date: Aug 27, 2020
@@ -77,7 +79,7 @@ class Graph:
     def DFSUtil(self, v, visited):
         # Mark the current node as visited and print it
         visited[v] = True
-        #print(f"{v}", end=" ")
+        # print(f"{v}", end=" ")
         # Recur for all the vertices adjacent to this vertex
         for i in self.graph[v]:
             if not visited[i]:
@@ -134,6 +136,7 @@ class Graph:
 
         return ans
 
+
 class Test(unittest.TestCase):
     def setUp(self) -> None:
         pass
@@ -154,6 +157,7 @@ class Test(unittest.TestCase):
         g.addEdge(1, 2)
         g.addEdge(2, 0)
         self.assertEqual(1, g.countSCCs())
+
 
 # main
 if __name__ == "__main__":

@@ -1,8 +1,7 @@
 #
 # Time : O(E); Space: O(E)
-# using Kosaraju's Algorithm
-# where, V = number of vertices
-# @tag : Graph ; Dikstra
+#
+# @tag : Graph ; Tarjan's Algorithm
 # @by  : Shaikat Majumdar
 # @date: Aug 27, 2020
 # **************************************************************************
@@ -49,7 +48,9 @@ import unittest
 
 
 class Solution:
-    def criticalConnections(self, n: int, connections: List[List[int]]) -> List[List[int]]:
+    def criticalConnections(
+        self, n: int, connections: List[List[int]]
+    ) -> List[List[int]]:
         graph = collections.defaultdict(list)
         for u, v in connections:
             graph[u].append(v)
@@ -58,17 +59,22 @@ class Solution:
         rank = [-1] * n
 
         def dfs(node, depth, parent):
-            if rank[node] >= 0: return rank[node]
+            if rank[node] >= 0:
+                return rank[node]
             rank[node] = depth
             min_back_depth = n
             for neighbor in graph[node]:
-                if neighbor == parent: continue
+                if neighbor == parent:
+                    continue
                 back_depth = dfs(neighbor, depth + 1, node)
                 if back_depth <= depth:
                     connections.discard(tuple(sorted((node, neighbor))))
                 min_back_depth = min(min_back_depth, back_depth)
             return min_back_depth
-        dfs(0, 0, -1)  # since this is a connected graph, we don't have to loop over all nodes.
+
+        dfs(
+            0, 0, -1
+        )  # since this is a connected graph, we don't have to loop over all nodes.
         return list(connections)
 
 
@@ -81,9 +87,18 @@ class Test(unittest.TestCase):
 
     def test_criticalConnections(self) -> None:
         sol = Solution()
-        self.assertEqual([(1,3)], sol.criticalConnections(4, [[0,1],[1,2],[2,0],[1,3]]))
+        self.assertEqual(
+            [(1, 3)], sol.criticalConnections(4, [[0, 1], [1, 2], [2, 0], [1, 3]])
+        )
         # Convert sol.criticalConnections(...) list of tuples to list of lists and then perform equality check
-        self.assertEqual([[1,3]], [list(elem) for elem in sol.criticalConnections(4, [[0, 1], [1, 2], [2, 0], [1, 3]])])
+        self.assertEqual(
+            [[1, 3]],
+            [
+                list(elem)
+                for elem in sol.criticalConnections(4, [[0, 1], [1, 2], [2, 0], [1, 3]])
+            ],
+        )
+
 
 # main
 if __name__ == "__main__":

@@ -104,7 +104,7 @@ class Test(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_findTheCity(self) -> None:
+    def test_networkDelayTime(self) -> None:
         sol = Solution()
         self.assertEqual(
             2,
