@@ -22,6 +22,7 @@
 # Explanation: Change `1` at (0, 1) to `0`, the shortest path is as follows:
 # (0, 0) -> (0, 1) -> (0, 2) -> (0, 3) -> (0, 4) -> (1, 4) -> (2, 4) -> (3, 4)
 # There are other options of length 7, not listed here.
+#
 # Example 2:
 #
 # Input:
@@ -31,6 +32,7 @@
 #
 # Output: -1
 # Explanation: Regardless of which `1` is changed to `0`, there is no viable path.
+#
 # Follow-up:
 # What if you can break k walls?
 #
