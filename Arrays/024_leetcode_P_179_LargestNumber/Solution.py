@@ -83,7 +83,8 @@ class Solution:
 
     # Python3 in 2 lines, with key function sort and *Proof*
     #
-    # I was bothered by that sort(ed) method/funciton has no cmp parameter in Python3, thus decide to find a key function instead.
+    # I was bothered by that sort(ed) method/function has no cmp parameter in Python3,
+    # thus decide to find a key function instead.
     #
     # As pointed out in many posts, it needs to sort the numbers with cmp(x,y) being str(x)+str(y)<=str(y)+str(x).
     # This is the same as to say x*10^n+y<=y*10^m+x.

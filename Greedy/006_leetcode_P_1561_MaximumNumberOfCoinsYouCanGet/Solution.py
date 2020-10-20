@@ -5,7 +5,7 @@
 # @by  : Shaikat Majumdar
 # @date: Aug 27, 2020
 # **************************************************************************
-# LeetCode - Problem 1561: https://leetcode.com/problems/maximum-number-of-coins-you-can-get/
+# LeetCode - Problem 1561: Maximum Number of Coins You Can Get
 #
 # Description:
 #
