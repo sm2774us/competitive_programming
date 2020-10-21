@@ -86,9 +86,10 @@ from typing import List
 
 import unittest
 
+
 class Solution(object):
     def maxCoins(self, piles: List[int]) -> int:
-        return sum(sorted(piles)[len(piles)// 3 :: 2])
+        return sum(sorted(piles)[len(piles) // 3 :: 2])
 
 
 class Test(unittest.TestCase):
@@ -101,9 +102,9 @@ class Test(unittest.TestCase):
     def test_maxCoins(self) -> None:
         sol = Solution()
         for piles, solution in (
-            [[2,4,1,2,7,8], 9],
-            [[2,4,5], 4],
-            [[9,8,7,6,5,1,2,3,4], 18]
+            [[2, 4, 1, 2, 7, 8], 9],
+            [[2, 4, 5], 4],
+            [[9, 8, 7, 6, 5, 1, 2, 3, 4], 18],
         ):
             self.assertEqual(solution, sol.maxCoins(piles))
 

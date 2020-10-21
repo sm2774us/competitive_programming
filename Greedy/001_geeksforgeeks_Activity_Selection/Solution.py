@@ -58,9 +58,11 @@ from typing import List
 
 import unittest
 
+
 class Solution:
     """The following implementation assumes that the activities
     are already sorted according to their finish time"""
+
     """Prints a maximum set of activities that can be done by a 
     single person, one at a time"""
     # a[]--> An array that contains start time of all activities
@@ -73,8 +75,9 @@ class Solution:
             if curr <= x[0]:
                 c += 1
                 curr = x[1]
-        #print(c)
+        # print(c)
         return c
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:

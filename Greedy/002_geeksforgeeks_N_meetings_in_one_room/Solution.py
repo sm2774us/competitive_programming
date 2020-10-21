@@ -50,6 +50,7 @@ from typing import List
 
 import unittest
 
+
 class Solution:
     def getMaxMeetingsInOneRoom(self, a: List[int], b: List[int]) -> List[int]:
         n = len(a)
@@ -58,15 +59,16 @@ class Solution:
             ans.append([a[i], b[i], i + 1])
         ans.sort(key=lambda x: x[1])
         max_meetings = [ans[0][2]]
-        #print(ans[0][2], end=" ")
+        # print(ans[0][2], end=" ")
         prev = ans[0][1]
         for i in range(1, n):
             if ans[i][0] >= prev:
                 max_meetings.append(ans[i][2])
-                #print(ans[i][2], end=" ")
+                # print(ans[i][2], end=" ")
                 prev = ans[i][1]
-        #print()
+        # print()
         return max_meetings
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
@@ -79,7 +81,11 @@ class Test(unittest.TestCase):
         sol = Solution()
         for a, b, solution in (
             [[1, 3, 0, 5, 8, 5], [2, 4, 6, 7, 9, 9], [1, 2, 4, 5]],
-            [[75250, 50074, 43659, 8931, 11273, 27545, 50879, 77924], [112960, 114515, 81825, 93424, 54316, 35533, 73383, 160252 ], [6, 7, 1]]
+            [
+                [75250, 50074, 43659, 8931, 11273, 27545, 50879, 77924],
+                [112960, 114515, 81825, 93424, 54316, 35533, 73383, 160252],
+                [6, 7, 1],
+            ],
         ):
             self.assertEqual(solution, sol.getMaxMeetingsInOneRoom(a, b))
 

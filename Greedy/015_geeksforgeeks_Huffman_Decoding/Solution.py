@@ -51,24 +51,28 @@ def compress_binary_string(string):
     # so must make sure string of 0s and 1s
     # has length which is a multiplier of 8
     pad = (8 - len(string)) % 8
-    padded_data = '0' * pad + string
+    padded_data = "0" * pad + string
 
     chars = [
         # convert string to binary and reinterpret as ascii char
-        chr(int(eight, 2)) for eight in
+        chr(int(eight, 2))
+        for eight in
         # split padded_data in segments of length 8
-        [padded_data[i:i + 8] for i in range(0, len(padded_data), 8)]
+        [padded_data[i : i + 8] for i in range(0, len(padded_data), 8)]
     ]
 
-    return ''.join(chars), pad
+    return "".join(chars), pad
 
 
 def expand_compressed_string(string, pad=0):
-    padded_data = ''.join([
-        # interpret ascii char as base 2 int, convert to binary string,
-        # remove 0b cruft, and ensure has length 8
-        bin(ord(char))[2:].zfill(8) for char in string
-    ])
+    padded_data = "".join(
+        [
+            # interpret ascii char as base 2 int, convert to binary string,
+            # remove 0b cruft, and ensure has length 8
+            bin(ord(char))[2:].zfill(8)
+            for char in string
+        ]
+    )
 
     return padded_data[pad:]
 
@@ -78,6 +82,7 @@ class HuffmanTree(object):
     """Huffman Code implementation
     See See https://en.wikipedia.org/wiki/Huffman_coding.
     """
+
     def __init__(self, weight, data, left=None, right=None):
         self.weight = weight
         self.data = data
@@ -98,10 +103,7 @@ class HuffmanTree(object):
     def __repr__(self):
         ldata = self.left and self.left.data
         rdata = self.right and self.right.data
-        return (
-            f'<HuffmanTree (data: {self.data}, '
-            f'left: {ldata}, right: {rdata})>'
-        )
+        return f"<HuffmanTree (data: {self.data}, " f"left: {ldata}, right: {rdata})>"
 
     def is_leaf(self):
         return not self.right and not self.left
@@ -110,10 +112,7 @@ class HuffmanTree(object):
         """Create map of chars to binary string encodings"""
         self.codebook = {}
 
-        nodes = {
-            '0': self.left,
-            '1': self.right,
-        }
+        nodes = {"0": self.left, "1": self.right}
 
         for prefix, node in nodes.items():
             if not node:
@@ -134,8 +133,7 @@ class HuffmanTree(object):
 
         # build priority queue from frequency counter -
         # higher frequency characters have lower priority
-        heap = [HuffmanTree(weight, data) for data, weight
-                in frequency.items()]
+        heap = [HuffmanTree(weight, data) for data, weight in frequency.items()]
         heapq.heapify(heap)
 
         while len(heap) > 1:
@@ -161,9 +159,9 @@ class HuffmanTree(object):
         """
         if self.is_leaf():
             leaves.append(self.data)
-            return '1'
+            return "1"
 
-        header = '0'
+        header = "0"
 
         header += self.left.__encode_tree(leaves)
         header += self.right.__encode_tree(leaves)
@@ -174,7 +172,7 @@ class HuffmanTree(object):
         leaves = []
 
         encoded_tree = self.__encode_tree(leaves)
-        leaves = ''.join(leaves)
+        leaves = "".join(leaves)
 
         return encoded_tree, leaves
 
@@ -196,7 +194,7 @@ class HuffmanTree(object):
             char = encoded_tree[idx]
 
             # leaf
-            if char == '1':
+            if char == "1":
                 idx += 1
                 data = leaves.pop(0)
                 return HuffmanTree(0, data)
@@ -205,7 +203,7 @@ class HuffmanTree(object):
             left = decode_tree_helper()
             right = decode_tree_helper()
 
-            data = ''
+            data = ""
 
             if left:
                 data += left.data
@@ -230,22 +228,22 @@ class HuffmanTree(object):
         segments = [str(e) for e in segments]
 
         segments.append(compressed_tree + leaves + compressed_data)
-        return '|'.join(segments)
+        return "|".join(segments)
 
     @classmethod
     def decode(cls, string):
         """Inverse of encode"""
-        meta = string.split('|', 4)
+        meta = string.split("|", 4)
 
         if len(meta) != 5:
-            raise ValueError('Improperly encoded string')
+            raise ValueError("Improperly encoded string")
 
         meta[:4] = [int(e) for e in meta[:4]]
         ctree_len, tree_pad, leave_len, data_pad, rest = meta
 
         compressed_tree = rest[:ctree_len]
-        leaves = rest[ctree_len:ctree_len+leave_len]
-        compressed_data = rest[ctree_len+leave_len:]
+        leaves = rest[ctree_len : ctree_len + leave_len]
+        compressed_data = rest[ctree_len + leave_len :]
 
         encoded_data = expand_compressed_string(compressed_data, data_pad)
         encoded_tree = expand_compressed_string(compressed_tree, tree_pad)
@@ -258,20 +256,20 @@ class HuffmanTree(object):
         NB: You should use encode, and not this method, if you need
             to decode the string and this tree will not be available
         """
-        return ''.join([self.codebook[char] for char in string])
+        return "".join([self.codebook[char] for char in string])
 
     def huffman_decode(self, string):
         """Inverse of huffman_encode"""
-        decoded_string = ''
+        decoded_string = ""
         node = self
 
         for char in string:
-            if char == '0':
+            if char == "0":
                 node = node.left
-            elif char == '1':
+            elif char == "1":
                 node = node.right
             else:
-                raise ValueError('Improperly encoded string')
+                raise ValueError("Improperly encoded string")
 
             if node.is_leaf():
                 decoded_string += node.data
@@ -282,74 +280,74 @@ class HuffmanTree(object):
 
 class TestHuffmanTree(unittest.TestCase):
     def test_eq(self):
-        self.assertEqual(HuffmanTree(5, 'a') == HuffmanTree(5, 'a'), True)
-        self.assertEqual(HuffmanTree(5, 'a') == HuffmanTree(5, 'b'), False)
-        self.assertEqual(HuffmanTree(5, 'a') == HuffmanTree(6, 'a'), False)
+        self.assertEqual(HuffmanTree(5, "a") == HuffmanTree(5, "a"), True)
+        self.assertEqual(HuffmanTree(5, "a") == HuffmanTree(5, "b"), False)
+        self.assertEqual(HuffmanTree(5, "a") == HuffmanTree(6, "a"), False)
 
     def test_lt(self):
-        self.assertEqual(HuffmanTree(5, 'a') < HuffmanTree(5, 'b'), True)
-        self.assertEqual(HuffmanTree(5, 'b') == HuffmanTree(5, 'a'), False)
-        self.assertEqual(HuffmanTree(5, 'b') == HuffmanTree(6, 'a'), False)
+        self.assertEqual(HuffmanTree(5, "a") < HuffmanTree(5, "b"), True)
+        self.assertEqual(HuffmanTree(5, "b") == HuffmanTree(5, "a"), False)
+        self.assertEqual(HuffmanTree(5, "b") == HuffmanTree(6, "a"), False)
 
     def test_from_string(self):
-        string = 'abb'
+        string = "abb"
         tree = HuffmanTree.from_string(string)
-        self.assertEqual(tree.data, 'ab')
+        self.assertEqual(tree.data, "ab")
         self.assertEqual(tree.weight, 3)
-        self.assertEqual(tree.codebook, {'a': '0', 'b': '1'})
+        self.assertEqual(tree.codebook, {"a": "0", "b": "1"})
 
-        self.assertEqual(tree.left.data, 'a')
+        self.assertEqual(tree.left.data, "a")
         self.assertEqual(tree.left.weight, 1)
         self.assertEqual(tree.left.codebook, {})
 
-        self.assertEqual(tree.right.data, 'b')
+        self.assertEqual(tree.right.data, "b")
         self.assertEqual(tree.right.weight, 2)
         self.assertEqual(tree.right.codebook, {})
 
     def test_huffman_encode(self):
-        string = 'abb'
+        string = "abb"
         tree = HuffmanTree.from_string(string)
-        self.assertEqual(tree.huffman_encode(string), '011')
+        self.assertEqual(tree.huffman_encode(string), "011")
 
-        string = 'hello world!'
-        expected = '1110110101010010101000011110111001011'
+        string = "hello world!"
+        expected = "1110110101010010101000011110111001011"
         tree = HuffmanTree.from_string(string)
         self.assertEqual(tree.huffman_encode(string), expected)
 
     def test_huffman_decode(self):
-        string = 'abb'
+        string = "abb"
         tree = HuffmanTree.from_string(string)
-        self.assertEqual(tree.huffman_decode('011'), string)
+        self.assertEqual(tree.huffman_decode("011"), string)
 
-        string = 'hello world!'
-        expected = '1110110101010010101000011110111001011'
+        string = "hello world!"
+        expected = "1110110101010010101000011110111001011"
         tree = HuffmanTree.from_string(string)
         self.assertEqual(tree.huffman_decode(expected), string)
 
     def test_encode_tree(self):
-        string = 'abb'
+        string = "abb"
         tree = HuffmanTree.from_string(string)
 
-        self.assertEqual(tree.encode_tree(), ('011', 'ab'))
+        self.assertEqual(tree.encode_tree(), ("011", "ab"))
 
-        string = 'abbc'
+        string = "abbc"
         tree = HuffmanTree.from_string(string)
 
-        self.assertEqual(tree.encode_tree(), ('00111', 'acb'))
+        self.assertEqual(tree.encode_tree(), ("00111", "acb"))
 
     def test_decode_tree(self):
-        encoded_tree, leaves = ('011', 'ab')
+        encoded_tree, leaves = ("011", "ab")
         tree = HuffmanTree.decode_tree(encoded_tree, leaves)
 
-        self.assertEqual(tree.data, 'ab')
+        self.assertEqual(tree.data, "ab")
         self.assertEqual(tree.weight, 0)
-        self.assertEqual(tree.codebook, {'a': '0', 'b': '1'})
+        self.assertEqual(tree.codebook, {"a": "0", "b": "1"})
 
-        self.assertEqual(tree.left.data, 'a')
+        self.assertEqual(tree.left.data, "a")
         self.assertEqual(tree.left.weight, 0)
         self.assertEqual(tree.left.codebook, {})
 
-        self.assertEqual(tree.right.data, 'b')
+        self.assertEqual(tree.right.data, "b")
         self.assertEqual(tree.right.weight, 0)
         self.assertEqual(tree.right.codebook, {})
 
@@ -367,14 +365,14 @@ def decode(string: str) -> str:
 class TestEncoding(unittest.TestCase):
     def test_given(self):
         strings = {
-            '0DE9MDK9J8I1BMUQ18HARUPOKXFE4HLADWV12OYYTUFI59Y1',
-            '6QXXCOLMUNBLYY0WOB5BR2HIR5L5XG02TGRAGV',
-            '5PNL',
-            'GKF8ANZ2DH6P3B5WWFMELX8XEMRSJGKHMDN932EZTM2O',
-            '4ZILNB9DW3Y65GIG4Z5WWICIJN6H7HTU88',
-            'Aaaaahhhhhhmmmmmmmuiiiiiiiaaaaaa',
-            'WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWWWWWWWWWBWWWWWWWWWWWWWW',
-            'lots|of\nunexpected\tchars\\x',
+            "0DE9MDK9J8I1BMUQ18HARUPOKXFE4HLADWV12OYYTUFI59Y1",
+            "6QXXCOLMUNBLYY0WOB5BR2HIR5L5XG02TGRAGV",
+            "5PNL",
+            "GKF8ANZ2DH6P3B5WWFMELX8XEMRSJGKHMDN932EZTM2O",
+            "4ZILNB9DW3Y65GIG4Z5WWICIJN6H7HTU88",
+            "Aaaaahhhhhhmmmmmmmuiiiiiiiaaaaaa",
+            "WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWWWWWWWWWBWWWWWWWWWWWWWW",
+            "lots|of\nunexpected\tchars\\x",
         }
 
         for string in strings:
@@ -383,5 +381,5 @@ class TestEncoding(unittest.TestCase):
             self.assertEqual(string, decoded)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

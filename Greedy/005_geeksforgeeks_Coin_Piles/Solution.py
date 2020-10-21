@@ -58,6 +58,7 @@ import math
 
 import unittest
 
+
 class Solution:
     # Function to return the minimum number
     # of coins that need to be removed
@@ -70,7 +71,8 @@ class Solution:
             temp = tmp
             tmp += nums[i]
             for j in reversed(range(i + 1, n)):
-                if (nums[j] - nums[i] - k > 0): temp += nums[j] - nums[i] - k
+                if nums[j] - nums[i] - k > 0:
+                    temp += nums[j] - nums[i] - k
             cnt = min(cnt, temp)
         return cnt
         # cnt = 0
@@ -90,6 +92,7 @@ class Solution:
         #         # Return the required count
         # return cnt
 
+
 class Test(unittest.TestCase):
     def setUp(self) -> None:
         pass
@@ -100,9 +103,9 @@ class Test(unittest.TestCase):
     def test_minimumCoins(self) -> None:
         sol = Solution()
         for a, k, solution in (
-            [[2,2,2,2], 0, 0],
-            [[1,2,5,1,1,1], 3, 1],
-            [[1,5,1,2,5,1], 3, 2]
+            [[2, 2, 2, 2], 0, 0],
+            [[1, 2, 5, 1, 1, 1], 3, 1],
+            [[1, 5, 1, 2, 5, 1], 3, 2],
         ):
             self.assertEqual(solution, sol.minimumCoins(a, len(a), k))
 

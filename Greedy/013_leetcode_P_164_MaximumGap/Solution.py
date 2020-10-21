@@ -62,6 +62,7 @@ import math
 
 import unittest
 
+
 class Solution(object):
     # @param num, a list of integer
     # @return an integer
@@ -88,10 +89,7 @@ class Test(unittest.TestCase):
 
     def test_maximumGap(self) -> None:
         sol = Solution()
-        for nums, solution in (
-            [[3,6,9,1], 3],
-            [[10], 0]
-        ):
+        for nums, solution in ([[3, 6, 9, 1], 3], [[10], 0]):
             self.assertEqual(solution, sol.maximumGap(nums))
 
 

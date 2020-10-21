@@ -67,9 +67,10 @@ class Solution:
         # value of B
         result = 0
         for i in range(n):
-            result += (A[i] * B[n - i - 1])
+            result += A[i] * B[n - i - 1]
 
         return result
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
@@ -81,8 +82,8 @@ class Test(unittest.TestCase):
     def test_getMinValue(self) -> None:
         sol = Solution()
         for A, B, solution in (
-            [[3,1,1], [6,5,4], 23],
-            [[6,1,9,5,4], [3,4,8,2,4], 80]
+            [[3, 1, 1], [6, 5, 4], 23],
+            [[6, 1, 9, 5, 4], [3, 4, 8, 2, 4], 80],
         ):
             self.assertEqual(solution, sol.getMinValue(A, B, len(A)))
 

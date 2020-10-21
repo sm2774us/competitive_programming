@@ -39,6 +39,7 @@ from typing import List
 
 import unittest
 
+
 class Solution(object):
     def minMeetingRooms(self, intervals: List[int]) -> int:
         """
@@ -50,15 +51,15 @@ class Solution(object):
         startTimes = sorted(startTimes)
         endTimes = sorted(endTimes)
         rooms = 0
-        while(len(startTimes) > 0):
+        while len(startTimes) > 0:
             startTime = startTimes.pop(0)
-            #now a meeting is going to start, is there a meeting ends
-            #(meaning a meeting room is released)?
+            # now a meeting is going to start, is there a meeting ends
+            # (meaning a meeting room is released)?
             endTime = endTimes[0]
             if endTime <= startTime:
                 endTimes.pop(0)
             else:
-                #need to ask for a new room
+                # need to ask for a new room
                 rooms += 1
         return rooms
 
@@ -73,8 +74,8 @@ class Test(unittest.TestCase):
     def test_minMeetingRooms(self) -> None:
         sol = Solution()
         for intervals, solution in (
-            [[[0, 30],[5, 10],[15, 20]], 2],
-            [[[7,10],[2,4]], 1]
+            [[[0, 30], [5, 10], [15, 20]], 2],
+            [[[7, 10], [2, 4]], 1],
         ):
             self.assertEqual(solution, sol.minMeetingRooms(intervals))
 

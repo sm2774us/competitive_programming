@@ -72,7 +72,7 @@ class Solution:
     def findMinimum(self, arr: List[int], n: int, k: int) -> int:
         res = 0
         i = 0
-        while (n):
+        while n:
             # Buy current candy
             res += arr[i]
 
@@ -92,7 +92,7 @@ class Solution:
         res = 0
         index = 0
         i = n - 1
-        while (i >= index):
+        while i >= index:
             # Buy candy with
             # maximum amount
             res += arr[i]
@@ -105,6 +105,7 @@ class Solution:
 
         return res
 
+
 class Test(unittest.TestCase):
     def setUp(self) -> None:
         pass
@@ -114,7 +115,7 @@ class Test(unittest.TestCase):
 
     def test_findMinimumAndMaximum(self) -> None:
         sol = Solution()
-        arr = [3,2,1,4]
+        arr = [3, 2, 1, 4]
         k = 2
         arr.sort()
         self.assertEqual(3, sol.findMinimum(arr, len(arr), k))

@@ -80,6 +80,7 @@ from functools import cmp_to_key
 
 import unittest
 
+
 class Solution(object):
     # In an INTERVIEW situation => go with the Quick Sort approach and list the other possible methods ( without actually implementing them )
 
@@ -87,7 +88,15 @@ class Solution(object):
         if not any(nums):
             return "0"
         return "".join(
-            sorted(map(str, nums), key=cmp_to_key(lambda n1, n2: -1 if n1 + n2 > n2 + n1 else (1 if n1 + n2 < n2 + n1 else 0))))
+            sorted(
+                map(str, nums),
+                key=cmp_to_key(
+                    lambda n1, n2: -1
+                    if n1 + n2 > n2 + n1
+                    else (1 if n1 + n2 < n2 + n1 else 0)
+                ),
+            )
+        )
 
     def compare(self, n1, n2):
         return str(n1) + str(n2) > str(n2) + str(n1)
@@ -95,9 +104,9 @@ class Solution(object):
     # bubble sort
     def largestNumberUsingBubbleSort(self, nums):
         for i in range(len(nums), 0, -1):
-            for j in range(i-1):
-                if not self.compare(nums[j], nums[j+1]):
-                    nums[j], nums[j+1] = nums[j+1], nums[j]
+            for j in range(i - 1):
+                if not self.compare(nums[j], nums[j + 1]):
+                    nums[j], nums[j + 1] = nums[j + 1], nums[j]
         return str(int("".join(map(str, nums))))
 
     # selection sort
@@ -169,6 +178,7 @@ class Solution(object):
         self.quickSort(nums, 0, len(nums) - 1)
         return str(int("".join(map(str, nums))))
 
+
 class Test(unittest.TestCase):
     def setUp(self) -> None:
         pass
@@ -178,10 +188,7 @@ class Test(unittest.TestCase):
 
     def test_largestNumber(self) -> None:
         sol = Solution()
-        for nums, solution in (
-            [[10,2], "210"],
-            [[3,30,34,5,9], "9534330"]
-        ):
+        for nums, solution in ([[10, 2], "210"], [[3, 30, 34, 5, 9], "9534330"]):
             self.assertEqual(solution, sol.largestNumberUsingBuiltin(nums))
             self.assertEqual(solution, sol.largestNumberUsingBubbleSort(nums))
             self.assertEqual(solution, sol.largestNumberUsingSelectionSort(nums))

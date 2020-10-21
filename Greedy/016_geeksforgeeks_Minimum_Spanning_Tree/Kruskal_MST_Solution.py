@@ -67,6 +67,7 @@
 from typing import List
 import unittest
 
+
 class UnionFindSet:
     def __init__(self, n):
         self._parents = [i for i in range(n)]
@@ -126,6 +127,7 @@ class Solution:
                 cost += w
         return -1 if len(set([unionfind.find(n) for n in range(N)])) != 1 else cost
 
+
 class Test(unittest.TestCase):
     def setUp(self) -> None:
         pass
@@ -136,8 +138,8 @@ class Test(unittest.TestCase):
     def test_minimumCost(self) -> None:
         sol = Solution()
         for N, connections, solution in (
-            [3, [[1,2,5],[2,3,3],[1,3,1]], 4],
-            [2, [[1,2,5]], 5]
+            [3, [[1, 2, 5], [2, 3, 3], [1, 3, 1]], 4],
+            [2, [[1, 2, 5]], 5],
         ):
             self.assertEqual(solution, sol.minimumCost(N, connections))
 

@@ -119,8 +119,8 @@ class Test(unittest.TestCase):
     def test_minimumCost(self) -> None:
         sol = Solution()
         for N, connections, solution in (
-            [3, [[1,2,5],[2,3,3],[1,3,1]], 4],
-            [2, [[1,2,5]], 5]
+            [3, [[1, 2, 5], [2, 3, 3], [1, 3, 1]], 4],
+            [2, [[1, 2, 5]], 5],
         ):
             self.assertEqual(solution, sol.minimumCost(N, connections))
 

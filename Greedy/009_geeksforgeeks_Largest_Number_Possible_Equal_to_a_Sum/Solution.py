@@ -62,7 +62,7 @@ class Solution:
         # then a number is possible
         # only if number of digits
         # is 1.
-        if (S == 0):
+        if S == 0:
             # if (N == 1):
             #     print("Largest number is ", "0", end="")
             # else:
@@ -71,7 +71,7 @@ class Solution:
 
         # Sum greater than the
         # maximum possible sum.
-        if (S > 9 * N):
+        if S > 9 * N:
             # print("Not possible", end="")
             return None
 
@@ -87,7 +87,7 @@ class Solution:
 
             # Fill 9 first to make
             # the number largest
-            if (S >= 9):
+            if S >= 9:
                 res[i] = 9
                 S = S - 9
 
@@ -106,7 +106,8 @@ class Solution:
             largest_number.append(res[i])
             # print(res[i], end="")
         return int("".join(map(str, largest_number)))
-    
+
+
 class Test(unittest.TestCase):
     def setUp(self) -> None:
         pass
@@ -116,10 +117,7 @@ class Test(unittest.TestCase):
 
     def test_findLargest(self) -> None:
         sol = Solution()
-        for N, S, solution in (
-            [2, 9, 90],
-            [3, 20, 992]
-        ):
+        for N, S, solution in ([2, 9, 90], [3, 20, 992]):
             self.assertEqual(solution, sol.findLargest(N, S))
 
 

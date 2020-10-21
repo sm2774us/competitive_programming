@@ -62,12 +62,13 @@ class Solution:
         for i in range(0, N, 1):
 
             # Check if we can buy ith toy or not
-            if (sum + cost[i] <= K):
+            if sum + cost[i] <= K:
                 sum = sum + cost[i]
                 # Increment the count variable
                 count += 1
 
         return count
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
@@ -80,7 +81,7 @@ class Test(unittest.TestCase):
         sol = Solution()
         for a, k, solution in (
             [[1, 12, 5, 111, 200, 1000, 10], 50, 4],
-            [[20, 30, 50], 100, 3]
+            [[20, 30, 50], 100, 3],
         ):
             self.assertEqual(solution, sol.maximum_toys(a, len(a), k))
 

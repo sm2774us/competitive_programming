@@ -67,6 +67,7 @@ from typing import List
 
 import unittest
 
+
 class Solution:
     # This functions returns the required
     # number of toys
@@ -83,7 +84,7 @@ class Solution:
             if i not in s:
 
                 # Check if the list can hold equal pages
-                if (len(s) == capacity):
+                if len(s) == capacity:
                     s.remove(s[0])
                     s.append(i)
 
@@ -106,6 +107,7 @@ class Solution:
         # print(f"{pageFaults}")
         return pageFaults
 
+
 class Test(unittest.TestCase):
     def setUp(self) -> None:
         pass
@@ -116,11 +118,14 @@ class Test(unittest.TestCase):
     def test_findPageFaultsInLRU(self) -> None:
         sol = Solution()
         for processList, capacity, solution in (
-            [[5,0,1,3,2,4,1,0,5], 4, 8],
-            [[7,0,1,2,0,3,0,4,2,3,0,3,2], 4, 6],
-            [[3,1,0,2,5,4,1,2], 4, 7]
+            [[5, 0, 1, 3, 2, 4, 1, 0, 5], 4, 8],
+            [[7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2], 4, 6],
+            [[3, 1, 0, 2, 5, 4, 1, 2], 4, 7],
         ):
-            self.assertEqual(solution, sol.findPageFaultsInLRU(processList, len(processList), capacity))
+            self.assertEqual(
+                solution,
+                sol.findPageFaultsInLRU(processList, len(processList), capacity),
+            )
 
 
 # main

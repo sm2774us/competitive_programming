@@ -69,7 +69,7 @@ class Solution:
     # minimum is minimized
     def getMinDiff(self, arr: List[int], n: int, k: int) -> int:
 
-        if (n == 1):
+        if n == 1:
             return 0
 
         # Sort all elements
@@ -82,7 +82,7 @@ class Solution:
         small = arr[0] + k
         big = arr[n - 1] - k
 
-        if (small > big):
+        if small > big:
             small, big = big, small
 
         # Traverse middle elements
@@ -93,7 +93,7 @@ class Solution:
 
             # If both subtraction and addition
             # do not change diff
-            if (subtract >= small or add <= big):
+            if subtract >= small or add <= big:
                 continue
 
             # Either subtraction causes a smaller
@@ -102,12 +102,13 @@ class Solution:
             # greedy approach (If big - subtract
             # causes smaller diff, update small
             # Else update big)
-            if (big - subtract <= add - small):
+            if big - subtract <= add - small:
                 small = subtract
             else:
                 big = add
 
         return min(ans, big - small)
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
@@ -118,10 +119,7 @@ class Test(unittest.TestCase):
 
     def test_getMinDiff(self) -> None:
         sol = Solution()
-        for a, k, solution in (
-            [[1, 5, 8, 10], 2, 5],
-            [[3, 9, 12, 16, 20], 3, 11]
-        ):
+        for a, k, solution in ([[1, 5, 8, 10], 2, 5], [[3, 9, 12, 16, 20], 3, 11]):
             self.assertEqual(solution, sol.getMinDiff(a, len(a), k))
 
 

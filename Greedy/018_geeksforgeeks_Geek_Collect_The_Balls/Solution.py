@@ -55,11 +55,13 @@ class Solution:
     # Function to find
     # the minimum amount
     # to buy all candies
-    def findMaximumNumberOfBallsCollected(self, N: int, M: int, first: List[int], second: List[int]) -> int:
+    def findMaximumNumberOfBallsCollected(
+        self, N: int, M: int, first: List[int], second: List[int]
+    ) -> int:
         intersection = [[0, 0]]
         f = 0
         s = 0
-        while (True):
+        while True:
             if f >= M or s >= N:
                 break
             if first[f] > second[s]:
@@ -107,6 +109,7 @@ class Solution:
         # print(count)
         return count
 
+
 class Test(unittest.TestCase):
     def setUp(self) -> None:
         pass
@@ -116,9 +119,14 @@ class Test(unittest.TestCase):
 
     def test_findMaximumNumberOfBallsCollected(self) -> None:
         sol = Solution()
-        first = [1,4,5,6,8]
-        second = [2,3,4,6,9]
-        self.assertEqual(29, sol.findMaximumNumberOfBallsCollected(len(first), len(second), first, second))
+        first = [1, 4, 5, 6, 8]
+        second = [2, 3, 4, 6, 9]
+        self.assertEqual(
+            29,
+            sol.findMaximumNumberOfBallsCollected(
+                len(first), len(second), first, second
+            ),
+        )
 
 
 # main
