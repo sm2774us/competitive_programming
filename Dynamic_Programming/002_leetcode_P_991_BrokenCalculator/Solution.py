@@ -1,7 +1,8 @@
 #
-# Time : O(n log n)
+# Time  :
+# Space :
 #
-# @tag : Greedy
+# @tag : Dynamic Programming
 # @by  : Shaikat Majumdar
 # @date: Aug 27, 2020
 # **************************************************************************
