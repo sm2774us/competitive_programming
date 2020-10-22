@@ -2,31 +2,47 @@
 # Time  :
 # Space :
 #
-# @tag : Dynamic Programming ; Greedy
+# @tag : Dynamic Programming
 # @by  : Shaikat Majumdar
 # @date: Aug 27, 2020
 # **************************************************************************
-# LeetCode - Problem 646: Maximum Length of Pair Chain
+# LeetCode - Problem 1143: Longest Common Subsequence
 #
 # Description:
 #
-# You are given n pairs of numbers. In every pair, the first number is always smaller than the second number.
+# Given two strings text1 and text2, return the length of their longest common subsequence.
 #
-# Now, we define a pair (c, d) can follow another pair (a, b) if and only if b < c. Chain of pairs can be formed in this fashion.
+# A subsequence of a string is a new string generated from the original string with some characters(can be none) deleted
+# without changing the relative order of the remaining characters. (eg, "ace" is a subsequence of "abcde"
+# while "aec" is not). A common subsequence of two strings is a subsequence that is common to both strings.
 #
-# Given a set of pairs, find the length longest chain which can be formed. You needn't use up all the given pairs. You can select pairs in any order.
+# If there is no common subsequence, return 0.
 #
 # Example 1:
-#   Input: [[1,2], [2,3], [3,4]]
-#   Output: 2
-#   Explanation: The longest chain is [1,2] -> [3,4]
 #
-# Note:
-#   1. The number of given pairs will be in the range [1, 1000].
+# Input: text1 = "abcde", text2 = "ace"
+# Output: 3
+# Explanation: The longest common subsequence is "ace" and its length is 3.
+# Example 2:
+#
+# Input: text1 = "abc", text2 = "abc"
+# Output: 3
+# Explanation: The longest common subsequence is "abc" and its length is 3.
+# Example 3:
+#
+# Input: text1 = "abc", text2 = "def"
+# Output: 0
+# Explanation: There is no such common subsequence, so the result is 0.
+#
+#
+# Constraints:
+#   * 1 <= text1.length <= 1000
+#   * 1 <= text2.length <= 1000
+#   * The input strings consist of lowercase English characters only.
 #
 # **************************************************************************
-# Source: https://leetcode.com/problems/maximum-length-of-pair-chain/ (LeetCode - Problem 646 - Maximum Length of Pair Chain)
-#         https://practice.geeksforgeeks.org/problems/max-length-chain/1 (GeeksForGeeks - Max length chain)
+# Source: https://leetcode.com/problems/longest-common-subsequence/ (LeetCode - Problem 1143 - Longest Common Subsequence)
+#         https://practice.geeksforgeeks.org/problems/longest-common-subsequence/0 (GeeksForGeeks - Longest Common Subsequence)
 # **************************************************************************
 # Solution Explanation
 # **************************************************************************
@@ -39,26 +55,82 @@ import unittest
 
 
 class Solution(object):
-    def findLongestChainUsingGreedy(self, pairs: List[List[int]]) -> int:
-        cur, res = -math.inf, 0
-        for p in sorted(pairs, key=lambda x: x[1]):
-            if cur < p[0]:
-                cur, res = p[1], res + 1
-        return res
+    # Recursive solution
+    # Time Complexity: O(2^n)
+    def longestCommonSubsequenceUsingRecursive(self, text1: str, text2: str) -> int:
+        def helper(s1, s2, i, j):
+            if i == len(s1) or j == len(s2):
+                return 0
+            if s1[i] == s2[j]:
+                return 1 + helper(s1, s2, i + 1, j + 1)
+            else:
+                return max(helper(s1, s2, i + 1, j), helper(s1, s2, i, j + 1))
 
-    def findLongestChainUsingDP(self, pairs: List[List[int]]) -> int:
-        """
-        :type pairs: List[List[int]]
-        :rtype: int
-        """
-        pairs.sort()
-        n = len(pairs)
-        dp = [1] * n
-        for i in range(n):
-            for j in range(i):
-                if pairs[i][0] > pairs[j][1] and dp[i] < dp[j] + 1:
-                    dp[i] = dp[j] + 1
-        return max(dp)
+        return helper(text1, text2, 0, 0)
+
+    # Recursive solution with Memoization
+    # Time Complexity: O(m*n)
+    def longestCommonSubsequenceUsingRecursiveWithMemoization(
+        self, text1: str, text2: str
+    ) -> int:
+        def helper(s1, s2, i, j, memo):
+            if memo[i][j] < 0:
+                if i == len(s1) or j == len(s2):
+                    memo[i][j] = 0
+                elif s1[i] == s2[j]:
+                    memo[i][j] = 1 + helper(s1, s2, i + 1, j + 1, memo)
+                else:
+                    memo[i][j] = max(
+                        helper(s1, s2, i + 1, j, memo), helper(s1, s2, i, j + 1, memo)
+                    )
+            return memo[i][j]
+
+        m = len(text1)
+        n = len(text2)
+        memo = [[-1 for _ in range(n + 1)] for _ in range(m + 1)]
+        return helper(text1, text2, 0, 0, memo)
+
+    # Bottom up dynamic programming
+    # Time Complexity: O(m*n)
+    # Space Complexity: O(m*n)
+    def longestCommonSubsequenceUsingDynamicProgrammingBottomUp(
+        self, text1: str, text2: str
+    ) -> int:
+        m = len(text1)
+        n = len(text2)
+        memo = [[0 for _ in range(n + 1)] for _ in range(m + 1)]
+
+        for row in range(1, m + 1):
+            for col in range(1, n + 1):
+                if text1[row - 1] == text2[col - 1]:
+                    memo[row][col] = 1 + memo[row - 1][col - 1]
+                else:
+                    memo[row][col] = max(memo[row][col - 1], memo[row - 1][col])
+
+        return memo[m][n]
+
+    # Dynamic Programming With Reduced Space Complexity
+    # Time Complexity: O(m*n)
+    # Space Complexity: O(MIN(m,n)
+    def longestCommonSubsequenceUsingDynamicProgrammingWithReducedSpaceComplexity(
+        self, text1: str, text2: str
+    ) -> int:
+        m = len(text1)
+        n = len(text2)
+        if m < n:
+            return self.longestCommonSubsequenceUsingDynamicProgrammingWithReducedSpaceComplexity(
+                text2, text1
+            )
+        memo = [[0 for _ in range(n + 1)] for _ in range(2)]
+
+        for i in range(m):
+            for j in range(n):
+                if text1[i] == text2[j]:
+                    memo[1 - i % 2][j + 1] = 1 + memo[i % 2][j]
+                else:
+                    memo[1 - i % 2][j + 1] = max(memo[1 - i % 2][j], memo[i % 2][j + 1])
+
+        return memo[m % 2][n]
 
 
 class Test(unittest.TestCase):
@@ -68,15 +140,34 @@ class Test(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_findLongestChain(self) -> None:
+    def test_longestCommonSubsequence(self) -> None:
         sol = Solution()
-        for pairs, solution in (
-            [[[1, 2], [2, 3], [3, 4]], 2],
-            [[[5, 24], [39, 60], [15, 28], [27, 40], [50, 90]], 3],
-            [[[5, 10], [1, 11]], 1],
+        for text1, text2, solution in (
+            ["abcde", "ace", 3],
+            ["abc", "abc", 3],
+            ["abc", "def", 0],
+            ["ABCDGH", "AEDFHR", 3],
+            ["ABC", "AC", 2],
         ):
-            self.assertEqual(solution, sol.findLongestChainUsingGreedy(pairs))
-            self.assertEqual(solution, sol.findLongestChainUsingDP(pairs))
+            self.assertEqual(
+                solution, sol.longestCommonSubsequenceUsingRecursive(text1, text2)
+            )
+            self.assertEqual(
+                solution,
+                sol.longestCommonSubsequenceUsingRecursiveWithMemoization(text1, text2),
+            )
+            self.assertEqual(
+                solution,
+                sol.longestCommonSubsequenceUsingDynamicProgrammingBottomUp(
+                    text1, text2
+                ),
+            )
+            self.assertEqual(
+                solution,
+                sol.longestCommonSubsequenceUsingDynamicProgrammingWithReducedSpaceComplexity(
+                    text1, text2
+                ),
+            )
 
 
 # main

@@ -46,6 +46,11 @@
 # **************************************************************************
 # Refer to Solution_Explanation.md
 #
+# **************************************************************************
+# Reference
+# **************************************************************************
+# LeetCode: https://leetcode.com/problems/maximum-length-of-repeated-subarray/discuss/306354/python-dp-solution-longest-common-substring
+#
 import unittest
 
 
