@@ -48,8 +48,12 @@
 # **************************************************************************
 # Refer to Solution_Explanation.md
 #
-from typing import List
-import math
+# References:
+# https://leetcode.com/problems/longest-common-subsequence/discuss/436719/Python-very-detailed-solution-with-explanation-and-walkthrough-step-by-step.
+# https://leetcode.com/problems/longest-common-subsequence/discuss/351689/JavaPython-3-Two-DP-codes-of-O(mn)-and-O(min(m-n))-spaces-w-picture-and-analysis
+# https://leetcode.com/problems/longest-common-subsequence/discuss/598508/Python-DP-solution-with-Explanation-%2B-Thinking-process-%2B-Diagram
+#
+from functools import lru_cache
 
 import unittest
 
@@ -57,7 +61,7 @@ import unittest
 class Solution(object):
     # Recursive solution
     # Time Complexity: O(2^n)
-    def longestCommonSubsequenceUsingRecursive(self, text1: str, text2: str) -> int:
+    def longestCommonSubsequenceUsingRecursion(self, text1: str, text2: str) -> int:
         def helper(s1, s2, i, j):
             if i == len(s1) or j == len(s2):
                 return 0
@@ -70,7 +74,7 @@ class Solution(object):
 
     # Recursive solution with Memoization
     # Time Complexity: O(m*n)
-    def longestCommonSubsequenceUsingRecursiveWithMemoization(
+    def longestCommonSubsequenceUsingRecursionAndMemoization(
         self, text1: str, text2: str
     ) -> int:
         def helper(s1, s2, i, j, memo):
@@ -132,6 +136,29 @@ class Solution(object):
 
         return memo[m % 2][n]
 
+    # Dynamic Programming With Reduced Space Complexity
+    # Time Complexity: O(m*n)
+    # Space Complexity: O(MIN(m,n)
+    def longestCommonSubsequenceUsingDynamicProgrammingWithRecursionAndMemoization(
+        self, text1: str, text2: str
+    ) -> int:
+        @lru_cache(maxsize=None)
+        def memo_solve(ptr1, ptr2):
+            if ptr1 == len(text1) or ptr2 == len(text2):
+                return 0
+
+            # Case 1
+            if text1[ptr1] == text2[ptr2]:
+                return 1 + memo_solve(ptr1 + 1, ptr2 + 1)
+
+            # Case 2
+            else:
+                return max(memo_solve(ptr1 + 1, ptr2), memo_solve(ptr1, ptr2 + 1))
+                # ^    # ^ Case 2 - Option 1           ^ Case 2 - Option 2
+                # | __You want the max() result from resulting branches in the tree
+
+        return memo_solve(0, 0)  # Start the recursion stack from str1[0] and str2[0]
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
@@ -150,11 +177,11 @@ class Test(unittest.TestCase):
             ["ABC", "AC", 2],
         ):
             self.assertEqual(
-                solution, sol.longestCommonSubsequenceUsingRecursive(text1, text2)
+                solution, sol.longestCommonSubsequenceUsingRecursion(text1, text2)
             )
             self.assertEqual(
                 solution,
-                sol.longestCommonSubsequenceUsingRecursiveWithMemoization(text1, text2),
+                sol.longestCommonSubsequenceUsingRecursionAndMemoization(text1, text2),
             )
             self.assertEqual(
                 solution,
@@ -165,6 +192,12 @@ class Test(unittest.TestCase):
             self.assertEqual(
                 solution,
                 sol.longestCommonSubsequenceUsingDynamicProgrammingWithReducedSpaceComplexity(
+                    text1, text2
+                ),
+            )
+            self.assertEqual(
+                solution,
+                sol.longestCommonSubsequenceUsingDynamicProgrammingWithRecursionAndMemoization(
                     text1, text2
                 ),
             )
