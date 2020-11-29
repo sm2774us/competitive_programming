@@ -164,13 +164,13 @@ ___rat in a maze problem___
             if self.isSafe(n, nx, ny) and arr[nx][ny] == 1:
                 if not visited[str(nx) + " " + str(ny)]:
                     if ny > y:
-                        self.dfs(arr, n, nx, ny, visited, path + ['R'])
+                        self.dfs_solution_1(arr, n, nx, ny, visited, path + ['R'])
                     elif nx > x:
-                        self.dfs(arr, n, nx, ny, visited, path + ['D'])
+                        self.dfs_solution_1(arr, n, nx, ny, visited, path + ['D'])
                     elif nx < x:
-                        self.dfs(arr, n, nx, ny, visited, path + ['U'])
+                        self.dfs_solution_1(arr, n, nx, ny, visited, path + ['U'])
                     elif ny < y:
-                        self.dfs(arr, n, nx, ny, visited, path + ['L'])
+                        self.dfs_solution_1(arr, n, nx, ny, visited, path + ['L'])
         visited[str(x) + " " + str(y)] = False
 ```
 
