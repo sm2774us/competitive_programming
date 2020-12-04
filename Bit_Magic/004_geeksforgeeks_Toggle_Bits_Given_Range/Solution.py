@@ -65,8 +65,8 @@
 #
 import unittest
 
-class Solution(object):
 
+class Solution(object):
     def toggleBitsFromLtoR(self, n: int, L: int, R: int) -> bool:
         # calculating a number
         # 'num' having 'r'
@@ -80,7 +80,7 @@ class Solution(object):
         # Besides this, we can calculate num as: num=(1<<r)-l .
 
         # and return the number
-        return (n ^ num)
+        return n ^ num
 
 
 class Test(unittest.TestCase):
@@ -92,11 +92,9 @@ class Test(unittest.TestCase):
 
     def test_toggleBitsFromLtoR(self) -> None:
         sol = Solution()
-        for n, L, R, solution in (
-            [17, 2, 3, 23],
-            [50, 2, 5, 44]
-        ):
+        for n, L, R, solution in ([17, 2, 3, 23], [50, 2, 5, 44]):
             self.assertEqual(solution, sol.toggleBitsFromLtoR(n, L, R))
+
 
 # main
 if __name__ == "__main__":

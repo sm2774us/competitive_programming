@@ -57,8 +57,8 @@
 #
 import unittest
 
-class Solution(object):
 
+class Solution(object):
     def checkKthBit(self, n: int, k: int) -> bool:
         return bool(n & (1 << k))
         # l = (bin(n)[2:][::-1])
@@ -77,12 +77,9 @@ class Test(unittest.TestCase):
 
     def test_checkKthBit(self) -> None:
         sol = Solution()
-        for n, k, solution in (
-            [4, 0, False],
-            [4, 2, True],
-            [500, 3, False]
-        ):
+        for n, k, solution in ([4, 0, False], [4, 2, True], [500, 3, False]):
             self.assertEqual(solution, sol.checkKthBit(n, k))
+
 
 # main
 if __name__ == "__main__":

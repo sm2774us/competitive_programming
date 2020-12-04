@@ -63,11 +63,13 @@
 #
 import unittest
 
-class Solution(object):
 
+class Solution(object):
     def isPowerOfTwo(self, n: int) -> bool:
-        if (n == 0): return False
+        if n == 0:
+            return False
         return (n & (n - 1)) == 0
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
@@ -79,15 +81,16 @@ class Test(unittest.TestCase):
     def test_isPowerOfTwo(self) -> None:
         sol = Solution()
         for n, solution in (
-                [1, True],
-                [4, True],
-                [15, False],
-                [16, True],
-                [32, True],
-                [33, False],
-                [98, False]
+            [1, True],
+            [4, True],
+            [15, False],
+            [16, True],
+            [32, True],
+            [33, False],
+            [98, False],
         ):
             self.assertEqual(solution, sol.isPowerOfTwo(n))
+
 
 # main
 if __name__ == "__main__":

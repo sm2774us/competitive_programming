@@ -54,6 +54,7 @@ from math import log2
 
 import unittest
 
+
 class Solution(object):
 
     #
@@ -96,7 +97,8 @@ class Solution(object):
         """Returns the index, counting from 0, of the
         least significant set bit in `n`. If no bit is set, returns 0.
         """
-        return (int(log2(n & -n)))+1 if n else 0
+        return (int(log2(n & -n))) + 1 if n else 0
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
@@ -107,11 +109,7 @@ class Test(unittest.TestCase):
 
     def test_getFirstBit(self) -> None:
         sol = Solution()
-        for n, solution in (
-            [18,2],
-            [12,3],
-            [0,0]
-        ):
+        for n, solution in ([18, 2], [12, 3], [0, 0]):
             self.assertEqual(solution, sol.getFirstSetBit_solution_1(n))
             self.assertEqual(solution, sol.getFirstSetBit_solution_2(n))
 

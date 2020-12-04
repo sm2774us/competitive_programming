@@ -56,10 +56,11 @@
 #
 import unittest
 
-class Solution(object):
 
+class Solution(object):
     def countBitsFlip(self, a: int, b: int) -> int:
-        return bin(a^b).count("1")
+        return bin(a ^ b).count("1")
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
@@ -70,11 +71,9 @@ class Test(unittest.TestCase):
 
     def test_countBitsFlip(self) -> None:
         sol = Solution()
-        for a, b, solution in (
-                [10, 20, 4],
-                [20, 25, 3]
-        ):
+        for a, b, solution in ([10, 20, 4], [20, 25, 3]):
             self.assertEqual(solution, sol.countBitsFlip(a, b))
+
 
 # main
 if __name__ == "__main__":

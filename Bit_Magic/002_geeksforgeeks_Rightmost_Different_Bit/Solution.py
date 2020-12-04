@@ -50,16 +50,16 @@ from math import log2
 
 import unittest
 
+
 class Solution(object):
 
     # Function to find the position of
     # rightmost set bit in 'n'
     def getRightMostSetBit(self, n: int) -> int:
-        if (n == 0):
+        if n == 0:
             return 0
 
         return int(log2(n & -n)) + 1
-
 
     # Function to find the position of
     # rightmost different bit in the
@@ -74,7 +74,7 @@ class Solution(object):
     # binary representations of 'm' and 'n'
     # and return its value
     def valOfRightMostDiffBit(self, m: int, n: int) -> int:
-        return (m^n) & -(m^n)
+        return (m ^ n) & -(m ^ n)
 
 
 class Test(unittest.TestCase):
@@ -86,18 +86,12 @@ class Test(unittest.TestCase):
 
     def test_posOfRightMostDiffBit(self) -> None:
         sol = Solution()
-        for m, n, solution in (
-            [11, 9, 2],
-            [52, 4, 5]
-        ):
+        for m, n, solution in ([11, 9, 2], [52, 4, 5]):
             self.assertEqual(solution, sol.posOfRightMostDiffBit(m, n))
 
     def test_valOfRightMostDiffBit(self) -> None:
         sol = Solution()
-        for m, n, solution in (
-            [13, 11, 2],
-            [23, 7, 16]
-        ):
+        for m, n, solution in ([13, 11, 2], [23, 7, 16]):
             self.assertEqual(solution, sol.valOfRightMostDiffBit(m, n))
 
 

@@ -63,10 +63,11 @@
 #
 import unittest
 
-class Solution(object):
 
+class Solution(object):
     def setKthBit(self, n: int, k: int) -> int:
         return n | (1 << k)
+
 
 class Test(unittest.TestCase):
     def setUp(self) -> None:
@@ -77,11 +78,9 @@ class Test(unittest.TestCase):
 
     def test_setKthBit(self) -> None:
         sol = Solution()
-        for n, k, solution in (
-                [10, 2, 14],
-                [15, 3, 15]
-        ):
+        for n, k, solution in ([10, 2, 14], [15, 3, 15]):
             self.assertEqual(solution, sol.setKthBit(n, k))
+
 
 # main
 if __name__ == "__main__":
