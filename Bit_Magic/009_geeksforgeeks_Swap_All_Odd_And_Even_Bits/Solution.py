@@ -118,7 +118,7 @@ class Test(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_wapOddAndEvenBits(self) -> None:
+    def test_swapOddAndEvenBits(self) -> None:
         sol = Solution()
         for num, solution in ([23, 43], [2, 1]):
             self.assertEqual(solution, sol.swapOddAndEvenBits(num))
