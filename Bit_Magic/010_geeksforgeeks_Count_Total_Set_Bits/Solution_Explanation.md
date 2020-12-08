@@ -1,4 +1,4 @@
-_solution_3## Geeks For Geeks : Rightmost different bit
+## Geeks For Geeks : Rightmost different bit
 
 #### **[Problem Statement](https://practice.geeksforgeeks.org/problems/count-total-set-bits-1587115620/1) of Count total set bits problem.**
 

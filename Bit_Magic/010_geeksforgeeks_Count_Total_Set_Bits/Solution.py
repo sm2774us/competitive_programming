@@ -229,7 +229,7 @@ class Solution(object):
 
             # If the count of pairs was odd then
             # add the remaining 1s which could
-            # not be groupped together
+            # not be grouped together
             if totalPairs & 1:
                 cnt += n % powerOf2
             else:
