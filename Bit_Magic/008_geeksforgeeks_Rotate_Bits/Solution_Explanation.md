@@ -98,7 +98,7 @@
 # **************************************************************************
 # Solution Explanation
 # **************************************************************************
-# Refer to Solution_Explanation.md ( one level directory above )
+# Refer to Solution_Explanation.md
 #
 import unittest
 
