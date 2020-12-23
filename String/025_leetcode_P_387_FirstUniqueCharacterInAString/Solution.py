@@ -1,6 +1,6 @@
 #
 # Time : O(N); Space: O(1)
-# @tag : Stack and Queue
+# @tag : String
 # @by  : Shaikat Majumdar
 # @date: Aug 27, 2020
 # **************************************************************************
@@ -23,7 +23,7 @@
 #
 # **************************************************************************
 # Source: https://leetcode.com/problems/first-unique-character-in-a-string/ (Leetcode - Problem 387 - First Unique Character in a String)
-#         https://practice.geeksforgeeks.org/problems/first-non-repeating-character-in-a-stream/0 (GeeksForGeeks - First non-repeating character in a stream)
+#         Variant => https://practice.geeksforgeeks.org/problems/non-repeating-character-1587115620/1 (GeeksForGeeks - Non Repeating Character)
 #
 # **************************************************************************
 # Complexity Analysis:
@@ -44,6 +44,10 @@ class Solution:
         return min(
             [s.find(c) for c in string.ascii_lowercase if s.count(c) == 1] or [-1]
         )
+
+    def firstUniqCharGFG(self, s: str) -> int:
+        index = [s.index(l) for l in string.ascii_lowercase if s.count(l) == 1]
+        return s[min(index)] if len(index) > 0 else None
 
 
 class Test(unittest.TestCase):
@@ -69,6 +73,20 @@ class Test(unittest.TestCase):
                 solution,
                 s.firstUniqCharConcise(str),
                 "Should return the index of the first non-repeating character in a string",
+            )
+
+    def test_firstUniqCharGFG(self) -> None:
+        s = Solution()
+        for str, solution in (
+            ["leetcode", "l"],
+            ["loveleetcode", "v"],
+            ["hello", "h"],
+            ["zxvczbtxyzvy", "c"],
+        ):
+            self.assertEqual(
+                solution,
+                s.firstUniqCharGFG(str),
+                "Should return the first non-repeating character in a string",
             )
 
 

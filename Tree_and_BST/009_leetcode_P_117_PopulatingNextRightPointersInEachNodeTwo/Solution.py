@@ -58,6 +58,7 @@ class Node:
         self.right = right
         self.next = next
 
+    @classmethod
     def treeToList(self, root):
         if not root:
             return []
@@ -138,8 +139,7 @@ class Test(unittest.TestCase):
         root.right = Node(3)
         root.right.right = Node(7)
         solution = s.connect(root)
-        node = Node()
-        listOfConnectedNodes = node.treeToList(solution)
+        listOfConnectedNodes = Node.treeToList(solution)
         self.assertEqual([[1], [2, 3], [4, 5, 7]], listOfConnectedNodes)
 
 

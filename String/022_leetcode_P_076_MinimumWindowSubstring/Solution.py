@@ -1,6 +1,8 @@
 #
-# Time : O(N); Space: O(1)
-# @tag : Hashing
+# Time :
+# Space:
+#
+# @tag : String
 # @by  : Shaikat Majumdar
 # @date: Aug 27, 2020
 # **************************************************************************
@@ -42,6 +44,7 @@
 #             start += 1
 #
 #
+from typing import List
 from collections import Counter
 from collections import defaultdict
 
@@ -53,6 +56,35 @@ class Solution:
         """
         :type s: str
         :type t: str
+        :rtype: str
+        """
+        st, c1, min_so_far, result, fmap = (
+            0,
+            Counter(t),
+            len(s) + 1,
+            "",
+            defaultdict(int),
+        )
+        unique_ch = len(c1)
+        for end in range(len(s)):
+            if s[end] in c1:
+                fmap[s[end]] += 1
+                if fmap[s[end]] == c1[s[end]]:
+                    unique_ch -= 1
+                while st <= end and unique_ch == 0:
+                    if end - st + 1 < min_so_far:
+                        min_so_far, result = end - st + 1, s[st : end + 1]
+                    if s[st] in fmap:
+                        fmap[s[st]] -= 1
+                        if fmap[s[st]] < c1[s[st]]:
+                            unique_ch += 1
+                    st += 1
+        return result
+
+    def minWindow_facebook_and_google_phone_screen(self, s: str, t: List[str]) -> str:
+        """
+        :type s: str
+        :type t: List[str]
         :rtype: str
         """
         st, c1, min_so_far, result, fmap = (
@@ -127,6 +159,42 @@ class Test(unittest.TestCase):
             #     sol.minWindow_concise(s, t),
             #     "Should return the minimum window in S which will contain all the characters in T",
             # )
+
+    # Facebook | Phone Screen | Minimum Window Substring
+    #
+    # Given a string as a "source" string, find the smallest substring of source such that it contains
+    # all characters in "search" string (which contains distinct characters).
+    #
+    # For example, for search string ['a','b','c'], source string "aefbcgaxy", the shortest string is "bcga".
+    def test_minWindow_facebook_phone_screen(self) -> None:
+        sol = Solution()
+        s = "aefbcgaxy"
+        t = ["a", "b", "c"]
+        self.assertEqual(
+            "bcga",
+            sol.minWindow_facebook_and_google_phone_screen(s, t),
+            "Should return the minimum window in S which will contain all the characters in T",
+        )
+
+    # Google | Phone | Minimum Window Substring
+    #
+    # I had one problem.
+    #
+    # Variation of https://leetcode.com/problems/minimum-window-substring/
+    #
+    # Given a string return the minimal substring that contain all the letters of the alphabet.
+    #
+    # def find(string, alphabet)
+    # For eg. string = aabcad alphabet = ['a','b','c', 'd'] Output: "bcad"
+    def test_minWindow_google_phone_screen(self) -> None:
+        sol = Solution()
+        s = "aabcad"
+        t = ["a", "b", "c", "d"]
+        self.assertEqual(
+            "bcad",
+            sol.minWindow_facebook_and_google_phone_screen(s, t),
+            "Should return the minimum window in S which will contain all the characters in T",
+        )
 
 
 if __name__ == "__main__":

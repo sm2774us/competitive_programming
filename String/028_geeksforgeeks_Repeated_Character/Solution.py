@@ -4,33 +4,39 @@
 # @by  : Shaikat Majumdar
 # @date: Aug 27, 2020
 # **************************************************************************
-# GeeksForGeeks - Find first repeated character
+# GeeksForGeeks - Repeated Character
 #
 # Description:
 #
-# Given a string S. The task is to find the first repeated character in it. We need to find the character that occurs more than once and whose index of second occurrence is smallest. S contains only lowercase letters.
-# Input:
-# The first line of input contains an integer T denoting the no of test cases. Then T test cases follow. Each test case contains a string S.
+# Given a string consisting of lowercase english alphabets. Find the repeated character present first in the string.
 #
-# Output:
-# For each test case in a new line print the first repeating character in the string. If no such character exist print -1.
+# Example 1:
+#
+# Input:
+# S = "geeksforgeeks"
+# Output: g
+# Explanation: g, e, k and s are the repeating
+# characters. Out of these, g occurs first.
+# â€‹Example 2:
+#
+# Input:
+# S = "abcde"
+# Output: -1
+# Explanation: No repeating character present.
+#
+# Your Task:
+# You don't need to read input or print anything. Your task is to complete the function firstRep() which takes the string S as input and returns the the first repeating character in the string. In case there's no repeating character present, return '#'.
+#
+#
+# Expected Time Complexity: O(|S|).
+# Expected Auxiliary Space: O(1).
+#
 #
 # Constraints:
-# 1 <= T <= 100
-# 1 <= |S| <=104
-#
-# Example:
-# Input:
-# 2
-# geeksforgeeks
-# hellogeeks
-#
-# Output:
-# e
-# l
+# 1<=|S|<=105
 #
 # **************************************************************************
-# Source: https://practice.geeksforgeeks.org/problems/find-first-repeated-character/0 (GeeksForGeeks - Find first repeated character)
+# Source: https://practice.geeksforgeeks.org/problems/repeated-character2058/1 (GeeksForGeeks - Repeated Character)
 #
 #
 import unittest
@@ -64,7 +70,11 @@ class Test(unittest.TestCase):
 
     def test_first_repeated_char(self) -> None:
         sol = Solution()
-        for str1, solution in (["geeksforgeeks", "e"], ["hellogeeks", "l"]):
+        for str1, solution in (
+            ["geeksforgeeks", "e"],
+            ["hellogeeks", "l"],
+            ["abcde", ""],
+        ):
             self.assertEqual(solution, sol.first_repeated_char(str1))
             self.assertEqual(solution, sol.first_repeated_char_using_set(str1))
 
