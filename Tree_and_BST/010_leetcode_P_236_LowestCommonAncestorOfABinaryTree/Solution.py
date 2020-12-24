@@ -19,6 +19,7 @@
 #
 # **************************************************************************
 # Source: https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/ (Leetcode - Problem 236 - Lowest Common Ancestor of a Binary Tree)
+#         https://practice.geeksforgeeks.org/problems/lowest-common-ancestor-in-a-binary-tree/1 (GeeksForGeeks - Lowest Common Ancestor in a Binary Tree)
 #         https://practice.geeksforgeeks.org/problems/lowest-common-ancestor-in-a-bst/1 (GeeksForGeeks - Lowest Common Ancestor in a BST)
 #
 # References: https://en.wikipedia.org/wiki/Euler_tour_technique [ Euler Tour ]
